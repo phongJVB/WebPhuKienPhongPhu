@@ -16,15 +16,29 @@ Route::get('/', function () {
 });
 //Tạo Router theo Group của từng phần trong Admin
 Route::prefix('admin')->group(function(){
+
+		Route::get('/', 'Admin\ProductsController@index')->name('index');
+
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
-		Route::get('/', 'Admin\ProductController@index')->name('index');
-		Route::get('/show/{id}', 'Admin\ProductController@show')->name('show');
-		Route::get('/create', 'Admin\ProductController@create')->name('create');
-		Route::post('/store', 'Admin\ProductController@store')->name('store');
-		Route::get('/edit/{id}', 'Admin\ProductController@edit')->name('edit');
-		Route::post('/update/{id}', 'Admin\ProductController@update')->name('update');
-		Route::get('/destroy/{id}', 'Admin\ProductController@destroy')->name('destroy');
+		Route::get('/', 'Admin\ProductsController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\ProductsController@show')->name('show');
+		Route::get('/create', 'Admin\ProductsController@create')->name('create');
+		Route::post('/store', 'Admin\ProductsController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\ProductsController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\ProductsController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\ProductsController@destroy')->name('destroy');
+	});
+
+	//Tạo Router cho categories trong Admin
+	Route::name('category.')->prefix('category')->group(function() {
+		Route::get('/', 'Admin\CategoriesController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\CategoriesController@show')->name('show');
+		Route::get('/create', 'Admin\CategoriesController@create')->name('create');
+		Route::post('/store', 'Admin\CategoriesController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\CategoriesController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\CategoriesController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\CategoriesController@destroy')->name('destroy');
 	});
 
 });

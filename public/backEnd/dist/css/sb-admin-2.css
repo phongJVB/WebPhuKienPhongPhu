@@ -352,3 +352,15 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+/*----------Custom CSS LHPhong-----------*/
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+.img-edit img{
+    margin: 10px 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 3px 2px 9px cadetblue;
+}   

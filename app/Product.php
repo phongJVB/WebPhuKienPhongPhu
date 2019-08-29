@@ -9,12 +9,12 @@ class Product extends Model
     protected $table = "products";
 
     /**
-     * Description: Tạo liên kết với bảng ProductType
+     * Description: Tạo liên kết với bảng category
      * id_type: Khóa ngoại ở bảng Product
      * id: Là khóa của bảng Product ( vì 1 sản phẩm thuộc về loại sản phẩm)
      */
-    public function product_type(){
-    	return $this->belongsTo('App\ProductType','id_type','id');
+    public function category(){
+    	return $this->belongsTo('App\Category','id_cate','id');
     }
 
     /**

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
     <title>Admin</title>
-
+    <base href="{{asset('')}}">  
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('backEnd/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 
@@ -45,6 +45,9 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{{ asset('backEnd/bower_components/metisMenu/dist/metisMenu.min.js') }}"></script>
+    
+    <!-- Ckeditor JavaScript -->
+    <script type="text/javascript" language="javascript" src="{{ asset('backEnd/ckeditor/ckeditor.js') }}" ></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('backEnd/dist/js/sb-admin-2.js') }}"></script>
