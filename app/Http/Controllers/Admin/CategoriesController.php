@@ -5,8 +5,8 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use App\Category;
-use App\Product;
+use App\Model\Category;
+use App\Model\roduct;
 
 class CategoriesController extends Controller
 {
@@ -63,17 +63,17 @@ class CategoriesController extends Controller
     {
         $category = Category::find($id);
         $this->validate($request,[
-            'txtCateName'=>'required|unique:categories,name|min:2|max:100'
+            'txtCateName'=>'required|min:2|max:100'
         ],
         [
             'txtCateName.required'=>'Bạn chưa nhập tên thể loại',
-            'txtCateName.unique'=>'Tên thể loại đã tồn tại',
             'txtCateName.min'=>'Tên thể loại phải có độ dài từ 2 cho đến 100 ký tự',
             'txtCateName.max'=>'Tên thể loại phải có độ dài từ 2 cho đến 100 ký tự',
         ]);
 
         // Với $category là mảng dữ liệu thể loại tìm được ta gán giá trị mới và update
         $category -> name = $request ->txtCateName;
+        $category -> description = $request ->txtDescription;
         $category -> save();
         return redirect('admin/category/edit/'.$id)->with('notification','Sửa thành công');
     }

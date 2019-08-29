@@ -4,8 +4,8 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Product;
-use App\Category;
+use App\Model\Product;
+use App\Model\Category;
 class ProductsController extends Controller
 {
     public function index()
