@@ -10,6 +10,11 @@
                         </h1>
                     </div>
                     <!-- /.col-lg-12 -->
+                     @if(session('notification'))
+                        <div class="alert alert-success" style="position: relative; clear: both; width: 40%;"> 
+                            {{ session('notification') }}
+                        </div>
+                    @endif
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr align="center">

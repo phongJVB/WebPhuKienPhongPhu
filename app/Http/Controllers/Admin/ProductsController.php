@@ -171,7 +171,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return redirect('admin/product')->with('notification','Bạn đã xóa thành công');
+        return redirect()->route('product.index')->with('notification','Bạn đã xóa thành công');
     }
 
 }

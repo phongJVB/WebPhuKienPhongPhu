@@ -52,7 +52,7 @@ Route::get('/home','pageController@getHome')->name('home');
 Route::get('/product_type','pageController@getProductType')->name('productType');
 
 // Router gọi đến xem chi tiết Product của website
-Route::get('/product','pageController@getProduct')->name('product');
+Route::get('/productDetail','pageController@getProduct')->name('productDetail');
 
 // Router gọi đến xem page giới thiệu của website
 Route::get('/about','pageController@getAbout')->name('about');
