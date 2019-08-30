@@ -14,10 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/admin', 'Admin\ProductsController@index')->name('admin');
 //Tạo Router theo Group của từng phần trong Admin
 Route::prefix('admin')->group(function(){
-
-		Route::get('/', 'Admin\ProductsController@index')->name('index');
 
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
@@ -44,18 +44,27 @@ Route::prefix('admin')->group(function(){
 });
 
 
+Route::name('home.')->prefix('home')->group(function(){
+		// Router gọi đến trang chủ của website
+		Route::get('/','pageController@getHome')->name('index');
 
-// Router gọi đến trang chủ của website
-Route::get('/home','pageController@getHome')->name('home');
+		// Router gọi đến ProductType của website
+		Route::get('/product_type','pageController@getProductType')->name('productType');
 
-// Router gọi đến ProductType của website
-Route::get('/product_type','pageController@getProductType')->name('productType');
+		// Router gọi đến xem chi tiết Product của website
+		Route::get('/productDetail','pageController@getProduct')->name('productDetail');
 
-// Router gọi đến xem chi tiết Product của website
-Route::get('/productDetail','pageController@getProduct')->name('productDetail');
+		// Router gọi đến xem page giới thiệu của website
+		Route::get('/about','pageController@getAbout')->name('about');
 
-// Router gọi đến xem page giới thiệu của website
-Route::get('/about','pageController@getAbout')->name('about');
+		// Router gọi đến xem page liên hệ của website
+		Route::get('/contact','pageController@getContact')->name('contact');
 
-// Router gọi đến xem page liên hệ của website
-Route::get('/contact','pageController@getContact')->name('contact');
+		// Router gọi đến trang login của website
+		Route::get('/login','pageController@getLogin')->name('login');
+		Route::post('/login','pageController@postLogin')->name('login');
+
+		// Router gọi đến trang đăng ký của website
+		Route::get('/register','pageController@getRegister')->name('register');
+		Route::get('/register','pageController@getRegister')->name('register');
+});

@@ -11,8 +11,8 @@
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
 						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
-						<li><a href="#">Đăng kí</a></li>
-						<li><a href="#">Đăng nhập</a></li>
+						<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
+						<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -91,16 +91,16 @@
 				<div class="visible-xs clearfix"></div>
 				<nav class="main-menu">
 					<ul class="l-inline ov">
-						<li><a href="home">Trang chủ</a></li>
-						<li><a href="#">Sản phẩm</a>
+						<li><a href="{{ Route('home.index') }}">Trang chủ</a></li>
+						<li><a href="{{ Route('home.productType') }}">Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="product_type">Sản phẩm 1</a></li>
-								<li><a href="product_type">Sản phẩm 2</a></li>
-								<li><a href="product_type">Sản phẩm 4</a></li>
+								<li><a href="{{ Route('home.productType') }}">Sản phẩm 1</a></li>
+								<li><a href="{{ Route('home.productType') }}">Sản phẩm 2</a></li>
+								<li><a href="{{ Route('home.productType') }}">Sản phẩm 4</a></li>
 							</ul>
 						</li>
-						<li><a href="about">Giới thiệu</a></li>
-						<li><a href="contact">Liên hệ</a></li>
+						<li><a href="{{ Route('home.about') }}">Giới thiệu</a></li>
+						<li><a href="{{ Route('home.contact') }}">Liên hệ</a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</nav>
