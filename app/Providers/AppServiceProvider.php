@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
+use App\Model\Category;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        
+        view()->composer(['layouts.header','pages.checkout'], function ($view) {
+            $categories = Category::all();
+            $view->with('categories', $categories);
+        });
+
+        Schema::defaultStringLength(191);
     }
 }

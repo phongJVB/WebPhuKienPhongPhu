@@ -14,6 +14,6 @@ class Category extends Model
      * id: Là khóa của bảng type_products
      */
     public function product(){
-    	return $this->hasMany('App\Product','id_cate','id');
+    	return $this->hasMany('App\Model\Product','categories_id','id');
     }
 }

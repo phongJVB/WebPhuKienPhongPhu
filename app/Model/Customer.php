@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    protected $table = "customer";
+    protected $table = "customers";
 
     public function bill(){
-    	return $this->belongsTo('App\Bill','id_customer','id');
+    	return $this->hasMany('App\Model\Bill','customers_id','id');
     }
 }

@@ -46,25 +46,35 @@ Route::prefix('admin')->group(function(){
 
 Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến trang chủ của website
-		Route::get('/','pageController@getHome')->name('index');
+		Route::get('/','PageController@getHome')->name('index');
 
 		// Router gọi đến ProductType của website
-		Route::get('/product_type','pageController@getProductType')->name('productType');
+		Route::get('/product_type','PageController@getProductType')->name('productType');
 
 		// Router gọi đến xem chi tiết Product của website
-		Route::get('/productDetail','pageController@getProduct')->name('productDetail');
+		Route::get('/productDetail','PageController@getProduct')->name('productDetail');
 
 		// Router gọi đến xem page giới thiệu của website
-		Route::get('/about','pageController@getAbout')->name('about');
+		Route::get('/about','PageController@getAbout')->name('about');
 
 		// Router gọi đến xem page liên hệ của website
-		Route::get('/contact','pageController@getContact')->name('contact');
+		Route::get('/contact','PageController@getContact')->name('contact');
+
+		/*---Route xử lý giỏ hàng----*/
+		Route::get('/showShoppingCart','CartController@showCart')->name('showShoppingCart');
+		Route::post('/shoppingCart','CartController@addToCart')->name('shoppingCart');
+		Route::post('/updateCart','CartController@updateCart')->name('updateCart');
+		Route::get('/removeCart/{rowId}','CartController@removeCart')->name('removeCart');
+
+		// Router gọi đến xử lý trang đặt hàng của website
+		Route::get('/checkout','PageController@getCheckout')->name('checkout');
+		Route::post('/checkout','PageController@postCheckout')->name('checkout');
 
 		// Router gọi đến trang login của website
-		Route::get('/login','pageController@getLogin')->name('login');
-		Route::post('/login','pageController@postLogin')->name('login');
+		Route::get('/login','PageController@getLogin')->name('login');
+		Route::post('/login','PageController@postLogin')->name('login');
 
 		// Router gọi đến trang đăng ký của website
-		Route::get('/register','pageController@getRegister')->name('register');
-		Route::get('/register','pageController@getRegister')->name('register');
+		Route::get('/register','PageController@getRegister')->name('register');
+		Route::post('/register','PageController@postRegister')->name('register');
 });

@@ -970,7 +970,7 @@ float:left
 }
 
 .form-block label {
-width:200px;
+width:160px;
 font-weight:lighter
 }
 
@@ -1886,6 +1886,7 @@ color:#000
 }
 
 .add-to-cart {
+border-radius: 2px;
 background-color:#3a5c83;
 height:35px;
 width:40px;
@@ -2916,7 +2917,7 @@ line-height:100%
 }
 
 .table-option {
-margin-bottom:-5px;
+margin-bottom:5px;
 color:#070707
 }
 
@@ -3163,12 +3164,12 @@ position:relative
 width:270px;
 text-align:center;
 border:1px solid #e8e8e8;
-margin-top:25px
+/*margin-top:25px*/
 }
 
 .cart-totals-row {
-height:55px;
-line-height:55px;
+height:37px;
+line-height:37px;
 border-top:1px solid #e8e8e8;
 font-size:18px;
 text-align:left
@@ -3204,9 +3205,10 @@ color:#000
 
 .beta-btn {
 color:#fff;
+border-radius: 2px;
 border:1px solid  #57a7c6;
 display:inline-block;
-padding:6px 20px
+padding:6px 20px;
 }
 
 .beta-btn:hover {
@@ -3225,7 +3227,8 @@ line-height:100%
 
 .beta-btn.primary:hover {
 color:#fff;
-background:#3a5c83
+background: #3a5c83;
+
 }
 
 .beta-btn.primary i {
@@ -4116,7 +4119,7 @@ padding:30px 0!important
 }
 
 tfoot td a {
-background-color:#3a5c83;
+/*background-color:#3a5c83;*/
 color:#fff
 }
 
@@ -5061,7 +5064,7 @@ position: relative;}
     -o-transition: all 0.17s ease-in-out;
 }
 .main-menu li{position: relative;}
-.main-menu ul.l-inline> li> a:hover{background: #3a5c83;color:white;
+.main-menu ul.l-inline> li> a:hover{border-radius:1px;background: #3a5c83;color:white;
 transition: all 0.17s ease-in-out;
     -moz-transition: all 0.17s ease-in-out;
     -webkit-transition: all 0.17s ease-in-out;
@@ -5202,3 +5205,52 @@ border:none;}
 .beta-rotator canvas{width:100%;}
 .beta-rotator {font-family: "Open Sans",sans-serif;}
 .history-slider span {font-family: "Open Sans",sans-serif;}
+
+/*Custom Shopping cart*/
+.update-qty{
+	height: 22px;
+    width: 72px;
+    border: 1px solid #57a7c6;
+    border-radius: 2px;
+}
+.update-qty:hover{
+	color: #fff;
+    background: #3a5c83;
+}
+#btnCheckout:hover{
+	background:#F84455;
+	border:1px solid #F84455
+}
+input#product-qty{
+	width: 85px;
+}
+a#linkCheckout{
+	color: #fff;
+}
+a#linkCheckout:hover{
+	text-decoration: none;
+    color: #FFFFFF;
+}
+.cl-red {
+	color: red;
+}
+/*----CSS delete cart header----*/
+.pro-del{
+	float: right;
+    position: absolute;
+    right: 15px;
+    top: 23px;
+}
+.pro-del a i {
+	color: #5149F3;
+    font-size: 18px;
+}
+
+.pro-del a i:hover {
+    color: #F55757;
+    font-size: 18px;
+}
+#btnOrder:hover{
+	background:#F84455;
+	border:1px solid #F84455
+}

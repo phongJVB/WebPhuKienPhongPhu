@@ -37,7 +37,7 @@
                                 <label>Product Type</label>
                                 <select class="form-control" name="optCategory">
                                     @foreach($categories as $item)
-                                        @if(  $products->id_cate == $item->id )
+                                        @if(  $products->categories_id == $item->id )
                                             <option value="{{ $item->id }}" selected='selected'> {{ $item->name }}</option>
                                         @else
                                             <option value="{{ $item->id }}"> {{ $item->name }}</option>

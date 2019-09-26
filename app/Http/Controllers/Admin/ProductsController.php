@@ -54,29 +54,29 @@ class ProductsController extends Controller
 
         $products = new Product;
         $products -> name = $request->txtName;
-        $products -> id_cate = $request->optCategory;
+        $products -> categories_id = $request->optCategory;
         $products -> description = $request->txtDescription;
         $products -> unit_price = $request->noPrice;
         $products -> promotion_price = $request->noPromotionPrice;
         $products -> unit = $request->txtUnit; 
         $products -> status = $request->rdoStatus;
 
-        if($request->hasFile('iputImage')){
+        if($request->hasFile('inputImage')){
                     //Hàm kiểm tra dữ liệu
             $this->validate($request, 
                 [
                     //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
-                    'iputImage' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    'inputImage' => 'mimes:jpg,jpeg,png,gif|max:2048',
                 ],          
                 [
                     //Tùy chỉnh hiển thị thông báo không thỏa mãn điều kiện
-                    'iputImage.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                    'iputImage.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
+                    'inputImage.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
+                    'inputImage.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
                 ] 
             ); 
 
             //Lưu hình ảnh vào thư mục public/upload/products              
-            $file = $request->file('iputImage');
+            $file = $request->file('inputImage');   
             //Lấy tên của file ảnh vừa chọn và thêm trường date để tránh trùng tên.
             $name = date('YmdHis').'_'.$file->getClientOriginalName(); 
             // Di chuyển vào thư mục chứa ảnh product
@@ -89,7 +89,7 @@ class ProductsController extends Controller
 
         $products -> save();
 
-        return redirect()->route('product.create')->with('notification','Thêm thành công');
+        return  redirect()->route('product.create')->with('notification','Thêm thành công');
     }
 
     public function edit($id)
@@ -126,29 +126,29 @@ class ProductsController extends Controller
         ]);
 
         $products -> name = $request->txtName;
-        $products -> id_cate = $request->optCategory;
+        $products -> categories_id = $request->optCategory;
         $products -> description = $request->txtDescription;
         $products -> unit_price = $request->noPrice;
         $products -> promotion_price = $request->noPromotionPrice;
         $products -> unit = $request->txtUnit; 
         $products -> status = $request->rdoStatus;
 
-        if($request->hasFile('iputImage')){
+        if($request->hasFile('inputImage')){
                     //Hàm kiểm tra dữ liệu
             $this->validate($request, 
                 [
                     //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
-                    'iputImage' => 'mimes:jpg,jpeg,png,gif|max:2048',
+                    'inputImage' => 'mimes:jpg,jpeg,png,gif|max:2048',
                 ],          
                 [
                     //Tùy chỉnh hiển thị thông báo không thỏa mãn điều kiện
-                    'iputImage.mimes' => 'Chỉ chấp nhận hình thẻ với đuôi .jpg .jpeg .png .gif',
-                    'iputImage.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
+                    'inputImage.mimes' => 'Chỉ chấp nhận hình ảnh với đuôi .jpg .jpeg .png .gif',
+                    'inputImage.max' => 'Hình thẻ giới hạn dung lượng không quá 2M',
                 ] 
             ); 
 
-            //Lưu hình ảnh vào thư mục public/upload/products              
-            $file = $request->file('iputImage');
+            //L0ưu hình ảnh vào thư mục public/upload/products              
+            $file = $request->file('inputImage');
             //Lấy tên của file ảnh vừa chọn và thêm trường date để tránh trùng tên.
             $name = date('YmdHis').'_'.$file->getClientOriginalName(); 
             // Di chuyển vào thư mục chứa ảnh product

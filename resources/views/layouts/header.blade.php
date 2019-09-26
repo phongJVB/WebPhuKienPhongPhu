@@ -4,8 +4,8 @@
 			<div class="container">
 				<div class="pull-left auto-width-left">
 					<ul class="top-menu menu-beta l-inline">
-						<li><a href=""><i class="fa fa-home"></i> 90-92 Lê Thị Riêng, Bến Thành, Quận 1</a></li>
-						<li><a href=""><i class="fa fa-phone"></i> 0163 296 7751</a></li>
+						<li><a href=""><i class="fa fa-home"></i> Ngõ 197 Trần Phú, Văn Quán, Hà Đông, HN</a></li>
+						<li><a href=""><i class="fa fa-phone"></i> 0964 648 152</a></li>
 					</ul>
 				</div>
 				<div class="pull-right auto-width-right">
@@ -13,6 +13,7 @@
 						<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
 						<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
 						<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>
+						<li><a href="{{ Route('home.index') }}">Logout</a></li>
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -31,53 +32,53 @@
 							<button class="fa fa-search" type="submit" id="searchsubmit"></button>
 						</form>
 					</div>
+					
+					<?php 
+						$cartProducts = Cart::Content();
+						$subtotal = Cart::subtotal();
+						$countCart = Count($cartProducts);
+					?> 
 
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i> Giỏ hàng (Trống) <i class="fa fa-chevron-down"></i></div>
+							<div class="beta-select"><i class="fa fa-shopping-cart"></i>
+
+								Giỏ hàng ( @if($countCart!=0) {{ $countCart }} @else Trống @endif ) 
+
+								<i class="fa fa-chevron-down"></i></div>
 							<div class="beta-dropdown cart-body">
+							
+								@foreach($cartProducts as $cartProduct  )
 								<div class="cart-item">
 									<div class="media">
 										<a class="pull-left" href="#"><img src="frontEnd/assets/dest/images/products/cart/1.png" alt=""></a>
 										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
+											<span class="cart-item-title">{{ $cartProduct->name }}</span>
 
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="frontEnd/assets/dest/images/products/cart/2.png" alt=""></a>
-										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
-										</div>
-									</div>
-								</div>
+											@foreach($categories as $item)
+											@if( $cartProduct->options->cateId == $item->id )
+											<span class="cart-item-options">Thể loại:{{ $item->name }} </span>
+											@endif
+											@endforeach
 
-								<div class="cart-item">
-									<div class="media">
-										<a class="pull-left" href="#"><img src="frontEnd/assets/dest/images/products/cart/3.png" alt=""></a>
-										<div class="media-body">
-											<span class="cart-item-title">Sample Woman Top</span>
-											<span class="cart-item-options">Size: XS; Colar: Navy</span>
-											<span class="cart-item-amount">1*<span>$49.50</span></span>
+											<span class="cart-item-amount">{{ $cartProduct->qty }}*<span>{{ $cartProduct->price }}</span></span>
 										</div>
+										<div class="pro-del"><a href="{{ Route('home.removeCart', $cartProduct->rowId) }}"><i class="fa fa-times-circle"></i></a></div>
 									</div>
 								</div>
+								@endforeach
+
 
 								<div class="cart-caption">
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value">$34.55</span></div>
+									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value"> {{ $subtotal }} VNĐ</span></div>
 									<div class="clearfix"></div>
 
 									<div class="center">
 										<div class="space10">&nbsp;</div>
-										<a href="checkout.html" class="beta-btn primary text-center">Đặt hàng <i class="fa fa-chevron-right"></i></a>
+										<a href="{{ Route('home.checkout') }}" class="beta-btn primary text-center">Check Out <i class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
+
 							</div>
 						</div> <!-- .cart -->
 					</div>
@@ -85,7 +86,7 @@
 				<div class="clearfix"></div>
 			</div> <!-- .container -->
 		</div> <!-- .header-body -->
-		<div class="header-bottom" style="background-color: #0277b8;">
+		<div class="header-bottom" style="background-color: #0277b8; height: 60px;">
 			<div class="container">
 				<a class="visible-xs beta-menu-toggle pull-right" href="#"><span class='beta-menu-toggle-text'>Menu</span> <i class="fa fa-bars"></i></a>
 				<div class="visible-xs clearfix"></div>
@@ -101,6 +102,7 @@
 						</li>
 						<li><a href="{{ Route('home.about') }}">Giới thiệu</a></li>
 						<li><a href="{{ Route('home.contact') }}">Liên hệ</a></li>
+						<li><a href="{{ Route('home.showShoppingCart') }}">Giỏ hàng</a></li>
 					</ul>
 					<div class="clearfix"></div>
 				</nav>
