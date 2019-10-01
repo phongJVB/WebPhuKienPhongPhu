@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Product
+                        <h1 class="page-header">User
                             <small>List</small>
                         </h1>
                     </div>
@@ -20,23 +20,27 @@
                             <tr align="center">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Status</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Gender</th>
+                                <th>Level</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($listProduct as $item)
+                            @foreach($users as $item)
                                 <tr class="odd gradeX" align="center">
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{!! $item->description !!}</td>
-                                    <td>{{ $item->unit_price }}</td>
-                                    <td>{{ ($item['status']==1) ? 'Mới':'Cũ'}}</td>
-                                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.product.destroy', $item->id) }}"> Delete</a></td>
-                                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.product.edit', $item->id) }}">Edit</a></td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{{ $item->address }}</td>
+                                    <td>{{ ($item['gender']==1) ? 'Nam':'Nữ'}}</td>
+                                    <td>{{ ($item['level']==0) ? 'Khách hàng':(($item['level']==1) ? 'Employee':'Admin') }}</td>
+                                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.user.destroy', $item->id) }}"> Delete</a></td>
+                                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.user.edit', $item->id) }}">Edit</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

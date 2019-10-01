@@ -89,7 +89,7 @@ class ProductsController extends Controller
 
         $products -> save();
 
-        return  redirect()->route('product.create')->with('notification','Thêm thành công');
+        return  redirect()->route('admin.product.create')->with('notification','Thêm thành công');
     }
 
     public function edit($id)
@@ -163,7 +163,7 @@ class ProductsController extends Controller
 
         $products -> save();
 
-        return redirect()->route('product.edit',[ $products->id ])->with('notification','Sửa thành công');
+        return redirect()->route('admin.product.edit',[ $products->id ])->with('notification','Sửa thành công');
     }
 
     public function destroy($id)
@@ -171,7 +171,7 @@ class ProductsController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return redirect()->route('product.index')->with('notification','Bạn đã xóa thành công');
+        return redirect()->route('admin.product.index')->with('notification','Bạn đã xóa thành công');
     }
 
 }

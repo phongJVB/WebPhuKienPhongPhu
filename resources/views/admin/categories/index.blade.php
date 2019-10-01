@@ -32,9 +32,9 @@
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->description }} </td>
                                 <td class="center"><i class="fa fa-trash-o  fa-fw"></i>
-                                <a href="{{ Route('category.destroy', $item->id) }}" 
+                                <a href="{{ Route('admin.category.destroy', $item->id) }}" 
                                 class="{{(($item->countID)>0) ? 'disabled':'enable'}}">Delete</a></td>
-                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('category.edit', $item->id) }}">Edit</a></td>
+                                <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.category.edit', $item->id) }}">Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

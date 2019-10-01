@@ -5,7 +5,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Product
+                        <h1 class="page-header">Orders
                             <small>List</small>
                         </h1>
                     </div>
@@ -19,24 +19,34 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
+                                <th>Order Name</th>
+                                <th>Address</th>
+                                <th>Email</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Note</th>
+                                <th>Order Date</th>
                                 <th>Status</th>
                                 <th>Delete</th>
-                                <th>Edit</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($listProduct as $item)
+                            @foreach($orders as $item)
                                 <tr class="odd gradeX" align="center">
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{!! $item->description !!}</td>
-                                    <td>{{ $item->unit_price }}</td>
-                                    <td>{{ ($item['status']==1) ? 'Mới':'Cũ'}}</td>
-                                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.product.destroy', $item->id) }}"> Delete</a></td>
-                                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.product.edit', $item->id) }}">Edit</a></td>
+                                    <td>{{ $item->customers_name }}</td>
+                                    <td>{{ $item->customers_address }}</td>
+                                    <td>{{ $item->customers_email }}</td>
+                                    <td>{{ $item->amount }}</td>
+                                    <td>{{ $item->payment }}</td>
+                                    <td>{!! $item->note !!}</td>
+                                    <td>{{ $item->date_order }}</td>
+
+                                    <td>{{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Hoàn lại' )) }}</td>
+
+                                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.order.destroy', $item->id) }}"> Delete</a></td>
+                                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.order.edit',$item->id) }}">Detail</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

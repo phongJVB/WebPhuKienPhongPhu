@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/admin', 'Admin\ProductsController@index')->name('admin');
 //Tạo Router theo Group của từng phần trong Admin
-Route::prefix('admin')->group(function(){
+Route::name('admin.')->prefix('admin')->group(function(){
 
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
@@ -41,6 +41,27 @@ Route::prefix('admin')->group(function(){
 		Route::get('/destroy/{id}', 'Admin\CategoriesController@destroy')->name('destroy');
 	});
 
+	//Tạo Router cho users trong Admin
+	Route::name('user.')->prefix('user')->group(function() {
+		Route::get('/', 'Admin\UsersController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\UsersController@show')->name('show');
+		Route::get('/create', 'Admin\UsersController@create')->name('create');
+		Route::post('/store', 'Admin\UsersController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\UsersController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\UsersController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\UsersController@destroy')->name('destroy');
+	});
+
+	//Tạo Router cho orders trong Admin
+	Route::name('order.')->prefix('order')->group(function() {
+		Route::get('/', 'Admin\OrdersController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\OrdersController@show')->name('show');
+		Route::get('/create', 'Admin\OrdersController@create')->name('create');
+		Route::post('/store', 'Admin\OrdersController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\OrdersController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\OrdersController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\OrdersController@destroy')->name('destroy');
+	});
 });
 
 
@@ -60,7 +81,7 @@ Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến xem page liên hệ của website
 		Route::get('/contact','PageController@getContact')->name('contact');
 
-		/*---Route xử lý giỏ hàng----*/
+		//Route xử lý giỏ hàng
 		Route::get('/showShoppingCart','CartController@showCart')->name('showShoppingCart');
 		Route::post('/shoppingCart','CartController@addToCart')->name('shoppingCart');
 		Route::post('/updateCart','CartController@updateCart')->name('updateCart');
@@ -77,4 +98,8 @@ Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến trang đăng ký của website
 		Route::get('/register','PageController@getRegister')->name('register');
 		Route::post('/register','PageController@postRegister')->name('register');
+
+		// Router gọi đến đăng xuất của website
+		Route::get('/logout','PageController@getLogout')->name('logout');
+
 });

@@ -43,7 +43,13 @@ class PageController extends Controller
     // }
 
     function getCheckout(){
-        return view('pages.checkout');
+        $user = Auth::user();
+        if($user){
+            return view('pages.checkout',compact('user'));
+        }
+        else{
+           return view('pages.checkout'); 
+        }     
     }
 
     // Xử lý lưu thông tin đơn hàng
@@ -51,20 +57,22 @@ class PageController extends Controller
         $order = new Order();
         $cart = Cart::content();
         $total = Cart::subtotal();
-
-        $order->customers_name = $request->txtName;
-        $order->customers_gender = $request->gender;
-        $order->customers_email = $request->txtEmail;
-        $order->customers_address = $request->txtAddress;
-        $order->customers_phone = $request->txtPhone;
-        $order->note = $request->txtNote;
-        $order->payment = $request->payment;
-        $order->amount = $total;
-        $order->date_order = date('Y-m-d');
-
-        $order->save();
+        $convertTotal= str_replace(',','', $total);
 
         if (count($cart) >0) {
+
+            $order->customers_id = $request->customersId;
+            $order->customers_name = $request->txtName;
+            $order->customers_gender = $request->gender;
+            $order->customers_email = $request->txtEmail;
+            $order->customers_address = $request->txtAddress;
+            $order->customers_phone = $request->txtPhone;
+            $order->note = $request->txtNote;
+            $order->payment = $request->payment;
+            $order->amount = $convertTotal;
+            $order->date_order = date('Y-m-d');
+            $order->save();
+
             foreach ($cart as $key => $item) {
                 $orderProduct = new OrderProduct();
                 $orderProduct->orders_id = $order->id;
@@ -74,11 +82,18 @@ class PageController extends Controller
                 $orderProduct->products_unit = $item->options->unit;
                 $orderProduct->save();
             }
+
+            Cart::destroy();
+
+            return redirect()->back()->with('notification','Đặt hàng thành công');
+            
+        } else{
+
+            return redirect()->back()->with('notification','Giỏ hàng trống! Khách hàng vui lòng đặt hàng');
+
         }
 
-        Cart::destroy();
-
-        return redirect()->back()->with('notification','Đặt hàng thành công');
+        
     }
 
 
@@ -151,6 +166,11 @@ class PageController extends Controller
 
         return redirect()->back()->with('notification','Thêm thành công người dùng');
 
+    }
+
+    function getLogout(){
+        Auth::logout();
+        return redirect()->route('home.index');
     }
     
 

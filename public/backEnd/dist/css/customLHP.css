@@ -1,0 +1,15 @@
+.radioChecked{
+	margin-left: 10px;
+}
+#inforCustomer tbody tr td:nth-child(1){
+	width: 200px;
+}
+.text-red{
+	color: red;
+}
+#ctrPayment{
+	margin-bottom: 150px;
+}
+#txtTotalCart{
+	margin: 5px 0px;
+}

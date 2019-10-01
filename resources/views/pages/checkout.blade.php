@@ -1,5 +1,6 @@
 @extends('master')
 @section('content')
+
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
@@ -16,7 +17,7 @@
 	
 	<div class="container">
 		<div id="content">
-
+	
 			@if(session('notification'))
                  <div class="alert alert-success"> 
                      {{ session('notification') }}
@@ -32,29 +33,41 @@
 
 						<div class="form-block">
 							<label for="name">Họ tên <span class="cl-red">(*)</span></label>
-							<input type="text" id="name" name="txtName" placeholder="Họ tên" required>
+							<input type="hidden" name="customersId" value="{{isset($user)?$user->id:''}}">
+							<input type="text" id="name" name="txtName" placeholder="Họ tên" value="{{isset($user)?$user->name:''}}" required>
 						</div>
+
 						<div class="form-block">
+
 							<label>Giới tính </label>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nam" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-							<input id="gender" type="radio" class="input-radio" name="gender" value="nữ" style="width: 10%"><span>Nữ</span>
-										
+							
+							@if(isset($user))
+								<input id="gender" type="radio" class="input-radio" name="gender" value="1" 
+								{{ ($user->gender == 1)?'checked':'' }} style="width: 10%"><span style="margin-right: 10%">Nam</span>
+								<input id="gender" type="radio" class="input-radio" name="gender" value="0" 
+								{{ ($user->gender == 0)?'checked':'' }} style="width: 10%"><span>Nữ</span>
+							@else
+								<input id="gender" type="radio" class="input-radio" name="gender" value="1" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
+								<input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%"><span>Nữ</span>
+							@endif
+
+
 						</div>
 
 						<div class="form-block">
 							<label for="email">Email <span class="cl-red">(*)</span></label>
-							<input type="email" id="email" name="txtEmail" required placeholder="expample@gmail.com">
+							<input type="email" id="email" name="txtEmail" value="{{isset($user)?$user->email:''}}" required placeholder="expample@gmail.com">
 						</div>
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ <span class="cl-red">(*)</span></label>
-							<input type="text" id="adress" name="txtAddress" placeholder="Street Address" required>
+							<input type="text" id="adress" name="txtAddress" placeholder="Street Address" value="{{isset($user)?$user->address:''}}" required>
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại <span class="cl-red">(*)</span></label>
-							<input type="text" name="txtPhone" id="phone" required>
+							<input type="text" name="txtPhone" id="phone" value="{{isset($user)?$user->phone:''}}" required>
 						</div>
 						
 						<div class="form-block">

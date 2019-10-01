@@ -43,10 +43,22 @@
                             <a href="#"><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="#">List User</a>
+                                    <a href=" {{ Route('admin.user.index') }} ">List User</a>
                                 </li>
                                 <li>
-                                    <a href="#">Add User</a>
+                                    <a href=" {{ Route('admin.user.create') }} ">Add User</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-book fa-fw"></i> Order<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href=" {{ Route('admin.order.index') }} ">List Order</a>
+                                </li>
+                                <li>
+                                    <a href=" {{ Route('admin.order.create') }} ">Add Order</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

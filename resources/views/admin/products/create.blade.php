@@ -27,7 +27,7 @@
                             </div>
                         @endif
                         <!-- Hiển thị form thêm sản phẩm-->
-                        <form action="{{ Route('product.store') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ Route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Name</label>
