@@ -1,3 +1,4 @@
+
       
         @extends('admin.layouts.index')
         @section('content')
@@ -51,7 +52,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Images</label>
-                                <input type="file" name="iputImage">
+                                <input type="file" name="inputImage">
                             </div>
                             <div class="form-group">
                                 <label>Product Unit</label>

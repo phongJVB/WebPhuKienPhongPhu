@@ -64,7 +64,7 @@ class UsersController extends Controller
         $user-> phone = $request->txtPhone;
         $user-> address = $request->txtAddress;
         $user-> gender = $request->rdoGender;
-        $user-> level = $request->rdoLevel;
+        $user-> role = $request->rdoLevel;
         $user-> password = bcrypt($request->txtPassword);
         $user->save();
 
@@ -124,7 +124,7 @@ class UsersController extends Controller
         $user-> phone = $request->txtPhone;
         $user-> address = $request->txtAddress;
         $user-> gender = $request->rdoGender;
-        $user-> level = $request->rdoLevel;
+        $user-> role = $request->rdoLevel;
 
         if($request->changePassword =="on"){
             $this->validate($request,

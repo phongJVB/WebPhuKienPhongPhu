@@ -31,6 +31,10 @@
                                 <label>Category Name</label>
                                 <input class="form-control" name="txtCateName" placeholder="Please Enter Category Name" />
                             </div>
+                            <div class="form-group">
+                                <label>Category Description</label>
+                                <textarea class="form-control" rows="3" name="txtDescription" placeholder="Please Enter Category Category"></textarea>
+                            </div>
                             <button type="submit" class="btn btn-default">Category Add</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>

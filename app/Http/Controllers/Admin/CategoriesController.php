@@ -34,10 +34,12 @@ class CategoriesController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'txtCateName'=>'required|unique:categories,name|min:3|max:100'
+            'txtCateName'=>'required|unique:categories,name|min:3|max:100',
+            'txtDescription'=>'required',
         ],
         [
             'txtCateName.required'=>'Bạn chưa nhập tên thể loại',
+            'txtDescription.required'=>'Bạn chưa nhập mô tả',
             'txtCateName.unique'=>'Tên thể loại đã tồn tại',
             'txtCateName.min'=>'Tên thể loại phải có độ dài từ 3 cho đến 100 ký tự',
             'txtCateName.max'=>'Tên thể loại phải có độ dài từ 3 cho đến 100 ký tự',
@@ -45,6 +47,7 @@ class CategoriesController extends Controller
 
         $categories = new Category;
         $categories -> name = $request ->txtCateName;
+        $categories -> description = $request ->txtDescription;
         $categories -> save();
 
         return redirect('admin/category/create')->with('notification','Thêm thành công');

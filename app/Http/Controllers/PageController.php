@@ -12,6 +12,7 @@ use App\Model\Product;
 use App\Model\Category;
 use App\Model\Order;
 use App\Model\OrderProduct;
+use App\Model\Slide;
 use Cart;
 
 
@@ -19,11 +20,19 @@ class PageController extends Controller
 {
     function getHome(){
         $products = Product::all();
-    	return view('pages.home',compact('products'));
+        $slides = Slide::all();
+    	return view('pages.home',compact('products','slides'));
     }
 
-    function getProductType(){
-    	return view('pages.productType');
+    function getProductType($id){
+        //Lấy sản phẩm theo thể loại cần tìm
+        $productType = Product::Where('categories_id',$id)->get();
+        $categories = Category::all();
+        // Lấy tên thể loại
+        $category = Category::Where('id',$id)->first();
+        // Tìm sản phẩm khách với thể loại cần tìm
+        $products = Product::Where('categories_id','<>',$id)->paginate(3);
+    	return view('pages.productType', compact('productType','categories','category','products'));
     }
 
     function getProduct(){
@@ -37,10 +46,6 @@ class PageController extends Controller
     function getContact(){
     	return view('pages.contact');
     }
-    
-    // function getShoppingCart(){
-    //     return view('pages.shopping_cart');
-    // }
 
     function getCheckout(){
         $user = Auth::user();
@@ -115,17 +120,16 @@ class PageController extends Controller
 
             ]);
 
-
-        if(Auth::attempt([ 'email'  => $request->txtEmail, 'password' => $request->password,'level'=>'0' ]))
-        {
-            return redirect()->route('home.index');
-
-        }elseif(Auth::attempt([ 'email'  => $request->txtEmail, 'password' => $request->password,'level'=>'1']))
-        {
-            return redirect()->route('admin');
-        }else
-        {
-            return redirect()->route('home.login')->with('notification','Tài khoản không tồn tại');
+        $arr =[
+            'email'  => $request->txtEmail, 
+            'password' => $request->password,
+        ];
+        if(Auth::attempt($arr)){
+            if(Auth::user()->role == 0){
+                return redirect()->route('home.index');
+            }
+        }else{
+            return redirect()->back()->with('notification','Tài khoản không tồn tại');
         }
     }
 
@@ -170,6 +174,7 @@ class PageController extends Controller
 
     function getLogout(){
         Auth::logout();
+        Cart::destroy();
         return redirect()->route('home.index');
     }
     

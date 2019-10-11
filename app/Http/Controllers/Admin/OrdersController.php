@@ -97,6 +97,8 @@ class OrdersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::find($id);
+        $order->delete();
+        return redirect()->route('admin.order.index')->with('notification','Bạn đã xóa thành công');
     }
 }

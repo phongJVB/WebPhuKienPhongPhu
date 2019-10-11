@@ -68,6 +68,7 @@
 								<input type="submit" class="update-qty" value="Update"></input> 
 
 							{!! Form::close() !!}
+							
 							</td>
 							
 							<?php $subTotal = ($cartProduct->qty)*($cartProduct->price); ?>

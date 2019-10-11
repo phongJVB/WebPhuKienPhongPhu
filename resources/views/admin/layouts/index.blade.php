@@ -7,6 +7,7 @@
     <meta name="author" content="">
     <title>Admin</title>
     <base href="{{asset('')}}">  
+    <link rel="icon" type="image/png" href="{{ asset('backEnd/login/images/icons/favicon.ico') }}"/>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('backEnd/bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 

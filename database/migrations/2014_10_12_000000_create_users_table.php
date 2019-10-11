@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('phone',50);
             $table->string('address',255);
             $table->integer('gender');
-            $table->integer('level');
+            $table->integer('role');
             $table->string('password',100);
             $table->rememberToken();
             $table->boolean('delete_flag')->default(false);

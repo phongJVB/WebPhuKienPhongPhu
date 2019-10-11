@@ -10,7 +10,7 @@ class Product extends Model
 
     /**
      * Description: Tạo liên kết với bảng category
-     * id_type: Khóa ngoại ở bảng Product
+     * categories_id: Khóa ngoại ở bảng Product
      * id: Là khóa của bảng Product ( vì 1 sản phẩm thuộc về loại sản phẩm)
      */
     public function category(){

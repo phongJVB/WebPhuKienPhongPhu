@@ -13,3 +13,69 @@
 #txtTotalCart{
 	margin: 5px 0px;
 }
+/*----Custom Giao dien admin old image----*/
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.5;
+}
+.img-edit img{
+    margin: 10px 0px;
+    width: 100px;
+    height: 100px;
+    box-shadow: 3px 2px 9px cadetblue;
+}   
+.img-edit-slide img{
+    margin: 10px 0px;
+    width: 300px;
+    height: 100px;
+    box-shadow: 3px 2px 9px cadetblue;
+} 
+/* --------Custom Hedear and Menu-------- */
+/*--Đổi màu Header---*/
+.navbar-static-top{
+  background-color: #3C8DBC;
+}
+.navbar{
+  border:none;
+}
+.sidebar-nav a {
+  color:#ffff;
+}
+ /*--Đổi màu cho Menu--*/
+.sidebar-nav,#wrapper {
+  background-color: #222d32;
+}
+.nav>li>a:hover, .nav>li>a:focus{
+  background-color: #1e282c;
+  color: #3C8DBC;
+}
+.sidebar ul li {
+   border-bottom: 1px solid #313131;
+}
+.sidebar ul li a.active{
+   background-color: #1e282c;
+   color: #3C8DBC;
+}
+.btn-default:hover{
+  background-color:#3C8DBC;
+  border-color:#3C8DBC;
+}
+ /*--Đổi màu cho Dropdown User--*/
+a.dropdown-toggle{
+  color: #ffff;
+}
+.nav>li>a.dropdown-toggle:hover, .nav>li>a.dropdown-toggle:focus {
+  background-color: #367FA9;
+  color: #ffff; 
+  border-radius:50px;
+}
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus{
+  background-color: #367FA9;
+  border-radius:50px;
+}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus{
+  background-color: #3C8DBC;
+  border-radius:2px;
+  color:#ffff;
+}

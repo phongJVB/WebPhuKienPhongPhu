@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/huong-style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/phong-style.css') }}">
 </head>
 <body>
 
@@ -29,6 +30,7 @@
 
 	<!-- include js files -->
 	<script src="{{ asset('frontEnd/assets/dest/js/jquery.js') }}"></script>
+	<script src="{{ asset('backEnd/bower_components/jquery/dist/jquery.min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js') }}"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/bxslider/jquery.bxslider.min.js') }}"></script>
@@ -42,6 +44,7 @@
 	<script src="{{ asset('frontEnd/assets/dest/js/wow.min.js') }}"></script>
 	<!--customjs-->
 	<script src="{{ asset('frontEnd/assets/dest/js/custom2.js') }}"></script>
+	<script src="{{ asset('frontEnd/assets/dest/js/phongCustom.js') }}"></script>
 	<script>
 			$(document).ready(function($) {    
 				$(window).scroll(function(){

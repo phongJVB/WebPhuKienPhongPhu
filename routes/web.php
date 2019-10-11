@@ -15,10 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin', 'Admin\ProductsController@index')->name('admin');
+Route::get('/admin', 'Admin\LoginController@index')->name('admin');
+Route::post('/admin','Admin\LoginController@postLogin')->name('admin');
 //Tạo Router theo Group của từng phần trong Admin
 Route::name('admin.')->prefix('admin')->group(function(){
-
+	
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
 		Route::get('/', 'Admin\ProductsController@index')->name('index');
@@ -62,6 +63,17 @@ Route::name('admin.')->prefix('admin')->group(function(){
 		Route::post('/update/{id}', 'Admin\OrdersController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\OrdersController@destroy')->name('destroy');
 	});
+
+	//Tạo Router cho slides trong Admin
+	Route::name('slide.')->prefix('slide')->group(function() {
+		Route::get('/', 'Admin\SlidesController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\SlidesController@show')->name('show');
+		Route::get('/create', 'Admin\SlidesController@create')->name('create');
+		Route::post('/store', 'Admin\SlidesController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\SlidesController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\SlidesController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\SlidesController@destroy')->name('destroy');
+	});
 });
 
 
@@ -70,7 +82,7 @@ Route::name('home.')->prefix('home')->group(function(){
 		Route::get('/','PageController@getHome')->name('index');
 
 		// Router gọi đến ProductType của website
-		Route::get('/product_type','PageController@getProductType')->name('productType');
+		Route::get('/product_type/{id}','PageController@getProductType')->name('productType');
 
 		// Router gọi đến xem chi tiết Product của website
 		Route::get('/productDetail','PageController@getProduct')->name('productDetail');

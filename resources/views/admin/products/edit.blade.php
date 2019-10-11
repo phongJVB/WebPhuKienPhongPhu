@@ -63,7 +63,7 @@
 
                             <div class="form-group">
                                 <label>New Images</label>
-                                <input type="file" name="iputImage" >
+                                <input type="file" name="inputImage" >
                             </div>
                             
 
@@ -95,7 +95,7 @@
                                 </label>
                             </div>
 
-                            <button type="submit" class="btn btn-default">Product Add</button>
+                            <button type="submit" class="btn btn-default">Product Update</button>
                             <button type="reset" class="btn btn-default">Reset</button>
                         <form>
                     </div>

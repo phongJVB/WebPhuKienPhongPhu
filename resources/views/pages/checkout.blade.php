@@ -149,3 +149,22 @@
 		</div> <!-- #content -->
 	</div> <!-- .container -->
 @endsection
+@section('script')
+<script>
+            $(document).ready(function(){
+                $('#payment_method_bacs').change(function(){
+                    if($(this).is(':checked')){
+                        $('.payment_box.payment_method_bacs').css('display','block');
+                        $('.payment_box.payment_method_cheque').css('display','none');
+                    }
+                });
+
+                $('#payment_method_cheque').change(function(){
+                    if($(this).is(':checked')){
+                        $('.payment_box.payment_method_cheque').css('display','block');
+                        $('.payment_box.payment_method_bacs').css('display','none');
+                    }
+                });
+            })
+	</script>
+@endsection

@@ -62,7 +62,7 @@ class ProductsController extends Controller
         $products -> status = $request->rdoStatus;
 
         if($request->hasFile('inputImage')){
-                    //Hàm kiểm tra dữ liệu
+            //Hàm kiểm tra dữ liệu
             $this->validate($request, 
                 [
                     //Kiểm tra đúng file đuôi .jpg,.jpeg,.png.gif và dung lượng không quá 2M
@@ -104,7 +104,7 @@ class ProductsController extends Controller
         $products = Product::find($id);
         $this->validate($request,
         [
-            'txtName'=>'required|unique:products,name|min:3|max:100',
+            'txtName'=>'required|min:3|max:100',
             'optCategory'=>'required',
             'noPrice'=>'required',
             'noPromotionPrice'=>'required',
@@ -113,7 +113,6 @@ class ProductsController extends Controller
         ],
         [
             'txtName.required'=>'Bạn chưa nhập tên thể loại',
-            'txtName.unique'=>'Tên sản phẩm đã tồn tại',
             'txtName.min'=>'Tên sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
             'txtName.max'=>'Tên sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
             'optCategory.required'=>'Bạn chưa chọn thể loại',
@@ -157,8 +156,6 @@ class ProductsController extends Controller
             unlink("upload/products/".$products->image);
             // Lấy tên lưu và csdl
             $products->image = $name;
-        }else{
-            $products->image = "";
         }
 
         $products -> save();

@@ -26,7 +26,7 @@
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">
-					<a href="index.html" id="logo"><img src="frontEnd/assets/dest/images/logo-cake.png" width="200px" alt=""></a>
+					<a href="index.html" id="logo"><img src="frontEnd/assets/dest/images/logoPhongPhu.png" width="200px" alt=""></a>
 				</div>
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
@@ -97,11 +97,11 @@
 				<nav class="main-menu">
 					<ul class="l-inline ov">
 						<li><a href="{{ Route('home.index') }}">Trang chủ</a></li>
-						<li><a href="{{ Route('home.productType') }}">Sản phẩm</a>
+						<li><a>Sản phẩm</a>
 							<ul class="sub-menu">
-								<li><a href="{{ Route('home.productType') }}">Sản phẩm 1</a></li>
-								<li><a href="{{ Route('home.productType') }}">Sản phẩm 2</a></li>
-								<li><a href="{{ Route('home.productType') }}">Sản phẩm 4</a></li>
+								@foreach($categories as $item)
+								<li><a href="{{ Route('home.productType',$item->id) }}">{{ $item->name }}</a></li>
+								@endforeach
 							</ul>
 						</li>
 						<li><a href="{{ Route('home.about') }}">Giới thiệu</a></li>
