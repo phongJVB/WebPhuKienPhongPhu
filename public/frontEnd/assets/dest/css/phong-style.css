@@ -102,3 +102,224 @@
     overflow: hidden;
     width: 102%;
 }
+/*==========================================================================*/
+/*------------------CSS Register-------------------*/
+.inputPass{
+  border: 1px solid #e1e1e1;
+  height: 37px;
+  padding: 0 12px;
+}
+/*-----------------Ribbon Sale Carousel-------------*/
+.ribbon-wrapper#carousel{
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  position: absolute;
+  top: 1px;
+  right: 20px;
+}
+
+/*----------------CSS Notice Cart Null-----------------*/
+.notice-cart-null{
+    text-align: center;
+    padding: 10px 10px;
+    margin: 5px 0 10px;
+}
+.connect-home{
+  margin-top: 20px;
+}
+.connect-home a{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #307f0f;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 20px;
+    background-color: #fff;
+    border: solid 1px #34a105;
+    border-radius: 3px;
+}
+.connect-home a:hover{
+  background-color: #0277b8;
+  cursor: pointer;
+  color: #ffff;
+  border: solid 1px #0277b8;
+}
+/*-------------------CSS Quantity In Product Detail--------*/
+.form-add-cart .quantity{
+  padding-top: 20px;
+    margin-right: 60px;
+    display: flex;
+}
+.form-add-cart .quantity input {
+  -webkit-appearance: none;
+  border: none;
+  text-align: center;
+  width: 75px;
+  height: 35px;
+  font-size: 16px;
+  color: #43484D;
+  font-weight: 300;
+}
+.form-add-cart .quantity p{
+  padding: 7px;
+}
+ 
+.form-add-cart button[class*=btn] {
+  width: 35px;
+  height: 35px;
+  background-color: #E1E8EE;
+  border: none;
+  cursor: pointer;
+}
+.form-add-cart .minus-btn img {
+  margin-bottom: 3px;
+}
+.form-add-cart   .plus-btn img {
+  margin-top: 2px;
+}
+.form-add-cart .btn-add-cart{
+  display: flex;
+  margin-top: 25px;
+}
+.form-add-cart .btn-add-cart button{
+  height: 40px;
+  padding: 10px;
+  background-color: #3a5c83;
+  border-radius: 3px;
+}
+.form-add-cart .btn-add-cart button:hover{
+  background-color: #f05d40;
+}
+.form-add-cart .btn-add-cart button.addCartNow{
+  margin-left: 40px;
+  width: 170px;
+  background-color: #f05d40;
+}
+.form-add-cart .btn-add-cart button.addCartNow:hover{
+  background-color: #FE6666;
+}
+.form-add-cart .btn-add-cart i{
+  font-size: 22px;
+  color: #ffff;
+}
+.form-add-cart .btn-add-cart span{
+  position: relative;
+  bottom: 3px;
+  left: 1px;
+  color: #ffff;
+}
+.form-add-cart .btn-add-cart .addCartNow span{
+  bottom: 0px;
+  font-family: arial;
+  font-size: 15px;
+}
+/*------CSS Quantity In Shopping Cart-------*/
+.shop_table .form-add-cart .quantity{
+  padding-top: 0px;
+  margin-right: 0px;
+}
+.shop_table tr th,tr td{
+  border: 1px solid #d2cece;
+}
+table.shop_table td:last-child,table.shop_table th:last-child{
+  border-right: 1px solid #d2cece;
+}
+.media>.pull-left{
+  width: 80px;
+  height: 80px;
+}
+#iconRemove{
+  cursor: pointer;
+}
+#iconRemove:hover i{
+  color: red;
+}
+/*--------------------------CSS Confirm Delete-------*/
+.modal{
+  top:5%;
+  position: fixed;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.modal-dialog{
+  width: 400px;
+}
+/*----CSS Form Seach Header------------------------*/
+#searchform{
+  width: 230px;
+}
+#searchform input{
+  border-radius: 3px;
+}
+#searchsubmit{
+  right: 10px;
+}
+#searchform input:focus{
+  border-color: #66bfff;
+  box-shadow: 0 0 0 1px rgba(0,149,255,0.15);
+}
+.cart{
+  border-radius: 3px;
+}
+.cart:hover{
+  background-color:#FE6666;
+  border-color: #FE6666;
+}
+.cart:hover #iconCart,.cart:hover #titleSelectCart{
+  color:#ffff;
+}
+#iconCart{
+    color: red;
+}
+
+/*------Box Not Found Search----*/
+.products-search .imageNotFound{
+    width: 385px!important;
+    margin: 0 auto;
+    display: block;
+}
+.products-search .not-found-text{
+  text-align: center;
+  color: #4a4a4a;
+  font-size: 20px;
+  line-height: 25px;
+  margin-top: 5px;
+}
+.products-search .tips-search{
+  margin: 10px auto 10px;
+  text-align: center;
+  padding: 0 10px;
+
+}
+.products-search .tips-search p{
+  font-weight: normal;
+  line-height: 18px;
+}
+.products-search .spacing{
+  display: inline-block;
+  vertical-align: top;
+  color: #4a4a4a;
+  font-size: 14px;
+  line-height: 1.3em;
+  font-weight: 500;
+}
+.products-search .spacing:nth-child(2){
+  text-align: left;
+  margin-left: 5px;
+}
+.products-search .spacing:nth-child(2) span{
+  color: #07C5F5;
+}
+
+input#inputQty::-webkit-outer-spin-button,
+input#inputQty::-webkit-inner-spin-button {
+  display: none; 
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input#inputQty[type=number] {
+  -moz-appearance:textfield; /* Firefox */
+}

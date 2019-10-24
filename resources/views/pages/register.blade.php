@@ -38,27 +38,27 @@
 						<div class="space20">&nbsp;</div>
 						<div class="form-block">
 							<label for="email">Email address <span style="color:red">(*)</span></label>
-							<input type="email" id="email" name="txtEmail" required>
+							<input type="email" id="email" name="txtEmail" value="{{ old('txtEmail')}}" required>
 						</div>
 						<div class="form-block">
 							<label for="your_last_name">Fullname <span style="color:red">(*)</span></label>
-							<input type="text" id="your_last_name" name="txtFullName" required>
+							<input type="text" id="your_last_name" name="txtFullName" value="{{ old('txtFullName')}}" required>
 						</div>
 						<div class="form-block">
 							<label for="adress">Address</label>
-							<input type="text" id="adress" name="txtAddress" placeholder="Street Address">
+							<input type="text" id="adress" name="txtAddress" placeholder="Street Address"  value="{{ old('txtAddress')}}">
 						</div>
 						<div class="form-block">
 							<label for="phone">Phone</label>
-							<input type="text" id="phone" name="txtPhone">
+							<input type="text" id="phone" name="txtPhone"  value="{{ old('txtPhone')}}">
 						</div>
 						<div class="form-block">
-							<label for="phone">Password <span style="color:red">(*)</span></label>
-							<input type="text" id="password" name="txtPassword" required>
+							<label for="pass">Password <span style="color:red">(*)</span></label>
+							<input type="password" id="password" name="txtPassword" class="inputPass" required>
 						</div>
 						<div class="form-block">
-							<label for="phone">Re password <span style="color:red">(*)</span></label>
-							<input type="text" id="re_password" name="txtRePassword" required>
+							<label for="pass">Re password <span style="color:red">(*)</span></label>
+							<input type="password" id="re_password" name="txtRePassword" class="inputPass" required>
 						</div>
 						<div class="form-block">
 							    <label>Gender</label>

@@ -1,17 +1,16 @@
             <div class="navbar-default sidebar" role="navigation">
+
                 <div class="sidebar-nav navbar-collapse">
+
+                    <div class="user-panel">
+                        <div class="pull-left image"> <img src="backEnd/dist/image/admin_phong.jpg" class="img-circle" alt="User Image"> </div>
+                        <div class="pull-left info">
+                            <p>Admin Phong</p>
+                            <a><i class="fa fa-circle text-success"></i> Online</a>
+                        </div>
+                    </div>
+
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         <li>
                             <a><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -71,6 +70,16 @@
                                 </li>
                                 <li>
                                     <a href=" {{ Route('admin.slide.create') }} ">Add Slide</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+
+                        <li>
+                            <a ><i class="fa fa-bank fa-fw"></i> Stock <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href=" {{ Route('admin.stock.index') }} ">List Stock</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

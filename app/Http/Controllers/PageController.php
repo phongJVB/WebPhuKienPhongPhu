@@ -13,6 +13,7 @@ use App\Model\Category;
 use App\Model\Order;
 use App\Model\OrderProduct;
 use App\Model\Slide;
+use App\Model\Stock;
 use Cart;
 
 
@@ -21,7 +22,8 @@ class PageController extends Controller
     function getHome(){
         $products = Product::all();
         $slides = Slide::all();
-    	return view('pages.home',compact('products','slides'));
+        $productsPaginate= Product::paginate(8);
+    	return view('pages.home',compact('products','slides','productsPaginate'));
     }
 
     function getProductType($id){
@@ -35,8 +37,18 @@ class PageController extends Controller
     	return view('pages.productType', compact('productType','categories','category','products'));
     }
 
-    function getProduct(){
-    	return view('pages.product');
+    function getProduct($id){
+        $stock = Stock::Where('products_id',$id)->first();
+        $product = Product::find($id);
+    	return view('pages.product',compact('product','stock'));
+    }
+
+    function getSearch(Request $request){
+        $keySearch = $request->key;
+        $products = Product::where('name','like','%'.$request->key.'%')
+                            ->orWhere('unit_price',$request->key)
+                            ->paginate(8);
+        return view('pages.search',compact('products','keySearch'));
     }
 
     function getAbout(){
@@ -88,6 +100,25 @@ class PageController extends Controller
                 $orderProduct->save();
             }
 
+            //Tính toán sản phẩm còn lại trong kho lưu vào Stock
+            $productSale = DB::table('order_products')
+                     ->select('products_id','products.name',DB::raw('SUM(products_quantity) AS total_sale_quantity'))
+                     ->join('products', 'products.id', '=', 'order_products.products_id')
+                     ->groupBy('products_id')
+                     ->get();//Lấy ra số lượng đã bán của từng sản phẩm
+
+            $stockList = Stock::all(); //Lấy ra các số lượng nhập vào trong kho
+
+            foreach ($stockList as $key => $item) {
+                foreach ($productSale as $itemSale) {
+                    if( $item->products_id == $itemSale->products_id ){
+                        $stock = Stock::where('products_id',$item->products_id)->first();
+                        $stock->stock_quantity = ($item->total_quantity)-($itemSale->total_sale_quantity);
+                        $stock->save();
+                    }
+                }
+            }
+
             Cart::destroy();
 
             return redirect()->back()->with('notification','Đặt hàng thành công');
@@ -124,9 +155,12 @@ class PageController extends Controller
             'email'  => $request->txtEmail, 
             'password' => $request->password,
         ];
+
         if(Auth::attempt($arr)){
             if(Auth::user()->role == 0){
                 return redirect()->route('home.index');
+            }else{
+                return redirect()->back()->with('notification','Tài khoản không tồn tại');
             }
         }else{
             return redirect()->back()->with('notification','Tài khoản không tồn tại');
@@ -141,9 +175,9 @@ class PageController extends Controller
         $this->validate($request,
         [
             'txtEmail'=>'required|email|unique:users,email',
-            'txtFullName'=>'required',
+            'txtFullName'=>'required|min:2|max:32',
             'txtAddress'=>'required',
-            'txtPhone'=>'required',
+            'txtPhone'=>'required|regex:/^[0-9]{10}$/',
             'txtPassword'=>'required|min:6|max:32',
             'txtRePassword'=>'required|same:txtPassword'
         ],
@@ -152,8 +186,11 @@ class PageController extends Controller
             'txtEmail.email'=>'Không đúng định dạng email',
             'txtEmail.unique'=>'Email đã tồn tại',
             'txtFullName.required'=>'Vui lòng nhập tên đầy đủ',
+            'txtFullName.min'=>'Password không được nhỏ hơn 2',
+            'txtFullName.max'=>'Password không được lớn hơn 32',
             'txtAddress.required'=>'Vui lòng nhập địa chỉ',
             'txtPhone.required'=>'Vui lòng nhập số điện thoại',
+            'txtPhone.regex'=>'Số điện thoại không đúng định dạng',
             'txtPassword.required'=>'Vui lòng nhập Password',
             'txtPassword.min'=>'Password không được nhỏ hơn 6',
             'txtPassword.max'=>'Password không được lớn hơn 32',

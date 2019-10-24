@@ -66,7 +66,7 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $orderDetailInfo = DB::table('orders')
                     ->join('order_products', 'orders.id', '=', 'order_products.orders_id')
-                    ->leftjoin('products', 'order_products.products_id', '=', 'products.id')
+                    ->join('products', 'order_products.products_id', '=', 'products.id')
                     ->where('orders.id', '=', $id)
                     ->select('order_products.*', 'products.name as products_name')
                     ->get();

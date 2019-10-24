@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Product;
 use App\Model\Category;
+use App\Model\Stock;
 class ProductsController extends Controller
 {
     public function index()
@@ -52,7 +53,7 @@ class ProductsController extends Controller
             'txtDescription.max'=>'Mô tả sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
         ]);
 
-        $products = new Product;
+        $products = new Product();
         $products -> name = $request->txtName;
         $products -> categories_id = $request->optCategory;
         $products -> description = $request->txtDescription;
@@ -88,6 +89,11 @@ class ProductsController extends Controller
         }
 
         $products -> save();
+
+        // Lưu sản phẩm vào Stock
+        $stock = new Stock();
+        $stock->products_id = $products->id;
+        $stock->save();
 
         return  redirect()->route('admin.product.create')->with('notification','Thêm thành công');
     }

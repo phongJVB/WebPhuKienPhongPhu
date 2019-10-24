@@ -10,14 +10,21 @@
 				</div>
 				<div class="pull-right auto-width-right">
 					<ul class="top-details menu-beta l-inline">
-						@if( Auth::check() )
+						
+					@if( Auth::check())
+						@if( Auth::user()->role==0 )
 							<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
 							<li><a href=""> Chào bạn {{ Auth::user()->name }}</a></li>
 							<li><a href="{{ Route('home.logout') }}">Đăng xuất</a></li>
 						@else
 							<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
-							<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>		
+							<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>
 						@endif
+					@else
+						<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
+						<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>	
+					@endif
+					
 					</ul>
 				</div>
 				<div class="clearfix"></div>
@@ -31,8 +38,8 @@
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
 					<div class="beta-comp">
-						<form role="search" method="get" id="searchform" action="/">
-							<input type="text" value="" name="s" id="s" placeholder="Nhập từ khóa..." />
+						<form role="search" method="get" id="searchform" action="{{ Route('home.search') }}">
+							<input type="text" value="" name="key" id="s" placeholder="Nhập từ khóa..." />
 							<button class="fa fa-search" type="submit" id="searchsubmit"></button>
 						</form>
 					</div>
@@ -42,20 +49,24 @@
 						$subtotal = Cart::subtotal();
 						$countCart = Count($cartProducts);
 					?> 
-
+					
 					<div class="beta-comp">
 						<div class="cart">
-							<div class="beta-select"><i class="fa fa-shopping-cart"></i>
-
-								Giỏ hàng ( @if($countCart!=0) {{ $countCart }} @else Trống @endif ) 
-
-								<i class="fa fa-chevron-down"></i></div>
-							<div class="beta-dropdown cart-body">
+							<div class="beta-select" id="titleSelectCart"><i class="fa fa-shopping-cart" id="iconCart"></i>
+							<span>
+							@if($countCart==0)
+								Giỏ hàng ( Trống ) 
+							@else
+								Giỏ hàng (  {{ $countCart }} )</span>
+								<i class="fa fa-chevron-down"></i>
+							</div>
+								<div class="beta-dropdown cart-body">
 							
 								@foreach($cartProducts as $cartProduct  )
+
 								<div class="cart-item">
 									<div class="media">
-										<a class="pull-left" href="#"><img src="frontEnd/assets/dest/images/products/cart/1.png" alt=""></a>
+										<a class="pull-left" href="{{ route('home.productDetail',$cartProduct->id)}}"><img src="upload/products/{{ $cartProduct->options->image }}" alt=""></a>
 										<div class="media-body">
 											<span class="cart-item-title">{{ $cartProduct->name }}</span>
 
@@ -65,27 +76,28 @@
 											@endif
 											@endforeach
 
-											<span class="cart-item-amount">{{ $cartProduct->qty }}*<span>{{ $cartProduct->price }}</span></span>
+											<span class="cart-item-amount">{{ $cartProduct->qty }}*<span>{{ number_format($cartProduct->price,'0','','.') }}</span></span>
 										</div>
 										<div class="pro-del"><a href="{{ Route('home.removeCart', $cartProduct->rowId) }}"><i class="fa fa-times-circle"></i></a></div>
 									</div>
 								</div>
 								@endforeach
-
-
+								<!-- Show Dropdown Cart -->
 								<div class="cart-caption">
 									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value"> {{ $subtotal }} VNĐ</span></div>
 									<div class="clearfix"></div>
 
 									<div class="center">
 										<div class="space10">&nbsp;</div>
-										<a href="{{ Route('home.checkout') }}" class="beta-btn primary text-center">Check Out <i class="fa fa-chevron-right"></i></a>
+										<a href="{{ Route('home.checkout') }}" class="beta-btn primary text-center">Đặt Hàng <i class="fa fa-chevron-right"></i></a>
 									</div>
 								</div>
+								@endif
 
 							</div>
 						</div> <!-- .cart -->
 					</div>
+					
 				</div>
 				<div class="clearfix"></div>
 			</div> <!-- .container -->

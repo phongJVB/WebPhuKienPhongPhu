@@ -48,7 +48,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Promotion Price</label>
-                                <input type="number" min="0" max="100000000"   class="form-control" name="noPromotionPrice" placeholder="Please Enter Promotion Price" />
+                                <input type="number" min="0" max="100000000"   class="form-control" name="noPromotionPrice" placeholder="Please Enter Promotion Price" value="0" />
                             </div>
                             <div class="form-group">
                                 <label>Images</label>

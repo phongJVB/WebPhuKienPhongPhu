@@ -74,6 +74,17 @@ Route::name('admin.')->prefix('admin')->group(function(){
 		Route::post('/update/{id}', 'Admin\SlidesController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\SlidesController@destroy')->name('destroy');
 	});
+
+	//Tạo Router cho slides trong Admin
+	Route::name('stock.')->prefix('stock')->group(function() {
+		Route::get('/', 'Admin\StocksController@index')->name('index');
+		Route::get('/create/{id}', 'Admin\StocksController@create')->name('create');
+		Route::get('/show/{id}', 'Admin\StocksController@show')->name('show');
+		Route::post('/store', 'Admin\StocksController@store')->name('store');
+		Route::get('/edit/{id}', 'Admin\StocksController@edit')->name('edit');
+		Route::post('/update/{id}', 'Admin\StocksController@update')->name('update');
+		Route::get('/destroy/{id}', 'Admin\StocksController@destroy')->name('destroy');
+	});
 });
 
 
@@ -85,7 +96,7 @@ Route::name('home.')->prefix('home')->group(function(){
 		Route::get('/product_type/{id}','PageController@getProductType')->name('productType');
 
 		// Router gọi đến xem chi tiết Product của website
-		Route::get('/productDetail','PageController@getProduct')->name('productDetail');
+		Route::get('/productDetail/{id}','PageController@getProduct')->name('productDetail');
 
 		// Router gọi đến xem page giới thiệu của website
 		Route::get('/about','PageController@getAbout')->name('about');
@@ -110,6 +121,9 @@ Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến trang đăng ký của website
 		Route::get('/register','PageController@getRegister')->name('register');
 		Route::post('/register','PageController@postRegister')->name('register');
+
+		// Router gọi đến trang search của website
+		Route::get('/search','PageController@getSearch')->name('search');
 
 		// Router gọi đến đăng xuất của website
 		Route::get('/logout','PageController@getLogout')->name('logout');

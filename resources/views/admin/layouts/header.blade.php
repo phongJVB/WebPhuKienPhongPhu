@@ -8,7 +8,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html" style="color: #ffff">Admin</a>
+                <div class="title-home-admin"> 
+                     <a class="navbar-brand" href="index.html" style="color: #ffff">Admin</a>
+                </div>
+               
             </div>
             <!-- /.navbar-header -->
 

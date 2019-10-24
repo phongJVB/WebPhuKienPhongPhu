@@ -35,6 +35,9 @@ class LoginController extends Controller
             if(Auth::user()->role != 0){
                 return redirect()->route('admin.product.index');
             }
+            else{
+                return redirect()->back()->with('notification','Tài khoản không tồn tại');
+            }
         }else{
             return redirect()->back()->with('notification','Tài khoản không tồn tại');
         }

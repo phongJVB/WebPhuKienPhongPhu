@@ -41,7 +41,7 @@
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 										@endif
 										<div class="single-item-header">
-											<a href="product"><img src="upload/products/{{ $item->image }}" alt=""></a>
+											<a href="{{ route('home.productDetail',$item->id)}}"><img src="upload/products/{{ $item->image }}" alt=""></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{ $item->name }}</p>
@@ -56,7 +56,7 @@
 										</div>
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -74,6 +74,7 @@
 								<p class="pull-left">Tìm thấy {{ count($products) }} sản phẩm</p>
 								<div class="clearfix"></div>
 							</div>
+
 							<div class="row">
 								@foreach($products as $item)
 								<div class="col-sm-4">
@@ -82,7 +83,7 @@
 										<div class="ribbon-wrapper"><div class="ribbon sale">Sale</div></div>
 										@endif
 										<div class="single-item-header">
-											<a href="product"><img src="upload/products/{{ $item->image }}" alt=""></a>
+											<a href="{{ route('home.productDetail',$item->id)}}"><img src="upload/products/{{ $item->image }}" alt=""></a>
 										</div>
 										<div class="single-item-body">
 											<p class="single-item-title">{{ $item->name }}</p>
@@ -97,7 +98,7 @@
 										</div>
 										<div class="single-item-caption">
 											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
-											<a class="beta-btn primary" href="product">Details <i class="fa fa-chevron-right"></i></a>
+											<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
 									</div>
@@ -105,6 +106,7 @@
 								@endforeach
 							</div>
 							<div class="row">{{ $products->links() }}</div>
+							
 							<div class="space40">&nbsp;</div>
 							
 						</div> <!-- .beta-products-list -->

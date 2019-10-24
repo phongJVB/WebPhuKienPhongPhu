@@ -18,16 +18,21 @@
 		<div id="content">
 			<div class="row">
 				<div class="col-sm-9">
-
+	
 					<div class="row">
 						<div class="col-sm-4">
-							<img src="frontEnd/assets/dest/images/products/6.jpg" alt="">
+							<img src="upload/products/{{ $product->image }}" alt="">
 						</div>
 						<div class="col-sm-8">
 							<div class="single-item-body">
-								<p class="single-item-title">Sample Woman Top</p>
+								<p class="single-item-title">{{ $product->name }}</p>
 								<p class="single-item-price">
-									<span>$34.55</span>
+									@if($product->promotion_price == 0)
+										<span class="flash-sale">{{ number_format($product->unit_price,'0','','.') }}₫</span>
+									@else
+										<span class="flash-del">{{ number_format($product->promotion_price,'0','','.')}}₫</span>
+										<span class="flash-sale">{{ number_format($product->unit_price,'0','','.') }}₫</span>
+									@endif
 								</p>
 							</div>
 
@@ -35,43 +40,40 @@
 							<div class="space20">&nbsp;</div>
 
 							<div class="single-item-desc">
-								<p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo ms id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe.</p>
+								<p>{!! $product->description !!}</p>
 							</div>
 							<div class="space20">&nbsp;</div>
+			
+							<p>Số Lượng: </p>
+							{!! Form::open(['url'=>'home/shoppingCart','method'=>'POST']) !!}
+								<input type="hidden" name="productId" value="{{$product->id}}">
+								<div class="form-add-cart">
+									<div class="quantity">
+									 <button class="minus-btn" name="button" mode="1">
+								        <img src="frontEnd\assets\dest\images\minus.svg" alt="" />
+								      </button>
+								      <input type="number" name="qty" id="inputQty" value="1" stockQty="{{ $stock->stock_quantity }}" mode="1">
+								      <button class="plus-btn" name="button">
+								        <img src="frontEnd\assets\dest\images\plus.svg" alt="" />
+								      </button>
+								      <p><span>{{ $stock->stock_quantity }}</span> sản phẩm có sẵn</p>
+								    </div>
 
-							<p>Options:</p>
-							<div class="single-item-options">
-								<select class="wc-select" name="size">
-									<option>Size</option>
-									<option value="XS">XS</option>
-									<option value="S">S</option>
-									<option value="M">M</option>
-									<option value="L">L</option>
-									<option value="XL">XL</option>
-								</select>
-								<select class="wc-select" name="color">
-									<option>Color</option>
-									<option value="Red">Red</option>
-									<option value="Green">Green</option>
-									<option value="Yellow">Yellow</option>
-									<option value="Black">Black</option>
-									<option value="White">White</option>
-								</select>
-								<select class="wc-select" name="color">
-									<option>Qty</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-									<option value="5">5</option>
-								</select>
-								<a class="add-to-cart" href="#"><i class="fa fa-shopping-cart"></i></a>
-								<div class="clearfix"></div>
-							</div>
+								    <div class="btn-add-cart"> 
+								    	<button type="submit" style="border:none" name="modeAddCart" value="1"><a><i class="fa fa-shopping-cart"></i><span>Thêm Vào Giỏ Hàng</span></a></button>
+
+								    	<button  class="addCartNow" type="submit" style="border:none" name="modeAddCart" value="2"><a><span>Mua Ngay</span></a></button>
+								    </div>
+									
+									<div class="clearfix"></div>
+								</div>
+							{!! Form::close() !!}
+
 						</div>
 					</div>
 
 					<div class="space40">&nbsp;</div>
+
 					<div class="woocommerce-tabs">
 						<ul class="tabs">
 							<li><a href="#tab-description">Description</a></li>
@@ -226,4 +228,7 @@
 			</div>
 		</div> <!-- #content -->
 	</div> <!-- .container -->
+	@endsection
+	@section('script')
+		<script src="{{ asset('frontEnd/assets/dest/js/quantity.js') }}"></script>
 	@endsection

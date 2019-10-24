@@ -25,4 +25,8 @@ class Product extends Model
     public function order_product(){
     	return $this->hasMany('App\Model\OrderPoduct','products_id','id');
     }
+
+    public function stock(){
+        return $this->hasOne('App\Model\Stock','products_id','id');
+    }
 }

@@ -1,0 +1,171 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
+use App\Model\Stock;
+use App\Model\StockDetail;
+use App\Model\Product;
+use App\Model\Order;
+
+class StocksController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {   
+        $stocks = Stock::all();
+        return view('admin.stocks.index',compact('stocks'));
+        
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create($id)
+    {	
+    	 $stock = Stock::find($id);
+    	 $productId = $stock->products_id;
+         $products = Product::find($productId); // Tìm để hiển thị tên sản phẩm ra ngoài view thêm
+         return view('admin.stocks.create',compact('products','stock'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request,[
+            'productQuantity'=>'required',
+            'txtNote'=>'required',                                             
+        ],[
+            'productQuantity.required'=>'Bạn chưa nhập số lượng sản phẩm',
+            'txtNote.required'=>'Bạn cần phải nhập chú thích',
+        ]);
+
+        $date = date('Y-m-d H:i:s');
+        $stockId = $request->stockId;
+        $stock = Stock::find($stockId);
+        $currentSaleNumber = $stock->total_quantity - $stock->stock_quantity;
+        $currentQuantityAdd = $stock->total_quantity += $request->productQuantity;
+
+        if($stock === null){
+            $stock = new Stock();
+            $stock->products_id = $productId;
+            $stock->total_quantity = $request->productQuantity;
+            $stock->stock_quantity = $request->productQuantity;
+            $stock->updated_at = $date;
+            $stock->save();
+
+        }else{
+            $stock->total_quantity = $currentQuantityAdd;
+            $stock->stock_quantity = $currentQuantityAdd - $currentSaleNumber;
+            $stock->updated_at = $date;
+            $stock->save();
+        }
+        
+
+        $stockDetail = new StockDetail();
+        $stockDetail->stocks_id = $stock->id;
+        $stockDetail->note = $request->txtNote;
+        $stockDetail->import_quantity = $request->productQuantity;
+        $stockDetail->save();
+
+        return redirect()->back()->with('notification','Thêm số lượng sản phẩm thành công');
+
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $stockDetail = DB::table('stocks')
+                    ->join('stock_details', 'stocks.id', '=', 'stock_details.stocks_id')
+                    ->where('stocks.id', '=', $id)
+                    ->select('stock_details.*')
+                    ->get();
+        return view('admin.stocks.detail',compact('stockDetail'));
+    }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {   
+        $stockDetail = StockDetail::find($id);
+        return view('admin.stocks.edit',compact('stockDetail'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $stockDetail = StockDetail::find($id);
+        $stockId = $stockDetail->stocks_id;
+        $stock = Stock::find($stockId);
+        $currentSaleNumber = $stock->total_quantity - $stock->stock_quantity;
+        $this->validate($request,
+            [
+                'productQuantity'=>'required|min:1',
+            ],
+            [
+                'productQuantity.required'=>'Bạn chưa nhập số lượng sản phẩm',
+                'productQuantity.min'=>'Số lượng sản phẩm nhỏ nhất là 1',
+            ]);
+
+        $stockDetail->import_quantity = $request->productQuantity;
+        $stockDetail->note = $request->txtNote;
+        $stockDetail->save();
+
+        //Lưu số lượng thay đổi trong bảng Stocks khi thay đổi số lượng bên Stock_Details
+        $totalQuantityUpdate = DB::table('stock_details')
+                            ->select('stocks_id',DB::raw('SUM(import_quantity) AS total_quantity'))
+                            ->where('stocks_id', '=', $stockId)
+                            ->get();
+        $totalQtyUpdate = $totalQuantityUpdate[0]->total_quantity;
+        $stock->total_quantity = $totalQtyUpdate;
+        $stock->stock_quantity = $totalQtyUpdate - $currentSaleNumber;
+        $stock->updated_at = date('Y-m-d H:i:s');
+        $stock->save();
+
+        return redirect()->back()->with('notification','Sửa thành công kho hàng');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        // $slide= Slide::find($id);
+        // $slide->delete();
+
+        return redirect()->route('admin.slide.index')->with('notification','Bạn đã xóa thành công');
+    }
+}

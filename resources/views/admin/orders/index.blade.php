@@ -19,7 +19,7 @@
                         <thead>
                             <tr align="center">
                                 <th>ID</th>
-                                <th>Order Name</th>
+                                <th>Customer Name</th>
                                 <th>Address</th>
                                 <th>Email</th>
                                 <th>Total</th>
@@ -46,7 +46,7 @@
                                     <td>{{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Hoàn lại' )) }}</td>
 
                                     <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.order.destroy',$item->id) }}"> Delete</a></td>
-                                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.order.edit',$item->id) }}">Detail</a></td>
+                                    <td class="center"><i class="fa fa-eye fa-fw"></i> <a href="{{ Route('admin.order.edit',$item->id) }}">Detail</a></td>
                                 </tr>
                             @endforeach
                         </tbody>
