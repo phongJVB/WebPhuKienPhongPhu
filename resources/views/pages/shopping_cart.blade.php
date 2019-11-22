@@ -3,17 +3,24 @@
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
-				<h6 class="inner-title">Shopping Cart</h6>
+				<h6 class="inner-title">Thông tin giỏ hàng</h6>
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Home</a> / <span>Shopping Cart</span>
+					<a href="index.html">Trang chủ</a> / <span>Thông tin giỏ hàng</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	
+    <!-- Hiển thị cảnh báo hết hàng -->
+    @if(session('warning'))
+	<div class="alert alert-danger alert-dismissible" role="alert" style="text-align: center;">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong><i class="fa fa-warning" style="font-size:20px;color:red"></i></strong> {{ session('warning') }}
+	</div>
+	@endif
+
 	<div class="container">
 		<div id="content">
 			
@@ -25,7 +32,7 @@
 							<tr>
 								<th class="product-name">Product</th>
 								<th class="product-price">Price</th>
-								<th class="product-status">Status</th>
+								<th class="product-status">Stock</th>
 								<th class="product-quantity">Quantity</th>
 								<th class="product-subtotal">Total</th>
 								<th class="product-remove">Remove</th>
@@ -53,11 +60,11 @@
 								</td>
 
 								<td class="product-price">
-									<span class="amount">{{ $cartProduct->price }}</span>
+									<span class="amount">{{ number_format($cartProduct->price,'0','','.') }}</span>
 								</td>
 
 								<td class="product-status">
-									In Stock
+									<p><span>{{ $cartProduct->options->stockQty }}</span> sản phẩm có sẵn</p>
 								</td>
 
 								<td class="product-quantity">
@@ -80,7 +87,7 @@
 								<?php $subTotal = ($cartProduct->qty)*($cartProduct->price); ?>
 
 								<td class="product-subtotal">
-									<span class="amount">{{ $subTotal }}</span>
+									<span class="amount">{{ number_format($subTotal,'0','','.') }}</span>
 								</td>
 
 								<td class="product-remove">
@@ -101,11 +108,14 @@
 
 									<div class="cart-totals pull-right">
 										<div class="cart-totals-row"><span>Cart Total:</span> 
-											<span><?php echo number_format($total) ?> </span>
+											<span>{{ number_format($total) }} </span>
 										</div>
 									</div>	
 									
-									<button type="submit" class="beta-btn primary" id="btnCheckout" name="proceed"><a id="linkCheckout" href="{{Route('home.checkout')}}">Proceed to Checkout </a></button>
+									<button type="submit" class="beta-btn primary" id="btnCheckout" name="proceed"><a id="linkCheckout" href="{{Route('home.checkout')}}">Đặt hàng </a></button>
+
+									<div class="connect-home"> <a href="{{ Route('home.index') }}"> Đến trang chủ </a></div>
+
 									<div class="clearfix"></div>
 								</td>
 							</tr>

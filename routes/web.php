@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/admin', 'Admin\LoginController@index')->name('admin');
 Route::post('/admin','Admin\LoginController@postLogin')->name('admin');
 //Tạo Router theo Group của từng phần trong Admin
-Route::name('admin.')->prefix('admin')->group(function(){
+Route::name('admin.')->prefix('admin')->middleware('adminLogin')->group(function(){
 	
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
@@ -29,7 +29,14 @@ Route::name('admin.')->prefix('admin')->group(function(){
 		Route::get('/edit/{id}', 'Admin\ProductsController@edit')->name('edit');
 		Route::post('/update/{id}', 'Admin\ProductsController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\ProductsController@destroy')->name('destroy');
+		Route::get('/destroyImage/{id}', 'Admin\ProductsController@destroyImage')->name('destroyImage');
+		Route::get('/destroyMainImage/{id}', 'Admin\ProductsController@destroyMainImage')->name('destroyMainImage');
 	});
+
+	//Tạo Router cho comments trong Admin
+	Route::name('comment.')->prefix('comment')->group(function() {
+		Route::get('/destroy/{id}/{productId}', 'Admin\CommentsController@destroy')->name('destroy');
+	});	
 
 	//Tạo Router cho categories trong Admin
 	Route::name('category.')->prefix('category')->group(function() {
@@ -85,6 +92,15 @@ Route::name('admin.')->prefix('admin')->group(function(){
 		Route::post('/update/{id}', 'Admin\StocksController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\StocksController@destroy')->name('destroy');
 	});
+
+	//Tạo Router cho Account Admin
+	Route::name('account.')->prefix('account')->group(function() {
+		Route::get('/index/{id}', 'Admin\AccountController@getAccount')->name('index');
+		Route::post('/update/{id}', 'Admin\AccountController@update')->name('update');
+		Route::get('/changePassword/{id}','Admin\AccountController@getChangePassword')->name('changePassword');
+		Route::post('/changePassword/{id}','Admin\AccountController@postChangePassword')->name('changePassword');
+		Route::get('/logout', 'Admin\AccountController@logout')->name('logout');
+	});
 });
 
 
@@ -127,5 +143,16 @@ Route::name('home.')->prefix('home')->group(function(){
 
 		// Router gọi đến đăng xuất của website
 		Route::get('/logout','PageController@getLogout')->name('logout');
+
+		// Router gọi đến add comment của website
+		Route::post('/store/{id}', 'Admin\CommentsController@store')->name('store');
+
+		// Router gọi đến phần account
+		Route::get('/account/{id}','AccountController@getAccount')->name('account');
+		Route::post('/updateAccount/{id}','AccountController@update')->name('updateAccount');
+		Route::get('/changePassword/{id}','AccountController@getChangePassword')->name('changePassword');
+		Route::post('/changePassword/{id}','AccountController@postChangePassword')->name('changePassword');
+		Route::get('/historyOrder/{id}','AccountController@getHistoryOrder')->name('historyOrder');
+		Route::get('/historyOrderDetail/{idOrder}/{id}','AccountController@getHistoryOrderDetail')->name('historyOrderDetail');
 
 });

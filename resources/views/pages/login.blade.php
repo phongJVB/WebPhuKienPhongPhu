@@ -7,7 +7,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb">
-					<a href="index.html">Home</a> / <span>Đăng nhập</span>
+					<a href="index.html">Trang chủ</a> / <span>Đăng nhập</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -39,15 +39,15 @@
 
 						
 						<div class="form-block">
-							<label for="email">Email address <span style="color:red">(*)</span></label>
+							<label for="email">Email <span style="color:red">(*)</span></label>
 							<input type="email" id="email" name="txtEmail" required>
 						</div>
 						<div class="form-block">
-							<label for="phone">Password <span style="color:red">(*)</span></label>
+							<label for="phone">Mật khẩu<span style="color:red">(*)</span></label>
 							<input type="password" id="pass" name="password" required>
 						</div>
 						<div class="form-block">
-							<button type="submit" class="btn btn-primary">Login</button>
+							<button type="submit" class="btn btn-primary ml-29">Đăng nhập</button>
 						</div>
 					</div>
 					<div class="col-sm-3"></div>

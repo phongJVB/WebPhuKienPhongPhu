@@ -15,24 +15,59 @@ class CartController extends Controller
     	$productId = $request->productId;
     	$productById = Product::where('id',$productId)->first();
         $stock = Stock::Where('products_id',$productId)->first();
-    	Cart::add([
-    		'id'=>$productId,
-    		'name'=>$productById->name,
-    		'price'=>$productById->unit_price,
-    		'weight'=>0,
-    		'qty'=>$request->qty,
-            'options'=>[
-                'cateId' => $productById->categories_id,
-                'unit' =>  $productById->unit,
-                'image'=> $productById->image,
-                'stockQty'=> $stock->stock_quantity,
-            ]
-    	]);
-        if($request->modeAddCart==1){
-    	   return redirect()->route('home.showShoppingCart');
-        }else{
-            return redirect()->back();
+
+        // Lấy ra thông tin số lượng sản phẩm có trong giỏ hàng và kho
+        $stockProduct = $stock->stock_quantity;
+        $curentStockQty = $currentQtyCart = 0;
+        $currentCart = Cart::content();
+        foreach ($currentCart as $item) {
+            if($item->id == $productId){
+                $curentStockQty = $item->options->stockQty;
+                $currentQtyCart = $item->qty;
+                break;
+            }
         }
+        $currentQtyCart+=$request->qty;
+
+        if($currentQtyCart > $curentStockQty && $currentQtyCart!=0 && $curentStockQty!=0 ){
+
+            if($request->modeAddCart==1){
+               return redirect()->route('home.showShoppingCart')->with('warning','Sản phẩm vừa mua đã quá số lượng có sẵn!!!');
+            }else{
+               return redirect()->back()->with('warning','Sản phẩm vừa mua đã quá số lượng có sẵn!!!');
+            }
+
+        }else if( $stockProduct == 0 ){
+
+            if($request->modeAddCart==1){
+               return redirect()->route('home.showShoppingCart')->with('warning','Sản phẩm vừa mua đã hết hàng!!!');
+            }else{
+               return redirect()->back()->with('warning','Sản phẩm vừa mua đã hết hàng!!!');
+            }
+
+        }else{
+
+            Cart::add([
+                'id'=>$productId,
+                'name'=>$productById->name,
+                'price'=>$productById->unit_price,
+                'weight'=>0,
+                'qty'=>$request->qty,
+                'options'=>[
+                    'cateId' => $productById->categories_id,
+                    'unit' =>  $productById->unit,
+                    'image'=> $productById->image,
+                    'stockQty'=> $stock->stock_quantity,
+                ]
+            ]);
+            
+            if($request->modeAddCart==1){
+               return redirect()->route('home.showShoppingCart');
+            }else{
+               return redirect()->back();
+            }
+        }
+        
     }
 
     public function showCart(){

@@ -4,7 +4,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<base href="{{asset('')}}">  
-	<title>Laravel </title>
+	<title>Phụ Kiện Phong Phú </title>
+	<link rel="icon" type="image/png" href="{{ asset('frontEnd/assets/dest/images/Shop.ico') }}"/>
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Dosis:300,400' >
 	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300'>
 	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
@@ -16,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/animate.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/huong-style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/phong-style.css') }}">
+	@yield('link')
 </head>
 <body>
 
@@ -30,7 +32,8 @@
 
 	<!-- include js files -->
 	<script src="{{ asset('frontEnd/assets/dest/js/jquery.js') }}"></script>
-	<script src="{{ asset('backEnd/bower_components/jquery/dist/jquery.min.js') }}"></script>
+	<script src="{{ asset('frontEnd/assets/dest/js/jquery.zoom.js') }}"></script>
+	<script src="{{ asset('frontEnd/assets/dest/js/jquery2.1.3.min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js') }}"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/bxslider/jquery.bxslider.min.js') }}"></script>

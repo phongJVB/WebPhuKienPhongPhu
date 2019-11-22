@@ -61,7 +61,7 @@
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ <span class="cl-red">(*)</span></label>
-							<input type="text" id="adress" name="txtAddress" placeholder="Street Address" value="{{isset($user)?$user->address:''}}" required>
+							<input type="text" id="adress" name="txtAddress" placeholder="Địa chỉ" value="{{isset($user)?$user->address:''}}" required>
 						</div>
 						
 
@@ -91,7 +91,7 @@
 									@foreach($cartProducts as $cartProduct  )
 									<!--  one item	 -->
 										<div class="media">
-											<img width="25%" src="frontEnd/assets/dest/images/shoping1.jpg" alt="" class="pull-left">
+											<img width="25%" src="upload/products/{{ $cartProduct->options->image }}" alt="" class="pull-left">
 											<div class="media-body">
 												<p class="font-large">{{ $cartProduct->name }}</p>
 

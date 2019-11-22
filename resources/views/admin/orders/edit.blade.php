@@ -93,7 +93,7 @@
                                 <option value="0">Chưa xử lý</option>
                                 <option value="1">Đang vận chuyển</option>
                                 <option value="2">Giao thành công</option>
-                                <option value="4">Hoàn lại</option>
+                                <option value="3">Hoàn lại</option>
                             </select>
 
                             <input type="submit" value="Xử lý" class="btn btn-primary">

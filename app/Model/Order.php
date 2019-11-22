@@ -8,11 +8,11 @@ class Order extends Model
 {
     protected $table = "orders";
 
-    public function bill_detail(){
+    public function order_product(){
     	return $this->hasMany('App\Model\OrderProduct','orders_id','id');
     }
 
-    public function customer(){
-    	return $this->belongsTo('App\Model\Customer','customers_id','id');
+    public function user(){
+    	return $this->belongsTo('App\Model\User','customers_id','id');
     }
 }

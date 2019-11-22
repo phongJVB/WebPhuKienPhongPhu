@@ -1402,7 +1402,7 @@ padding:30px 40px
 
 .your-order-item {
 padding:10px 0;
-border-bottom:1px solid #f8f8f8
+border-bottom:1px solid #ffff;
 }
 
 .your-order-item.pbn {
@@ -4642,7 +4642,8 @@ padding:40px 0 50px
 }
 
 #footer a {
-color:#7b8fa3
+color:#7b8fa3;
+cursor: pointer;
 }
 #footer.color-div a {color:gray}
 #footer a:hover {
@@ -4652,7 +4653,8 @@ color:#f90
 
 #footer h4.widget-title {
 color:#adbac8;
-margin-bottom:22px
+margin-bottom:22px;
+font-size: 2em;
 }
 #footer.color-div h4.widget-title{color:gray;}
 

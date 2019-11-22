@@ -7,7 +7,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb">
-					<a href="index.html">Home</a> / <span>Đăng kí</span>
+					<a href="index.html">Trang chủ</a> / <span>Đăng kí</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -37,31 +37,31 @@
 						<h4>Đăng kí</h4>
 						<div class="space20">&nbsp;</div>
 						<div class="form-block">
-							<label for="email">Email address <span style="color:red">(*)</span></label>
+							<label for="email">Địa chỉ Email <span style="color:red">(*)</span></label>
 							<input type="email" id="email" name="txtEmail" value="{{ old('txtEmail')}}" required>
 						</div>
 						<div class="form-block">
-							<label for="your_last_name">Fullname <span style="color:red">(*)</span></label>
+							<label for="your_last_name">Họ tên <span style="color:red">(*)</span></label>
 							<input type="text" id="your_last_name" name="txtFullName" value="{{ old('txtFullName')}}" required>
 						</div>
 						<div class="form-block">
-							<label for="adress">Address</label>
-							<input type="text" id="adress" name="txtAddress" placeholder="Street Address"  value="{{ old('txtAddress')}}">
+							<label for="adress">Địa chỉ</label>
+							<input type="text" id="adress" name="txtAddress" placeholder="Nhập địa chỉ..."  value="{{ old('txtAddress')}}">
 						</div>
 						<div class="form-block">
-							<label for="phone">Phone</label>
+							<label for="phone">Điện thoại</label>
 							<input type="text" id="phone" name="txtPhone"  value="{{ old('txtPhone')}}">
 						</div>
 						<div class="form-block">
-							<label for="pass">Password <span style="color:red">(*)</span></label>
+							<label for="pass">Mật khẩu <span style="color:red">(*)</span></label>
 							<input type="password" id="password" name="txtPassword" class="inputPass" required>
 						</div>
 						<div class="form-block">
-							<label for="pass">Re password <span style="color:red">(*)</span></label>
+							<label for="pass">Nhập lại mật khẩu <span style="color:red">(*)</span></label>
 							<input type="password" id="re_password" name="txtRePassword" class="inputPass" required>
 						</div>
 						<div class="form-block">
-							    <label>Gender</label>
+							    <label>Giới tính</label>
                                 <label>
                                     <input name="rdoGender" value="1" checked="" type="radio">Nam
                                 </label>
@@ -70,7 +70,7 @@
                                 </label>
 						</div>
 						<div class="form-block">
-							<button type="submit" class="btn btn-primary">Register</button>
+							<button type="submit" class="btn btn-primary ml-29">Đăng ký</button>
 						</div>
 					</div>
 					<div class="col-sm-3"></div>

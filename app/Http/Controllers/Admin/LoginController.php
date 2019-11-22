@@ -27,11 +27,16 @@ class LoginController extends Controller
 
             ]);
 
-        $arr =[
+        $arrName =[
             'name'  => $request->username, 
             'password' => $request->password,
         ];
-        if(Auth::attempt($arr)){
+        
+        $arrEmail =[
+            'email' => $request->username,
+            'password' => $request->password,
+        ];
+        if(Auth::attempt($arrName) || Auth::attempt($arrEmail) ){
             if(Auth::user()->role != 0){
                 return redirect()->route('admin.product.index');
             }

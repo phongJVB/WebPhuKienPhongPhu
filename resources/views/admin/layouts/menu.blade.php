@@ -5,7 +5,7 @@
                     <div class="user-panel">
                         <div class="pull-left image"> <img src="backEnd/dist/image/admin_phong.jpg" class="img-circle" alt="User Image"> </div>
                         <div class="pull-left info">
-                            <p>Admin Phong</p>
+                            <p>Welcome {{ Auth::user()->name }}</p>
                             <a><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
                     </div>
@@ -39,25 +39,10 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href=" {{ Route('admin.user.index') }} ">List User</a>
-                                </li>
-                                <li>
-                                    <a href=" {{ Route('admin.user.create') }} ">Add User</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
                             <a ><i class="fa fa-book fa-fw"></i> Order<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href=" {{ Route('admin.order.index') }} ">List Order</a>
-                                </li>
-                                <li>
-                                    <a href=" {{ Route('admin.order.create') }} ">Add Order</a>
                                 </li>
                             </ul>
                          </li>
@@ -84,6 +69,18 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        <li style="display: {{ (Auth::user()->role == 2)?'block':'none' }};">
+                            <a><i class="fa fa-users fa-fw"></i> User<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href=" {{ Route('admin.user.index') }} ">List User</a>
+                                </li>
+                                <li>
+                                    <a href=" {{ Route('admin.user.create') }} ">Add User</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>                        
                        
                     </ul>
                 </div>

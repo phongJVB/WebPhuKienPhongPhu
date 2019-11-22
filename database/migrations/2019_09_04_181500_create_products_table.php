@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('promotion_price')->unsigned();
             $table->string('unit',50);
             $table->text('image');
+            $table->text('detail_description');
             $table->text('description');
             $table->boolean('status')->default(false);
             $table->integer('quantity')->unsigned();

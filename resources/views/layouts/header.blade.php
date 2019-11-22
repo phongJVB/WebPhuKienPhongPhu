@@ -13,7 +13,7 @@
 						
 					@if( Auth::check())
 						@if( Auth::user()->role==0 )
-							<li><a href="#"><i class="fa fa-user"></i>Tài khoản</a></li>
+							<li><a href="{{ Route('home.account',Auth::user()->id) }}"><i class="fa fa-user"></i>Tài khoản</a></li>
 							<li><a href=""> Chào bạn {{ Auth::user()->name }}</a></li>
 							<li><a href="{{ Route('home.logout') }}">Đăng xuất</a></li>
 						@else
@@ -78,7 +78,8 @@
 
 											<span class="cart-item-amount">{{ $cartProduct->qty }}*<span>{{ number_format($cartProduct->price,'0','','.') }}</span></span>
 										</div>
-										<div class="pro-del"><a href="{{ Route('home.removeCart', $cartProduct->rowId) }}"><i class="fa fa-times-circle"></i></a></div>
+										<div class="pro-del"><a href="{{ Route('home.removeCart', $cartProduct->rowId) }}"><i class="fa fa-times-circle"></i></a>
+										</div>
 									</div>
 								</div>
 								@endforeach
@@ -116,7 +117,7 @@
 								@endforeach
 							</ul>
 						</li>
-						<li><a href="{{ Route('home.about') }}">Giới thiệu</a></li>
+						<!-- <li><a href="{{ Route('home.about') }}">Giới thiệu</a></li>  -->
 						<li><a href="{{ Route('home.contact') }}">Liên hệ</a></li>
 						<li><a href="{{ Route('home.showShoppingCart') }}">Giỏ hàng</a></li>
 					</ul>

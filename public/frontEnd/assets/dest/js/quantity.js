@@ -40,7 +40,6 @@ $(document).ready(function(){
 
 			 		var value = parseInt($(this).val());
 			 		var stockQty = parseInt($('#inputQty').attr("stockQty"));
-			 		debugger;
 			 		var $mode = $(this).attr("mode");
 
 			 		if( (value < 1 || isNaN(value)) && $mode ==1 ){

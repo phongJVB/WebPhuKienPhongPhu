@@ -36,10 +36,10 @@
 				<div class="col-sm-12 col-centered">
 
 					<div class="beta-products-list">
-						<h4><b>New Products</b></h4>
+						<h4><b>Sản Phẩm Mới</b></h4>
 						<div class="beta-products-details">
 							<?php $count = count($products); ?>
-							<p class="pull-left">{{ $count }} styles found</p>
+							<p class="pull-left">Tìm thấy {{ $count }} sản phẩm</p>
 							<div class="clearfix"></div>
 						</div>
 
@@ -78,7 +78,7 @@
 													<button type="submit" style="border:none" class="add-to-cart pull-left" name="modeAddCart" value="1"><a class="add-to-cart pull-left"><i class="fa fa-shopping-cart"></i></a></button>
 													{!! Form::close() !!}
 
-													<a class="beta-btn primary" href="{{ route('home.productDetail',$product->id)}}">Details <i class="fa fa-chevron-right"></i></a>
+													<a class="beta-btn primary" href="{{ route('home.productDetail',$product->id)}}">Chi tiết <i class="fa fa-chevron-right"></i></a>
 													<div class="clearfix"></div>
 												</div>
 											</div>
@@ -107,7 +107,7 @@
 					<div class="space50">&nbsp;</div>
 
 					<div class="beta-products-list">
-						<h4><b>Top Products</b></h4>
+						<h4><b>Tất Cả Sản Phẩm</b></h4>
 						<div class="beta-products-details">
 							<p class="pull-left">Tìm thấy {{ count($productsPaginate) }} sản phẩm</p>
 							<div class="clearfix"></div>
@@ -142,7 +142,7 @@
 										<button type="submit" style="border:none" class="add-to-cart pull-left" name="modeAddCart" value="1"><a class="add-to-cart pull-left"><i class="fa fa-shopping-cart"></i></a></button>
 										{!! Form::close() !!}
 
-										<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id) }}">Details<i class="fa fa-chevron-right"></i></a>
+										<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id) }}">Chi tiết<i class="fa fa-chevron-right"></i></a>
 										<div class="clearfix"></div>
 									</div>
 								</div>
@@ -161,7 +161,7 @@
 
 		</div> <!-- .main-content -->
 	</div> <!-- #content -->
-	
+
 </div>
 
 @endsection

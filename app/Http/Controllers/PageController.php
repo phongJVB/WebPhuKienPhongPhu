@@ -14,13 +14,16 @@ use App\Model\Order;
 use App\Model\OrderProduct;
 use App\Model\Slide;
 use App\Model\Stock;
+use App\Model\Comment;
+use App\Model\ImagesProduct;
 use Cart;
 
 
 class PageController extends Controller
 {
     function getHome(){
-        $products = Product::all();
+        $products = Product::Where('status',1)->get();
+        //Lấy ra các sản phẩm mới trên thị trường. Kết quả sẽ là 1 object gồm các class product
         $slides = Slide::all();
         $productsPaginate= Product::paginate(8);
     	return view('pages.home',compact('products','slides','productsPaginate'));
@@ -40,7 +43,27 @@ class PageController extends Controller
     function getProduct($id){
         $stock = Stock::Where('products_id',$id)->first();
         $product = Product::find($id);
-    	return view('pages.product',compact('product','stock'));
+        $imagesProduct = ImagesProduct::Where('products_id',$id)->get();
+        //Lấy ra sản phẩm tương tự
+        $productType = Product::Where('categories_id',$product->categories_id)->paginate(3);
+        // Lấy 4 sản phẩm bán chạy
+        $productBestSale = DB::table('order_products')
+                     ->select('products_id','products.*',DB::raw('SUM(products_quantity) AS total_sale_quantity'))
+                     ->join('orders', 'orders.id', '=', 'order_products.orders_id')
+                     ->join('products', 'products.id', '=', 'order_products.products_id')
+                     ->where('orders.status', '<>', 3)
+                     ->groupBy('products_id')
+                     ->orderBy('total_sale_quantity','desc')
+                     ->limit(4)
+                     ->get();
+        //Lấy ra sản phẩm mới trên thị trường
+        $productNews = DB::table('products')
+                    ->select('products.*')
+                    ->where('products.status','1')
+                    ->limit(4)
+                    ->get();
+
+    	return view('pages.product',compact('product','stock','productType','productBestSale','productNews','imagesProduct'));
     }
 
     function getSearch(Request $request){
@@ -103,7 +126,9 @@ class PageController extends Controller
             //Tính toán sản phẩm còn lại trong kho lưu vào Stock
             $productSale = DB::table('order_products')
                      ->select('products_id','products.name',DB::raw('SUM(products_quantity) AS total_sale_quantity'))
+                     ->join('orders', 'orders.id', '=', 'order_products.orders_id')
                      ->join('products', 'products.id', '=', 'order_products.products_id')
+                     ->where('orders.status', '<>', 3)
                      ->groupBy('products_id')
                      ->get();//Lấy ra số lượng đã bán của từng sản phẩm
 

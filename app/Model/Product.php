@@ -29,4 +29,16 @@ class Product extends Model
     public function stock(){
         return $this->hasOne('App\Model\Stock','products_id','id');
     }
+
+    public function comment(){
+        return $this->hasMany('App\Model\Comment','products_id','id');
+    }
+
+    public function images(){
+        return $this->hasMany('App\Model\ImagesProduct','products_id','id');
+    }
+
+    public function first_image(){
+        return $this->hasMany('App\Model\ImagesProduct','products_id','id')->limit(1);
+    }
 }

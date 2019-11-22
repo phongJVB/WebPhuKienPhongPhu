@@ -26,6 +26,7 @@
 
     <!-- DataTables Responsive CSS -->
     <link href="{{ asset('backEnd/bower_components/datatables-responsive/css/dataTables.responsive.css') }}" rel="stylesheet">
+    @yield('link')
 </head>
 
 <body>
@@ -61,9 +62,7 @@
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
-                responsive: true
-        });
+        $('#dataTables-example').DataTable();
     });
     </script>
 

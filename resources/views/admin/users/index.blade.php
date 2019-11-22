@@ -24,7 +24,7 @@
                                 <th>Phone</th>
                                 <th>Address</th>
                                 <th>Gender</th>
-                                <th>Level</th>
+                                <th>Role</th>
                                 <th>Delete</th>
                                 <th>Edit</th>
                             </tr>
@@ -38,7 +38,7 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td>{{ ($item['gender']==1) ? 'Nam':'Nữ'}}</td>
-                                    <td>{{ ($item['level']==0) ? 'Khách hàng':(($item['level']==1) ? 'Employee':'Admin') }}</td>
+                                    <td>{{ ($item['role']==0) ? 'Khách hàng':(($item['role']==1) ? 'Employee':'Admin') }}</td>
                                     <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.user.destroy', $item->id) }}"> Delete</a></td>
                                     <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{ Route('admin.user.edit', $item->id) }}">Edit</a></td>
                                 </tr>

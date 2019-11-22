@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Model\User;
 
@@ -70,17 +71,6 @@ class UsersController extends Controller
 
         return redirect()->back()->with('notification','Thêm thành công người dùng');
 
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**

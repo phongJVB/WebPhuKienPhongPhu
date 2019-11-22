@@ -165,7 +165,5 @@ class StocksController extends Controller
     {
         // $slide= Slide::find($id);
         // $slide->delete();
-
-        return redirect()->route('admin.slide.index')->with('notification','Bạn đã xóa thành công');
     }
 }

@@ -7,7 +7,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="home">Home</a> / <span>Sản phẩm</span>
+					<a href="home">Trang chủ</a> / <span>Loại sản phẩm</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -19,7 +19,9 @@
 				<div class="space60">&nbsp;</div>
 				<div class="row">
 					<div class="col-sm-3">
+						<ul id="titleAsideMenu">Menu</ul>
 						<ul class="aside-menu">
+
 							@foreach( $categories as $item )
 							<li><a href=" {{ Route('home.productType',$item->id)}}">{{ $item->name }}</a></li>
 							@endforeach

@@ -77,6 +77,14 @@
     height: 230px;
 }
 
+.ml-29{
+  margin-left: 29%!important;
+}
+
+.ml-24{
+  margin-left: 24%!important;
+}
+
 .red {background: red;}
 
 .blue {background: blue;}
@@ -108,6 +116,7 @@
   border: 1px solid #e1e1e1;
   height: 37px;
   padding: 0 12px;
+  font-size: 16px;
 }
 /*-----------------Ribbon Sale Carousel-------------*/
 .ribbon-wrapper#carousel{
@@ -236,6 +245,21 @@ table.shop_table td:last-child,table.shop_table th:last-child{
 #iconRemove:hover i{
   color: red;
 }
+table.shop_table tfoot .connect-home a{
+  height: 37px;
+  width: 135px;
+  line-height: 37px;
+  margin-left: 5px;
+  font-weight: normal;
+}
+table.shop_table tfoot #linkCheckout{
+  font-size: 14px;
+  border-radius: 3px;
+}
+table.shop_table tfoot #btnCheckout{
+  width: 135px;
+  border-radius: 3px;
+}
 /*--------------------------CSS Confirm Delete-------*/
 .modal{
   top:5%;
@@ -322,4 +346,160 @@ input#inputQty::-webkit-inner-spin-button {
 
 input#inputQty[type=number] {
   -moz-appearance:textfield; /* Firefox */
+}
+/*----CSS Footer----*/
+#footer .img-footer{
+  background-image: url('../images/footer.png');
+  min-width: 32px;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+}
+#footer .icon-face{
+  background-position: -90px -10px;
+}
+#footer .icon-instagram{
+  background-position: -152px -10px;
+}
+#footer .icon-likedin{
+  background-position: -204px -10px;
+}
+#footer .follow-us{
+  display: flex;  
+}
+#footer .title-follow{
+  padding: 5px;
+}
+.copyright .img-payment{
+  background-image: url('../images/footer.png');
+  width: 55px;
+  height: 34px;
+  background-repeat: no-repeat;
+}
+.copyright .icon-mastercard{
+  background-position: -243px -62px;
+}
+.copyright .icon-visa{
+  background-position: -310px -51px;
+}
+.copyright .icon-jcb{
+  background-position: -160px -62px;
+}
+.copyright .icon-bct{
+  background-position:-160px -111px;
+  width: 120px;
+  height: 47px;
+  margin-top: 2px;
+}
+/*-----CSS Title Aside Menu-----*/
+#titleAsideMenu{
+  z-index: 2;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+  padding: 10px 10px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+}
+.aside-menu{
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+/*------CSS For Comment----*/
+#tab-reviews .well{
+    min-height: 20px;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+}
+#tab-reviews .well h4, .media h4.media-heading{
+  font-family: inherit;
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+img.imgUserCmt{
+  width: 64px;
+  height: 64px;
+  border-radius: 33px;
+}
+/*----------------CSS Image Product Detail----*/
+.img-product-detail .img-child{
+  width: 100%;
+  position: relative;
+  display: flex;
+  margin-top: 5px;
+}
+.img-child .child{
+  width: 30%;
+
+  margin-right: 10px;
+}
+.img-child .child:first-child{
+  margin-left: 3px;
+}
+.img-child .child:hover{
+  border: 2px solid red;
+  cursor: pointer;
+}
+.boder-child{
+  border: 2px solid red;
+}
+/* these styles are for the demo, but are not required for the plugin */
+.zoom {
+  display:inline-block;
+  position: relative;
+}
+
+.zoom img {
+  display: block;
+}
+.zoom img::selection { background-color: transparent; }
+
+/*-----CSS Payment Box---*/
+.payment_box{
+  background-color: #ffff;
+}
+/*------CSS Form Acount-----*/
+.headAccount{
+  margin-bottom: 10%;
+}
+.bodyAccount{
+  padding-top: 1em;
+}
+.contentAccount{
+  padding-left: 15%;
+}
+.contentAccount .form-block input{
+  width: 40%;
+  border-radius: 2px;
+}
+.contentAccount .form-block input:focus{
+  border: 1px solid #15A5EF;
+  border-radius: 2px;
+}
+#btnUpdateAccount:disabled{
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+.aside-menu li a:hover i{
+    color: #0277b8;
+    font-weight: bold;
+}
+.contentAccount .form-block input:read-only{
+  background-color: #F0EFEF;
+  border: 1px solid #e1e1e1;
+}
+.contentAccount .page-header-account{
+  padding-bottom: 20px;
 }

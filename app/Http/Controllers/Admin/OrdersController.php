@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Model\Order;
 use App\Model\OrderProduct;
 use App\Model\Product;
+use App\Model\Stock;
 
 class OrdersController extends Controller
 {
@@ -44,17 +45,6 @@ class OrdersController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -85,6 +75,29 @@ class OrdersController extends Controller
         $order = Order::find($id);
         $order->status = $request->status;
         $order->save();
+    
+        if($request->status == 3){
+           //Tính toán sản phẩm còn lại trong kho lưu vào Stock
+            $productSale = DB::table('order_products')
+                     ->select('products_id','products.name',DB::raw('SUM(products_quantity) AS total_sale_quantity'))
+                     ->join('orders', 'orders.id', '=', 'order_products.orders_id')
+                     ->join('products', 'products.id', '=', 'order_products.products_id')
+                     ->where('orders.status', '<>', 3)
+                     ->groupBy('products_id')
+                     ->get();//Lấy ra số lượng đã bán của từng sản phẩm
+
+            $stockList = Stock::all(); //Lấy ra các số lượng nhập vào trong kho
+
+            foreach ($stockList as $key => $item) {
+                foreach ($productSale as $itemSale) {
+                    if( $item->products_id == $itemSale->products_id ){
+                        $stock = Stock::where('products_id',$item->products_id)->first();
+                        $stock->stock_quantity = ($item->total_quantity)-($itemSale->total_sale_quantity);
+                        $stock->save();
+                    }
+                }
+            }
+        }
 
         return redirect()->back()->with('notification','Cập nhật thành công');
     }
