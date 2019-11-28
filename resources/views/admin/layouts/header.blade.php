@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <div class="title-home-admin"> 
-                     <a class="navbar-brand" href="index.html" style="color: #ffff">Admin</a>
+                     <a class="navbar-brand" href="{{ Route('admin.dashboard.index') }}" style="color: #ffff">Admin</a>
                 </div>
                
             </div>

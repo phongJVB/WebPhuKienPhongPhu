@@ -5,7 +5,11 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Model\User;
+use App\Model\Order;
+use App\Model\Comment;
+use App\Model\OrderProduct;
 
 class UsersController extends Controller
 {
@@ -16,7 +20,7 @@ class UsersController extends Controller
      */     
     public function index()
     {   
-        $users = User::all();
+        $users = User::Where('delete_flag',0)->get();
         return view('admin.users.index',compact('users'));
     }
 
@@ -147,7 +151,41 @@ class UsersController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
+        $user->delete_flag = 1;
+        $user->delete_at = date('Y-m-d H:i:s');
+        $user->save();
+        return redirect()->route('admin.user.index')->with('notification','Bạn đã xóa thành công người dùng');
+    }
+
+    public function showRestore()
+    {  
+        $users = DB::table('users')
+                 ->select('users.*',DB::raw('count(orders.customers_id) as countID'))
+                 ->leftJoin('orders', 'orders.customers_id', '=', 'users.id')
+                 ->where('users.delete_flag','=',1)
+                 ->groupBy('users.id')
+                 ->get();
+        return view('admin.users.restore',compact('users'));
+    }
+
+    public function restore($id)
+    {  
+        $user = User::find($id);
+        $user->delete_flag = 0;
+        $userName = $user->name;
+        $user->save();
+
+    return redirect()->route('admin.user.index')->with('notification',$userName.' đã khôi phục');
+    }
+
+    // Xóa tất cả các bảng liên quan 
+    public function destroyAll($id)
+    {
+        $user = User::find($id);
+        foreach($user->comment as $item){
+            $item->delete();
+        }
         $user->delete();
-        return redirect()->route('admin.user.index')->with('notification','Bạn đã xóa thành công');
+    return redirect()->route('admin.user.showRestore')->with('notification','Bạn đã xóa thành công người dùng');
     }
 }

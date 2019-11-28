@@ -19,26 +19,38 @@ class CommentsController extends Controller
     public function store($id,Request $request)
     {   
         if(Auth::check()){
+            // Kiểm tra phiên session trình duyệt
+            if(Auth::user()->role == 0 && Auth::user()->delete_flag == 0){
+                if(empty($request->txtContent)){
+                    // Không có thông tin bình luận
+                    // biến status để phân biệt để append html vào chưa điền comment
+                    $status = 2; 
+                    $html = view('pages.comment')->with(compact('status'))->render();
+                    return response()->json(['success' => 0, 'html' => $html]);
+                }else{
+                    $comment = new Comment();
+                    $comment->users_id = Auth::user()->id;
+                    $comment->products_id = $request->productId;
+                    $comment->content = $request->txtContent;
+                    $comment->save();
 
-            if(empty($request->txtContent)){
-                $status = 2; // Phân biệt để append html vào chưa điền comment
+                    // Bình luận thành công
+                    $status = 1;
+                    $comments = Comment::Where('products_id',$id)->orderBy('id', 'DESC')->get();
+                    $countCmt = count($comments);     
+                    $html = view('pages.comment')->with(compact('comments','status'))->render();
+                    return response()->json(['success' => 1, 'html' => $html,'countCmt'=>$countCmt ]);
+                }
+            }else{
+                // Xóa phiên đăng nhập nếu đang là admin
+                Auth::logout();
+                $status = 0;
                 $html = view('pages.comment')->with(compact('status'))->render();
                 return response()->json(['success' => 0, 'html' => $html]);
-            }else{
-                $comment = new Comment();
-                $comment->users_id = Auth::user()->id;
-                $comment->products_id = $request->productId;
-                $comment->content = $request->txtContent;
-                $comment->save();
-
-                $status = 1;
-                $comments = Comment::Where('products_id',$id)->orderBy('id', 'DESC')->get();
-                $countCmt = count($comments);     
-                $html = view('pages.comment')->with(compact('comments','status'))->render();
-                return response()->json(['success' => 1, 'html' => $html,'countCmt'=>$countCmt ]);
             }
-            
+                        
         }else{
+            // Chưa có phiên session nào đăng nhập
             $status = 0;
             $html = view('pages.comment')->with(compact('status'))->render();
             return response()->json(['success' => 0, 'html' => $html]);

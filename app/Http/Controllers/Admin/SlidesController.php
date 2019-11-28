@@ -40,12 +40,14 @@ class SlidesController extends Controller
         $this->validate($request,
         	[
         		'txtTitle'=>'required|unique:slides,title|min:3|max:200',
+                'inputImage'=>'required',
         	],
         	[
         		'txtTitle.required'=>'Bạn chưa nhập tên thể loại',
             	'txtTitle.unique'=>'Tiêu đề đã tồn tại',
             	'txtTitle.min'=>'Tên sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
             	'txtTitle.max'=>'Tên sản phẩm phải có độ dài từ 3 cho đến 200 ký tự',
+                'inputImage.required'=>'Bạn chưa chọn ảnh cho slide',
         	]);
 
         $slide = new Slide();
@@ -171,6 +173,7 @@ class SlidesController extends Controller
     public function destroy($id)
     {
         $slide= Slide::find($id);
+        unlink("upload/slides/".$slide->image);
         $slide->delete();
 
         return redirect()->route('admin.slide.index')->with('notification','Bạn đã xóa thành công');

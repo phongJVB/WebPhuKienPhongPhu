@@ -11,24 +11,29 @@
                     </div>
                     <!-- /.col-lg-12 -->
                     <div class="col-lg-7" style="padding-bottom:120px">
-                    	 @if(count($errors)>0)
-                            <div class="alert alert-danger"> 
-                                @foreach($errors->all() as $err)
-                                    {{ $err }}<br>
+                    	@if(count($errors)>0)
+                            <div class="alert alert-danger alert-dismissible">
+                              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                @foreach( $errors->all() as $key => $err )
+                                      <strong>{{ ($key+1) }}.</strong>{{ $err }}<br>
                                 @endforeach
-                            </div>    
+                            </div>     
                         @endif
 
                         @if(session('notification'))
-                            <div class="alert alert-success"> 
-                                {{ session('notification') }}
+                            <div class="alert alert-success alert-dismissible">
+                              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                              <strong>{{ session('notification') }}</strong>
                             </div>
                         @endif
+
                         @if(session('warring'))
-                            <div class="alert alert-danger"> 
-                                {{ session('warring') }}
-                            </div>
+                        <div class="alert alert-danger alert-dismissible">
+                            <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            <strong>{{ session('warring') }}</strong>
+                        </div>
                         @endif
+                        
                         <form action="{{ Route('admin.account.changePassword',$user->id) }}" method="POST">
                         	@csrf
                             <div class="form-group">

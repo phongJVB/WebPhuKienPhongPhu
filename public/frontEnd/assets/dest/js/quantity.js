@@ -9,7 +9,6 @@ $(document).ready(function(){
 		if ( value > 1 ) {
 			value = value - 1;
 		} else if( $mode==2 ){
-			alert('Bạn có chắc chắn xóa sản phẩm không ?');
 			value = 0;
 		}else{
 			value = 1;
@@ -40,14 +39,14 @@ $(document).ready(function(){
 
 			 		var value = parseInt($(this).val());
 			 		var stockQty = parseInt($('#inputQty').attr("stockQty"));
+			 		// Lấy biến mode để phân biệt giữa inputQty ở product.blade và shopping_cart.blade
 			 		var $mode = $(this).attr("mode");
 
 			 		if( (value < 1 || isNaN(value)) && $mode ==1 ){
 			 			value = 1;
 			 		}else if( (value < 1 || isNaN(value)) && $mode ==2 ){
-			 			alert('Bạn có chắc chắn xóa sản phẩm không ?');
-			 			value = 0;
-			 		}else if(value > stockQty){
+						value = 0;
+			 		}else if(value > stockQty){	
 			 			value = stockQty;
 			 		}else{
 			 			value = value;
@@ -55,6 +54,7 @@ $(document).ready(function(){
 			 		 $(this).val(value);
 			 	});
 
+				// Không cho nhập chữ "e" trong ô input number
 			 	$('#inputQty').on('keypress',function(evt){
 					if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57){
 					    evt.preventDefault();

@@ -5,43 +5,47 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Slide
+                <h1 class="page-header">User
                     <small>List</small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
              @if(session('notification'))
-                <div class="alert alert-success alert-dismissible" style="position: relative; clear: both; width: 40%;">
+                <div class="alert alert-success alert-dismissible" style="position: relative;clear: both;width:40%;">
                   <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                   <strong>{{ session('notification') }}</strong>
                 </div>
             @endif
-            
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Slug</th>
-                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Role</th>
                         <th>Delete</th>
-                        <th>Edit</th>
+                        <th>Restore</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($slides as $item)
+                    @foreach($users as $item)
                         <tr class="odd gradeX" align="center">
                             <td>{{ $item->id }}</td>
-                            <td class="text-left">{{ $item->title }}</td>
-                            <td class="text-left">{{ $item->slug }}</td>
-                            <td style="width: 20%"><img src="upload/slides/{{ $item->image }}" class="imgSlide"></td>
-                            <td class="center">
-                                <a href="{{ Route('admin.slide.destroy', $item->id) }}"
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->email }}</td>
+                            <td>{{ $item->phone }}</td>
+                            <td>{{ $item->address }}</td>
+                            <td>{{ ($item->gender==1) ? 'Nam':'Nữ'}}</td>
+                            <td>{{ ($item->role==0) ? 'Khách hàng':(($item->role==1) ? 'Employee':'Admin') }}</td>
+                            <td class="center {{ ($item->countID > 0)?'cursor-not-allowed':'' }}" >
+                                <a href="{{ Route('admin.user.destroyAll', $item->id) }}"
                                 style="display: none"></a>
-                                <a class="btn btn-danger remove"><i class="fa fa-trash-o  fa-fw"></i>Delete</a>
+                                <a class="btn btn-danger remove" {{ ($item->countID > 0)?'disabled':'' }}><i class="fa fa-trash-o  fa-fw"></i> Delete</a>
                             </td>
-                            <td class="center">
-                                <a href="{{ Route('admin.slide.edit', $item->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"> </i>Edit</a></td>
+                            <td class="center" ><a href="{{ Route('admin.user.restore', $item->id) }}" class="btn btn-success"><i class="fa fa-refresh"></i> Restore </a></td>   
                         </tr>
                     @endforeach
                 </tbody>
@@ -58,10 +62,11 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Xóa Ảnh Slide Trang Chủ</h5>
+        <h5 class="modal-title">Xóa Thông Tin Người Dùng</h5>
       </div>
       <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa ảnh của slide không?</p>
+        <p>Bạn có chắc chắn muốn xóa hết thông tin <br>
+        liên quan về người dùng này không ?</p>
 
       </div>
       <div class="modal-footer">
@@ -78,4 +83,3 @@
 @section('script')
 <script src="{{ asset('backEnd/dist/js/confirmDelete.js') }}"></script>
 @endsection
-

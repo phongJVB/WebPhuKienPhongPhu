@@ -38,6 +38,7 @@
         @yield('content')
 
     </div>
+        @yield('modal')
     <!-- /#wrapper -->
 
     <!-- jQuery -->
@@ -61,9 +62,9 @@
 
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-    $(document).ready(function() {
-        $('#dataTables-example').DataTable();
-    });
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable();
+        });
     </script>
 
     @yield('script')

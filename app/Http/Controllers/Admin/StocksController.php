@@ -155,15 +155,4 @@ class StocksController extends Controller
         return redirect()->back()->with('notification','Sửa thành công kho hàng');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        // $slide= Slide::find($id);
-        // $slide->delete();
-    }
 }

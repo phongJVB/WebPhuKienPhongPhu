@@ -143,10 +143,10 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Xóa Sản Phẩm</h5>
+        <h5 class="modal-title">Xóa Sản Phẩm Trong Giỏ Hàng</h5>
       </div>
       <div class="modal-body">
-        <p>Bạn Có Chắc Chắn Muốn Xóa Sản Phẩm Không ?</p>
+        <p>Bạn có chắc chắn xóa sản phẩm này không ?</p>
 
       </div>
       <div class="modal-footer">
@@ -232,9 +232,11 @@
 				$('.modal').css('display','block');
 				$('#btnAgree').prev('a').attr('href',url);
 			});
+
 			$('#closeConfirm').click(function(){
 				$('.modal').fadeOut(300);
 			});
+
 			$('#btnAgree').click(function(){
 				let url = $(this).prev('a').attr('href');
 				document.location.href=url;

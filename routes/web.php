@@ -10,25 +10,25 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/admin', 'Admin\LoginController@index')->name('admin');
 Route::post('/admin','Admin\LoginController@postLogin')->name('admin');
 //Tạo Router theo Group của từng phần trong Admin
 Route::name('admin.')->prefix('admin')->middleware('adminLogin')->group(function(){
 	
+	Route::name('dashboard.')->prefix('dashboard')->group(function() {
+		Route::get('/', 'Admin\DashboardController@index')->name('index');
+	});	
 	//Tạo Router cho product trong Admin
 	Route::name('product.')->prefix('product')->group(function() {
 		Route::get('/', 'Admin\ProductsController@index')->name('index');
-		Route::get('/show/{id}', 'Admin\ProductsController@show')->name('show');
+		Route::get('/restore', 'Admin\ProductsController@showRestore')->name('showRestore');
+		Route::get('/restore/{id}', 'Admin\ProductsController@restore')->name('restore');
 		Route::get('/create', 'Admin\ProductsController@create')->name('create');
 		Route::post('/store', 'Admin\ProductsController@store')->name('store');
 		Route::get('/edit/{id}', 'Admin\ProductsController@edit')->name('edit');
 		Route::post('/update/{id}', 'Admin\ProductsController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\ProductsController@destroy')->name('destroy');
+		Route::get('/destroyAll/{id}', 'Admin\ProductsController@destroyAll')->name('destroyAll');
 		Route::get('/destroyImage/{id}', 'Admin\ProductsController@destroyImage')->name('destroyImage');
 		Route::get('/destroyMainImage/{id}', 'Admin\ProductsController@destroyMainImage')->name('destroyMainImage');
 	});
@@ -52,12 +52,14 @@ Route::name('admin.')->prefix('admin')->middleware('adminLogin')->group(function
 	//Tạo Router cho users trong Admin
 	Route::name('user.')->prefix('user')->group(function() {
 		Route::get('/', 'Admin\UsersController@index')->name('index');
-		Route::get('/show/{id}', 'Admin\UsersController@show')->name('show');
+		Route::get('/restore', 'Admin\UsersController@showRestore')->name('showRestore');
+		Route::get('/restore/{id}', 'Admin\UsersController@restore')->name('restore');
 		Route::get('/create', 'Admin\UsersController@create')->name('create');
 		Route::post('/store', 'Admin\UsersController@store')->name('store');
 		Route::get('/edit/{id}', 'Admin\UsersController@edit')->name('edit');
 		Route::post('/update/{id}', 'Admin\UsersController@update')->name('update');
 		Route::get('/destroy/{id}', 'Admin\UsersController@destroy')->name('destroy');
+		Route::get('/destroyAll/{id}', 'Admin\UsersController@destroyAll')->name('destroyAll');
 	});
 
 	//Tạo Router cho orders trong Admin
@@ -103,7 +105,7 @@ Route::name('admin.')->prefix('admin')->middleware('adminLogin')->group(function
 	});
 });
 
-
+Route::get('/','PageController@getHome')->name('index');
 Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến trang chủ của website
 		Route::get('/','PageController@getHome')->name('index');

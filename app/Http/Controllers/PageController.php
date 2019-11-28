@@ -22,21 +22,21 @@ use Cart;
 class PageController extends Controller
 {
     function getHome(){
-        $products = Product::Where('status',1)->get();
+        $products = Product::Where('status',1)->Where('delete_flag',0)->get();
         //Lấy ra các sản phẩm mới trên thị trường. Kết quả sẽ là 1 object gồm các class product
         $slides = Slide::all();
-        $productsPaginate= Product::paginate(8);
+        $productsPaginate= Product::Where('delete_flag',0)->paginate(8);
     	return view('pages.home',compact('products','slides','productsPaginate'));
     }
 
     function getProductType($id){
         //Lấy sản phẩm theo thể loại cần tìm
-        $productType = Product::Where('categories_id',$id)->get();
+        $productType = Product::Where('categories_id',$id)->Where('delete_flag',0)->get();
         $categories = Category::all();
         // Lấy tên thể loại
         $category = Category::Where('id',$id)->first();
         // Tìm sản phẩm khách với thể loại cần tìm
-        $products = Product::Where('categories_id','<>',$id)->paginate(3);
+        $products = Product::Where('categories_id','<>',$id)->Where('delete_flag',0)->paginate(3);
     	return view('pages.productType', compact('productType','categories','category','products'));
     }
 
@@ -69,6 +69,7 @@ class PageController extends Controller
     function getSearch(Request $request){
         $keySearch = $request->key;
         $products = Product::where('name','like','%'.$request->key.'%')
+        					->where('delete_flag',0)
                             ->orWhere('unit_price',$request->key)
                             ->paginate(8);
         return view('pages.search',compact('products','keySearch'));
@@ -83,13 +84,20 @@ class PageController extends Controller
     }
 
     function getCheckout(){
-        $user = Auth::user();
-        if($user){
-            return view('pages.checkout',compact('user'));
+        if(Auth::check()){
+            $user = Auth::user();
+            if($user->role == 0 && $user->delete_flag == 0){
+                return view('pages.checkout',compact('user'));
+            }
+            else{
+               //Nếu phiên trên cùng trình duyệt là Admin thì phải logout 
+               Auth::logout();
+               return view('pages.checkout'); 
+            }  
+        }else{
+            return view('pages.checkout'); 
         }
-        else{
-           return view('pages.checkout'); 
-        }     
+           
     }
 
     // Xử lý lưu thông tin đơn hàng
@@ -182,7 +190,7 @@ class PageController extends Controller
         ];
 
         if(Auth::attempt($arr)){
-            if(Auth::user()->role == 0){
+            if(Auth::user()->role == 0 && Auth::user()->delete_flag == 0 ){
                 return redirect()->route('home.index');
             }else{
                 return redirect()->back()->with('notification','Tài khoản không tồn tại');

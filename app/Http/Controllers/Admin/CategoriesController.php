@@ -14,7 +14,7 @@ class CategoriesController extends Controller
     {
     	$category = DB::table('categories')
                      ->select('categories.*',DB::raw('count(products.categories_id) as countID'))
-                     ->leftJoin('products', 'categories.id', '=', 'products.categories_id')
+                     ->leftJoin('products', 'products.categories_id', '=', 'categories.id')
                      ->groupBy('categories.id')
                      ->get();
         return view('admin.categories.index',['category' => $category]);

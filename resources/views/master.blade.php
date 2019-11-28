@@ -20,7 +20,7 @@
 	@yield('link')
 </head>
 <body>
-
+	<button id="myBtnScroll" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 	<!-- Header -->
 	@include('layouts.header')
 
@@ -49,15 +49,24 @@
 	<script src="{{ asset('frontEnd/assets/dest/js/custom2.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/js/phongCustom.js') }}"></script>
 	<script>
-			$(document).ready(function($) {    
+			$(document).ready(function() {    
 				$(window).scroll(function(){
 					if($(this).scrollTop()>150){
-						$(".header-bottom").addClass('fixNav')
+						$('#myBtnScroll').css('display','block');
+						$(".header-bottom").addClass('fixNav');
+
 					}else{
-						$(".header-bottom").removeClass('fixNav')
-					}}
-					)
-			})
+						$('#myBtnScroll').css('display','none');
+						$(".header-bottom").removeClass('fixNav');
+					}
+				});
+			});
+			$(document).ready(function(){
+				$('#myBtnScroll').on('click',function(){
+					 $('html, body').animate({
+                    	scrollTop: $("body").offset().top}, 1000);
+				});
+			});
 	</script>
 	@yield('script') 
 </body>

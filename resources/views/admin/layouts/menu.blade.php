@@ -6,13 +6,13 @@
                         <div class="pull-left image"> <img src="backEnd/dist/image/admin_phong.jpg" class="img-circle" alt="User Image"> </div>
                         <div class="pull-left info">
                             <p>Welcome {{ Auth::user()->name }}</p>
-                            <a><i class="fa fa-circle text-success"></i> Online</a>
+                            <a><i class="fa fa-circle" style="color:#36d239"></i> Online</a>
                         </div>
                     </div>
 
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href=" {{ Route('admin.dashboard.index') }} "><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a><i class="fa fa-bars fa-fw"></i> Category<span class="fa arrow"></span></a>
@@ -34,6 +34,9 @@
                                 </li>
                                 <li>
                                     <a href="admin/product/create">Add Product</a>
+                                </li>
+                                <li>
+                                    <a href="{{ Route('admin.product.showRestore') }}">Restore Product</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -77,6 +80,9 @@
                                 </li>
                                 <li>
                                     <a href=" {{ Route('admin.user.create') }} ">Add User</a>
+                                </li>
+                                <li>
+                                    <a href="{{ Route('admin.user.showRestore') }}">Restore User</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->

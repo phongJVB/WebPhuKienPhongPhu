@@ -26,7 +26,7 @@
 					</div>
 					@else
 					<div class="beta-products-list">
-						<h4><b>Search Products</b></h4>
+						<h4><b>Tìm kiếm sản phẩm</b></h4>
 						<div class="beta-products-details">
 							<p class="pull-left">Tìm thấy {{ count($products) }} sản phẩm</p>
 							<div class="clearfix"></div>

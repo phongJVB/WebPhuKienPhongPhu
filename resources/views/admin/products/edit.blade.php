@@ -1,7 +1,7 @@
+@extends('admin.layouts.index')
 @section('link')
 <link href="{{ asset('backEnd/dist/css/fileinput.css') }}" rel="stylesheet" type="text/css">    
 @endsection
-@extends('admin.layouts.index')
 @section('content')
 <!-- Page Content -->
 <div id="page-wrapper">
@@ -16,24 +16,20 @@
             <div class="col-lg-7" style="padding-bottom:20px">
                 <!-- Hiển thị thông báo lỗi và thông báo thành công thi thêm sản phẩm -->
                 @if(count($errors)>0)
-                <div id="alert-notice">
-                    <div class="alert alert-danger alert-dismissible" role="alert" style="text-align: center;">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <p>
+                    <strong>
                     @foreach( $errors->all() as $err )
                             {{ $err }}<br>
-                    @endforeach</p>
-                    </div>
-                </div>       
+                    @endforeach</strong>
+                    </div>      
                 @endif
 
                 @if(session('notification'))
-                <div id="alert-notice">
-                    <div class="alert alert-success alert-dismissible" role="alert" style="text-align: center;">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>{{ session('notification') }}</strong>
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>{{ session('notification') }}</strong>
                     </div>
-                </div>
                 @endif
                 <!-- Hiển thị form thêm sản phẩm-->
                 <form action="{{ Route('admin.product.update',$products->id) }}" method="POST" enctype="multipart/form-data">
@@ -137,7 +133,10 @@
        
                     <div class="form-group">
                         <label>Product Unit</label>
-                        <input class="form-control" name="txtUnit" placeholder="Please Enter Unit" value="{{ $products->unit }}" />
+                        <select class="form-control" name="txtUnit">
+                            <option value="Chiếc" {{ ($products->unit=="Chiếc")?'selected':'' }}>Chiếc</option>
+                            <option value="Đôi" {{ ($products->unit=="Đôi")?'selected':'' }}>Đôi</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -168,8 +167,8 @@
                         </label>
                     </div>
 
-                    <button type="submit" class="btn btn-default">Product Update</button>
-                    <button type="reset" class="btn btn-default">Reset</button>
+                    <button type="submit" class="btn btn-success">Product Update</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
                 <form>
             </div>
         </div>
@@ -201,7 +200,11 @@
                             <td>{{ $item->user->name }}</td>
                             <td class="text-left">{{ $item->content }}</td>
                             <td>{{ $item->created_at }}</td>
-                            <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{ Route('admin.comment.destroy', [ $item->id, $products->id]) }}"> Delete</a></td>
+                            <td class="center">
+                                <a href="{{ Route('admin.comment.destroy',[$item->id,$products->id]) }}"
+                                style="display: none"></a>
+                                <a class="btn btn-danger remove"> <i class="fa fa-trash-o  fa-fw"></i>Delete</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -214,11 +217,34 @@
 </div>
 <!-- /#page-wrapper -->
 @endsection
+
+@section('modal')
+<div class="modal" role="dialog" id="modalDeleteComment">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Xóa Bình Luận</h5>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa bình luận không?</p>
+
+      </div>
+      <div class="modal-footer">
+        <a href="" style="display: none"></a>
+        <button type="button" class="btn btn-primary" id="btnAgree">
+        Đồng Ý</button>
+        <button type="button" class="btn btn-danger" id="closeConfirm">Thoát</button>
+      </div>
+    </div>
+  </div>
+</div>
+@endsection
+
 @section('script')
  <script src="{{ asset('backEnd/dist/js/fileinput.js') }}" type="text/javascript"></script>
  <script src="{{ asset('backEnd/dist/js/theme.js') }}" type="text/javascript"></script>
  <script src="{{ asset('backEnd/dist/js/popper.min.js') }}" type="text/javascript"></script>
-<script>
+ <script>
     $(document).ready(function(){
         var countOldImg = parseInt($('#countOldImage').val());
         if(countOldImg < 2){
@@ -227,7 +253,7 @@
              $('#formNewChildImage').attr("hidden",true);
         }
     });
-</script>
+ </script>
  <script type="text/javascript">
     var count = $('div.img-child').length;
     var maxCount = 2-count;
@@ -245,5 +271,28 @@
         maxFileSize:2000,
         maxFileCount:1,
     });
+</script>
+<script>
+    $(document).ready(function(){
+    $('.remove').click(function(){
+        let url = $(this).prev('a').attr('href');
+        $('#wrapper').css('opacity',0.5);
+        $('#modalDeleteComment').css('display','block');
+        $('#btnAgree').prev('a').attr('href',url);
+    });
+    
+    $('#closeConfirm').click(function(){
+        debugger;
+        $('#wrapper').css('opacity',1);
+        $('#modalDeleteComment').fadeOut(300);
+    });
+
+    $('#btnAgree').click(function(){
+        $('#wrapper').css('opacity',1);
+        $('#modalDeleteComment').fadeOut(100);
+        let url = $(this).prev('a').attr('href');
+        document.location.href=url;                
+    });
+});
 </script>
 @endsection

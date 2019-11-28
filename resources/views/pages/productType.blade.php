@@ -31,7 +31,11 @@
 						<div class="beta-products-list">
 							<h4>Sản phẩm</h4>
 							<div class="beta-products-details">
-								<p class="pull-left">Tìm thấy {{ count($productType) }} sản phẩm</p>
+								@if(count($productType) > 0)
+									<p class="pull-left">Tìm thấy {{ count($productType) }} sản phẩm</p>
+								@else
+									<p class="pull-left">Không tìm thấy sản phẩm nào tương ứng</p>
+								@endif
 								<div class="clearfix"></div>
 							</div>
 
@@ -66,6 +70,7 @@
 								@endforeach
 
 							</div>
+
 						</div> <!-- .beta-products-list -->
 
 						<div class="space50">&nbsp;</div>

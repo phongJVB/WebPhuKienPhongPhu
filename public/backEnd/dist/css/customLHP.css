@@ -16,9 +16,12 @@
 }
 /*----Custom Giao dien admin old image----*/
 a.disabled {
-  pointer-events: none;
-  cursor:default;
+  pointer-events:none;
+  cursor:not-allowed;
   opacity: 0.5;
+}
+.cursor-not-allowed { 
+  cursor: not-allowed; 
 }
 .img-edit img{
     margin: 10px 0px;
@@ -162,4 +165,21 @@ ul.dropdown-user li:hover{
 }
 #formNewChildImage,#formNewMainImage{
   margin-left: 15px;
+}
+/*----------CSS Modal Confirm Delete-----*/
+.modal-dialog {
+  width: 400px;
+}
+.modal {
+  top: 5%;
+  position: fixed;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.modal-title{
+  font-size: 24px;
+  font-weight: bold;
+}
+img.imgSlide{
+  width: 100%;
 }

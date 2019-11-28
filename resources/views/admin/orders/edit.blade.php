@@ -8,11 +8,20 @@
                     <small>Đơn hàng</small>
                 </h1>
             </div>
+
+            @if( $order->status==3 )
+                <div class="alert alert-info alert-dismissible" style="position:relative;clear:both;width:50%;">
+                  <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                  <strong>Sản phẩm đã hoàn lại sẽ không thể xử lý trạng thái giao hàng</strong>
+                </div>
+            @endif
             @if(session('notification'))
-            <div class="alert alert-success" style="position: relative; clear: both; width: 40%;"> 
-                {{ session('notification') }}
-            </div>
-            @endif                    <!-- /.col-lg-12 -->
+                <div class="alert alert-success alert-dismissible" style="position: relative; clear: both; width: 40%;">
+                    <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ session('notification') }}</strong>
+                </div>
+            @endif                    
+            <!-- /.col-lg-12 -->
             <div class="col-lg-12">
                 <div class="container123  col-lg-6">
                     <table class="table table-bordered" id="inforCustomer">
@@ -90,13 +99,14 @@
                         <div class="form-inline">
                             <label>Trạng thái giao hàng: </label>
                             <select name="status" class="form-control input-inline" style="width: 200px">
-                                <option value="0">Chưa xử lý</option>
-                                <option value="1">Đang vận chuyển</option>
-                                <option value="2">Giao thành công</option>
-                                <option value="3">Hoàn lại</option>
+                                <option value="0" {{ ( $order->status==0)?'selected':'' }}>Chưa xử lý</option>
+                                <option value="1" {{ ( $order->status==1)?'selected':'' }}>Đang vận chuyển</option>
+                                <option value="2" {{ ( $order->status==2)?'selected':'' }}>Giao thành công</option>
+                                <option value="3" {{ ( $order->status==3)?'selected':'' }}>Đã hoàn lại</option>
                             </select>
-
-                            <input type="submit" value="Xử lý" class="btn btn-primary">
+                            <span class="{{ ($order->status==3)?'cursor-not-allowed':'' }}">
+                                <input type="submit" value="Xử lý" class="btn btn-primary" {{ ( $order->status==3)?'disabled':'' }}>
+                            </span>
                         </div>
                     </div>
                 </form>

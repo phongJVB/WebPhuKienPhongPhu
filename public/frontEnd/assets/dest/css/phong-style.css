@@ -264,8 +264,6 @@ table.shop_table tfoot #btnCheckout{
 .modal{
   top:5%;
   position: fixed;
-  overflow: hidden;
-  overflow-y: hidden;
 }
 .modal-dialog{
   width: 400px;
@@ -502,4 +500,27 @@ img.imgUserCmt{
 }
 .contentAccount .page-header-account{
   padding-bottom: 20px;
+}
+
+/*-----------CSS Scroll Down To Top-------*/
+#myBtnScroll {
+  display: none;
+  cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background-color:#0277b8;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0 7px 10px 0 rgba(106,65,65,.21);
+}
+
+#myBtnScroll:hover {
+  background-color: #555;
 }

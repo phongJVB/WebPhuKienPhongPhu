@@ -5,15 +5,21 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header-account">Product
+                <h1 class="page-header-account">Product Restore
                     <small>List </small>
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+            <!-- Hiển thị thông tin về nút Delete -->
+            <div class="alert alert-info alert-dismissible" style="position:relative;clear:both;width:50%;">
+              <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>Các sản phẩm đã có trong đơn hàng sẽ không được xóa</strong>
+            </div>
+            <!-- Hiển thị thông báo khi xóa thành công -->
              @if(session('notification'))
-                <div class="alert alert-success alert-dismissible" style="position:relative; clear:both; width:50%; ">
-                  <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                  <strong> {{ session('notification') }} </strong>
+                <div class="alert alert-info alert-dismissible" style="text-align: center; position:relative; clear:both; width:50%; ">
+                <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong> {{ session('notification') }} </strong>
                 </div>
             @endif
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -26,7 +32,7 @@
                         <th>Price</th>
                         <th>Status</th>
                         <th>Delete</th>
-                        <th>Edit</th>
+                        <th>Restore</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,12 +44,12 @@
                             <td class="text-left">{!! $item->detail_description !!}</td>
                             <td>{{ $item->unit_price }}</td>
                             <td>{{ ($item->status ==1) ? 'Mới':'Cũ'}}</td>
-                            <td class="center" >
-                                <a href="{{ Route('admin.product.destroy', $item->id) }}"
+                            <td class="center {{ ($item->countID > 0)?'cursor-not-allowed':'' }}" >
+                                <a href="{{ Route('admin.product.destroyAll', $item->id) }}"
                                 style="display: none"></a>
-                                <a class="btn btn-danger remove"><i class="fa fa-trash-o  fa-fw"></i> Delete</a>
+                                <a class="btn btn-danger remove" {{ ($item->countID > 0)?'disabled':'' }}><i class="fa fa-trash-o  fa-fw"></i> Delete</a>
                             </td>
-                            <td class="center"><a href="{{ Route('admin.product.edit', $item->id) }}" class="btn btn-warning"><i class="fa fa-pencil fa-fw"></i> Edit</a></td>
+                            <td class="center" ><a href="{{ Route('admin.product.restore', $item->id) }}" class="btn btn-success"><i class="fa fa-refresh"></i> Restore </a></td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -63,7 +69,8 @@
         <h5 class="modal-title">Xóa Sản Phẩm</h5>
       </div>
       <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa sản phẩm không?</p>
+        <p>Bạn có chắc chắn muốn xóa hết thông tin <br>
+        liên quan về sản phẩm này không ?</p>
 
       </div>
       <div class="modal-footer">

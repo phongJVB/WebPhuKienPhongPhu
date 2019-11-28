@@ -37,8 +37,8 @@ class LoginController extends Controller
             'password' => $request->password,
         ];
         if(Auth::attempt($arrName) || Auth::attempt($arrEmail) ){
-            if(Auth::user()->role != 0){
-                return redirect()->route('admin.product.index');
+            if(Auth::user()->role != 0  && Auth::user()->delete_flag == 0 ){
+                return redirect()->route('admin.dashboard.index');
             }
             else{
                 return redirect()->back()->with('notification','Tài khoản không tồn tại');

@@ -16,16 +16,18 @@
             <div class="col-lg-7" style="padding-bottom:120px">
                 <!-- Hiển thị thông báo lỗi và thông báo thành công thi thêm sản phẩm -->
                 @if(count($errors)>0)
-                    <div class="alert alert-danger"> 
+                    <div class="alert alert-danger alert-dismissible">
+                      <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         @foreach( $errors->all() as $key => $err )
-                          <strong>{{ ($key+1) }}.</strong>{{ $err }}<br>
+                              <strong>{{ ($key+1) }}.</strong>{{ $err }}<br>
                         @endforeach
-                    </div>    
+                    </div>  
                 @endif
 
                 @if(session('notification'))
-                    <div class="alert alert-success"> 
-                        {{ session('notification') }}
+                    <div class="alert alert-success alert-dismissible">
+                      <a class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong>{{ session('notification') }}</strong>
                     </div>
                 @endif
                 <!-- Hiển thị form thêm sản phẩm-->
@@ -53,8 +55,8 @@
                     </div>
                     <div class="form-group">
                         <label>Main Product Image</label>
-                        <div id="alert-notice">
-                            <div class="alert alert-info alert-dismissible" role="alert" style="text-align: center;">
+                        <div class="alert-notice">
+                            <div class="alert alert-info alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p> Bạn chỉ được thêm
                                 <strong style="color: red"> 1 </strong> ảnh chính mới.</p>
@@ -66,8 +68,8 @@
                     </div>
                     <div class="form-group">
                         <label>Child Images</label>
-                        <div id="alert-notice">
-                            <div class="alert alert-info alert-dismissible" role="alert" style="text-align: center;">
+                        <div class="alert-notice">
+                            <div class="alert alert-info alert-dismissible" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <p> Bạn có thể thêm tối đa 
                                 <strong style="color: red"> 2 </strong> ảnh con mới. Không trùng ảnh chính</p>
@@ -79,7 +81,10 @@
                     </div>
                     <div class="form-group">
                         <label>Product Unit</label>
-                        <input class="form-control" name="txtUnit" placeholder="Please Enter Unit" />
+                        <select class="form-control" name="txtUnit">
+                            <option value="Chiếc">Chiếc</option>
+                            <option value="Đôi">Đôi</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Product Description</label>
@@ -98,8 +103,8 @@
                             <input name="rdoStatus" value="0" type="radio">Old
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-default">Product Add</button>
-                    <button type="reset" class="btn btn-default">Reset</button>
+                    <button type="submit" class="btn btn-success">Product Add</button>
+                    <button type="reset" class="btn btn-warning">Reset</button>
                 <form>
             </div>
         </div>
@@ -129,11 +134,6 @@
         maxFileSize:2000,
         maxFileCount:1,    
     });
-</script>
-<script>
-  $(document).ready(function() {
-    $(".select2").select2();
-  });
 </script>
 
 @endsection
