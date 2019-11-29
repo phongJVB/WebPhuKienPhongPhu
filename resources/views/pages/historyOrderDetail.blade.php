@@ -10,7 +10,7 @@
         <div id="page-wrapper">
             <div class="container-fluid">
                     <h4 class="page-header-account"> Đơn hàng chi tiết </h4>
-                    <table class="table table-striped table-bordered table-hover">
+                    <table class="table table-striped table-bordered table-hover table-historyOrderDetail">
                         <thead>
                             <tr align="center">
                                 <th>STT</th>

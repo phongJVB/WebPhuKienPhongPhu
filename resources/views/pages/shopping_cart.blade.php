@@ -54,7 +54,6 @@
 											@endif
 											@endforeach
 											
-											<p class="table-option">Hãng: Điện thoại </p>
 										</div>
 									</div>
 								</td>

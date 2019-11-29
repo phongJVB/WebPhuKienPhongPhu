@@ -35,8 +35,9 @@
                             <td>{{ $item->total_quantity }}</td>
                             <td>{{ $item->stock_quantity }}</td>
                             <td class="center"> 
-                                <a href="{{ Route('admin.stock.show',$item->id) }}" class="btn btn-info"><i class="fa fa-eye fa-fw"></i>Watch</a></td>
-                             <td class="center"><a href="{{ Route('admin.stock.create', $item->id) }}" class="btn btn-success"><i class="fa fa-plus fa-fw"></i> Add</a></td>
+                                <a href="{{ Route('admin.stock.show',$item->id) }}" class="btn btn-info"><i class="fa fa-eye fa-fw"></i>Watch</a>
+                            </td>
+                            <td class="center"><a href="{{ Route('admin.stock.create', $item->id) }}" class="btn btn-success"><i class="fa fa-plus fa-fw"></i> Add</a></td>
                         </tr>
                     @endforeach
                 </tbody>

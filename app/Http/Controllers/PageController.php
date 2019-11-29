@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Validator;
 use App\Model\User;
@@ -191,7 +192,8 @@ class PageController extends Controller
 
         if(Auth::attempt($arr)){
             if(Auth::user()->role == 0 && Auth::user()->delete_flag == 0 ){
-                return redirect()->route('home.index');
+                $url = $request->url;
+                return Redirect::to($url);
             }else{
                 return redirect()->back()->with('notification','Tài khoản không tồn tại');
             }

@@ -35,6 +35,8 @@ Route::name('admin.')->prefix('admin')->middleware('adminLogin')->group(function
 
 	//Tạo Router cho comments trong Admin
 	Route::name('comment.')->prefix('comment')->group(function() {
+		Route::get('/', 'Admin\CommentsController@index')->name('index');
+		Route::get('/show/{id}', 'Admin\CommentsController@show')->name('show');
 		Route::get('/destroy/{id}/{productId}', 'Admin\CommentsController@destroy')->name('destroy');
 	});	
 

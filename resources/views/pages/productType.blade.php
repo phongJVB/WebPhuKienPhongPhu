@@ -61,7 +61,12 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											{!! Form::open(['url'=>'home/shoppingCart','method'=>'POST']) !!}
+												<input type="hidden" name="productId" value="{{$item->id}}">
+												<input type="hidden" name="qty" value="1">
+												<button type="submit" style="border:none" class="add-to-cart pull-left" name="modeAddCart" value="1"><a class="add-to-cart pull-left"><i class="fa fa-shopping-cart"></i></a></button>
+											{!! Form::close() !!}
+
 											<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>
@@ -104,7 +109,12 @@
 											</p>
 										</div>
 										<div class="single-item-caption">
-											<a class="add-to-cart pull-left" href="shopping_cart.html"><i class="fa fa-shopping-cart"></i></a>
+											{!! Form::open(['url'=>'home/shoppingCart','method'=>'POST']) !!}
+												<input type="hidden" name="productId" value="{{$item->id}}">
+												<input type="hidden" name="qty" value="1">
+												<button type="submit" style="border:none" class="add-to-cart pull-left" name="modeAddCart" value="1"><a class="add-to-cart pull-left"><i class="fa fa-shopping-cart"></i></a></button>
+											{!! Form::close() !!}
+											
 											<a class="beta-btn primary" href="{{ route('home.productDetail',$item->id)}}">Details <i class="fa fa-chevron-right"></i></a>
 											<div class="clearfix"></div>
 										</div>

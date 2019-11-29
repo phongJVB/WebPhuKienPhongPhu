@@ -173,71 +173,10 @@
             </div>
         </div>
         <!-- end row -->
-        <div class="row" style="padding-bottom:20px">
-            <div class="col-lg-12">
-                <h1 class="page-header">Comment
-                    <small>List</small>
-                </h1>
-            </div>
-            @if( count($products->comment)==0 )
-                <div class="col-lg-12"><h4>Không có bình luận cho sản phẩm này</h4></div>
-            @else
-            <!-- /.col-lg-12 -->
-            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                    <tr align="center">
-                        <th>ID</th>
-                        <th>User Name</th>
-                        <th>Content</th>
-                        <th>Created_at</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($products->comment as $item)
-                        <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->user->name }}</td>
-                            <td class="text-left">{{ $item->content }}</td>
-                            <td>{{ $item->created_at }}</td>
-                            <td class="center">
-                                <a href="{{ Route('admin.comment.destroy',[$item->id,$products->id]) }}"
-                                style="display: none"></a>
-                                <a class="btn btn-danger remove"> <i class="fa fa-trash-o  fa-fw"></i>Delete</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            @endif
-        </div>
-        <!-- /.End-row -->
     </div>
     <!-- /.container-fluid -->
 </div>
 <!-- /#page-wrapper -->
-@endsection
-
-@section('modal')
-<div class="modal" role="dialog" id="modalDeleteComment">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Xóa Bình Luận</h5>
-      </div>
-      <div class="modal-body">
-        <p>Bạn có chắc chắn muốn xóa bình luận không?</p>
-
-      </div>
-      <div class="modal-footer">
-        <a href="" style="display: none"></a>
-        <button type="button" class="btn btn-primary" id="btnAgree">
-        Đồng Ý</button>
-        <button type="button" class="btn btn-danger" id="closeConfirm">Thoát</button>
-      </div>
-    </div>
-  </div>
-</div>
 @endsection
 
 @section('script')
@@ -271,28 +210,5 @@
         maxFileSize:2000,
         maxFileCount:1,
     });
-</script>
-<script>
-    $(document).ready(function(){
-    $('.remove').click(function(){
-        let url = $(this).prev('a').attr('href');
-        $('#wrapper').css('opacity',0.5);
-        $('#modalDeleteComment').css('display','block');
-        $('#btnAgree').prev('a').attr('href',url);
-    });
-    
-    $('#closeConfirm').click(function(){
-        debugger;
-        $('#wrapper').css('opacity',1);
-        $('#modalDeleteComment').fadeOut(300);
-    });
-
-    $('#btnAgree').click(function(){
-        $('#wrapper').css('opacity',1);
-        $('#modalDeleteComment').fadeOut(100);
-        let url = $(this).prev('a').attr('href');
-        document.location.href=url;                
-    });
-});
 </script>
 @endsection

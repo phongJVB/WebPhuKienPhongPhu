@@ -42,6 +42,15 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
+                            <a ><i class="fa fa-comments fa-fw"></i> Comments<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="admin/comment">List Product Comments</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a ><i class="fa fa-book fa-fw"></i> Order<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

@@ -2918,6 +2918,7 @@ text-align:left
 }
 
 .table-title {
+padding-top: 5px;
 margin-bottom:5px;
 color:#000;
 line-height:100%

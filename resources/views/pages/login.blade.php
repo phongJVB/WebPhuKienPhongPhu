@@ -37,7 +37,7 @@
 						<h4>Đăng nhập</h4>
 						<div class="space20">&nbsp;</div>
 
-						
+						<input type="hidden" name="url" value="{{ url()->previous() }}" >
 						<div class="form-block">
 							<label for="email">Email <span style="color:red">(*)</span></label>
 							<input type="email" id="email" name="txtEmail" required>

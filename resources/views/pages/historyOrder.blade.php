@@ -10,7 +10,7 @@ Lịch sử đơn hàng
         <div id="page-wrapper">
             <div class="container-fluid">
                     <h4 class="page-header-account"> Lịch sử đơn hàng </h4>
-                    <table class="table table-striped table-bordered table-hover">
+                    <table class="table table-striped table-bordered table-hover table-historyOrder">
                         <thead>
                             <tr align="center">
                                 <th>Đơn hàng</th>
@@ -30,7 +30,11 @@ Lịch sử đơn hàng
                                     <td>{{ $item->payment }}</td>
                                     <td>{!! $item->note !!}</td>
                                     <td>{{ $item->date_order }}</td>
-                                    <td>{{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Hoàn lại' )) }}</td>
+                                    <td class="text-left">
+                                    <span class="btn {{ ($item['status']==0)?'btn-warning':( ($item['status']==1 )? 'btn-info':( ($item['status']==2 )? 'btn-success':'btn-danger' )) }} ">
+                                    {{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Đã hoàn lại' )) }}
+                                    </span>
+                                    </td>
                                      <td class="center"><a href="{{ Route('home.historyOrderDetail',[ $item->id, $user->id]) }}"><i class="fa fa-eye" style="font-size:20px;color: #FFD200"></i> </a></td>
                                 </tr>
                             @endforeach

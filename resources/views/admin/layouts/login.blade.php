@@ -35,23 +35,26 @@
 			<div class="wrap-login100">
 				<div class="login100-form-title" style="background-image: url(backEnd/login/images/bg-01.jpg);">
 					<span class="login100-form-title-1">
-						Sign In
+						Sign In Admin
 					</span>
 				</div>
 
 				@if(count($errors)>0)
-	                <div class="alert alert-danger"> 
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+	                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor: pointer;"><span aria-hidden="true">&times;</span></button>
 	                    @foreach( $errors->all() as $err )
-	                        {{ $err }}<br>
+	                            {{ $err }}<br>
 	                    @endforeach
-	                </div>    
-           	 	@endif
+                    </div>      
+                @endif
 
 	            @if(session('notification'))
-	                <div class="alert alert-danger"> 
-	                    {{ session('notification') }}
-	                </div>
+	                <div class="alert alert-danger alert-dismissible" >
+                    	<a class="close" data-dismiss="alert" aria-label="close" style="cursor: pointer;">&times;</a>
+                    	{{ session('notification') }}
+                	</div>
 	            @endif	
+	            
 				<form action="{{ Route('admin') }}" method="post" class="login100-form validate-form" >
 					@csrf
 

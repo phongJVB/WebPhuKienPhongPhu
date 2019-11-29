@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Model\Product;
 use App\Model\Comment;
 
 class CommentsController extends Controller
@@ -16,6 +17,20 @@ class CommentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function index(){
+        $products = Product::Where('delete_flag',0)->get();
+        return view('admin.comments.index',compact('products'));
+    }
+    /**
+     * [Hiển thị comment theo từng sản phẩm]
+     * @param  [type] $id [id của sản phẩm]
+     * @return [type]     [description]
+     */
+    public function show($id){
+        $products = Product::find($id);
+        return view('admin.comments.showComment',compact('products'));
+    }
+
     public function store($id,Request $request)
     {   
         if(Auth::check()){
