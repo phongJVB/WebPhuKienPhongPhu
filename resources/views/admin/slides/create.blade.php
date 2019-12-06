@@ -46,8 +46,9 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Slide Add</button>
+                    <button type="submit" class="btn btn-success">Add</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
+                    <a class="btn btn-danger" href="{{ Route('admin.dashboard.index') }}" role="button">Cancel </a>
                 <form>
             </div>
         </div>

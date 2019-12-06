@@ -20,7 +20,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Title</th>
                         <th>Slug</th>
                         <th>Image</th>
@@ -29,9 +29,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($slides as $item)
+                    @foreach($slides as $key => $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td class="text-left">{{ $item->title }}</td>
                             <td class="text-left">{{ $item->slug }}</td>
                             <td style="width: 20%"><img src="upload/slides/{{ $item->image }}" class="imgSlide"></td>

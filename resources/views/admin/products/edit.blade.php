@@ -167,8 +167,9 @@
                         </label>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Product Update</button>
+                    <button type="submit" class="btn btn-success">Update</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
+                    <a class="btn btn-danger" href="{{ Route('admin.product.index') }}" role="button">Cancel </a>
                 <form>
             </div>
         </div>

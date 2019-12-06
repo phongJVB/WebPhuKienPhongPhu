@@ -35,7 +35,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="txtEmail" placeholder="Please Enter Email" value="{{ $user->email }}"/>
+                                <input type="email" class="form-control" name="txtEmail" placeholder="Please Enter Email" value="{{ $user->email }}" readonly />
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
@@ -47,11 +47,11 @@
                             </div>                           
                             <div class="form-group">
                                 <input type="checkbox" id="changeCheckbox" name="changePassword">
-                                <label>Đổi mật khẩu</label>
-                                <input type="password" class="form-control removeDisabled"  name="txtPassword" placeholder="Nhập mật khẩu" disabled="" />
+                                <label>Change Password</label>
+                                <input type="password" class="form-control removeDisabled"  name="txtPassword" placeholder="Nhập mật khẩu mới" disabled="" />
                             </div>
                             <div class="form-group">
-                                <label>Nhập lại mật khẩu</label>
+                                <label>Re-Password</label>
                                 <input type="password" class="form-control removeDisabled" name="txtRePassword" placeholder="Nhập lại mật khẩu" disabled=""/>
                             </div>
 							<div class="form-group">
@@ -59,11 +59,11 @@
                                 <div class="radioChecked" >
 	                                <label class="radio-inline">
 	                                    <input name="rdoGender" value="1" 
-                                        {{ ($user->gender == 1)?'checked':'' }} type="radio">Nam
+                                        {{ ($user->gender == 1)?'checked':'' }} type="radio">Male
 	                                </label>
 	                                <label class="radio-inline">
 	                                    <input name="rdoGender" value="0"
-                                        {{ ($user->gender == 0)?'checked':'' }}  type="radio">Nữ
+                                        {{ ($user->gender == 0)?'checked':'' }}  type="radio">Female
 	                                </label>
                                 </div>
                             </div>
@@ -72,20 +72,21 @@
                              	<div class="radioChecked">
 	                                <label class="radio-inline">
 	                                    <input name="rdoLevel" value="0" 
-                                        {{ ($user->level == 0)?'checked':'' }} type="radio">Customer
+                                        {{ ($user->role == 0)?'checked':'' }} type="radio">Customer
 	                                </label>
 	                                <label class="radio-inline">
 	                                    <input name="rdoLevel" value="1"
-                                        {{ ($user->level == 1)?'checked':'' }}  type="radio">Employee
+                                        {{ ($user->role == 1)?'checked':'' }}  type="radio">Employee
 	                                </label>
 	                                <label class="radio-inline">
 	                                    <input name="rdoLevel" value="2"
-                                        {{ ($user->level == 2)?'checked':'' }} type="radio">Admin
+                                        {{ ($user->role == 2)?'checked':'' }} type="radio">Admin
 	                                </label>
                             	</div>
                             </div>
-                            <button type="submit" class="btn btn-success">User Add</button>
+                            <button type="submit" class="btn btn-success">Update</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
+                            <a class="btn btn-danger" href="{{ Route('admin.user.index') }}" role="button">Cancel </a>
                         <form>
                     </div>
                 </div>

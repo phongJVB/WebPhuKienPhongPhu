@@ -19,7 +19,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Product Name</th>
                         <th>Total Import Quantity</th>
                         <th>Stock Quantity</th>
@@ -28,9 +28,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($stocks as $item)
+                    @foreach($stocks as $key => $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td class="text-left">{{ $item->product->name }}</td>
                             <td>{{ $item->total_quantity }}</td>
                             <td>{{ $item->stock_quantity }}</td>

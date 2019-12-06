@@ -13,39 +13,16 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	<div class="beta-map">
-		
-		<div class="abs-fullwidth beta-map wow flipInX"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.409772612195!2d105.78098151445377!3d20.976205094947357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acd2d89877d7%3A0xe55435164e9b4695!2zMTk3IFRy4bqnbiBQaMO6LCBQLiBWxINuIFF1w6FuLCBIw6AgxJDDtG5nLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1572859507365!5m2!1svi!2s"></iframe></div>
-	</div>
 	<div class="container">
-		<div id="content" class="space-top-none">
-			
+		<div id="content" class="space-top-none">			
 			<div class="space50">&nbsp;</div>
 			<div class="row">
-				<div class="col-sm-8">
-					<h2>Liên Hệ Form</h2>
-					<div class="space20">&nbsp;</div>
-					<p>Mọi thông tin quý khách muốn phản hồi vui lòng gửi tới chúng tôi. Phụ kiện điện thoại Phong Phú rất vui khi được phụ vụ quý khách hàng.</p>
-					<div class="space20">&nbsp;</div>
-					<form action="#" method="post" class="contact-form">	
-						<div class="form-block">
-							<input name="your-name" type="text" placeholder="Your Name">
-						</div>
-						<div class="form-block">
-							<input name="your-email" type="email" placeholder="Your Email">
-						</div>
-						<div class="form-block">
-							<input name="your-subject" type="text" placeholder="Subject">
-						</div>
-						<div class="form-block">
-							<textarea name="your-message" placeholder="Your Message"></textarea>
-						</div>
-						<div class="form-block">
-							<button type="submit" class="beta-btn primary">Send Message <i class="fa fa-chevron-right"></i></button>
-						</div>
-					</form>
+				<div class="col-sm-8" >
+					<div class="beta-map" style="border:2px solid #fcfcfc">		
+						<div class="abs-fullwidth beta-map wow flipInX"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.409772612195!2d105.78098151445377!3d20.976205094947357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acd2d89877d7%3A0xe55435164e9b4695!2zMTk3IFRy4bqnbiBQaMO6LCBQLiBWxINuIFF1w6FuLCBIw6AgxJDDtG5nLCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1572859507365!5m2!1svi!2s"></iframe></div>
+					</div>
 				</div>
-				<div class="col-sm-4">
+				<div class="col-sm-4" id="infoContact">
 					<h2>Thông tin liên hệ</h2>
 					<div class="space20">&nbsp;</div>
 
@@ -58,13 +35,13 @@
 					<h6 class="contact-title">Câu hỏi thắc mắc</h6>
 					<p>
 						Mọi thắc mắc vui lòng quý khách hàng gửi tới mail:<br>
-						<a href="mailto:pkdtPhongPhu@gmail.com">pkdtPhongPhu@gmail.com</a>
+						<i>pkdtPhongPhu@gmail.com</i>
 					</p>
 					<div class="space20">&nbsp;</div>
 					<h6 class="contact-title">Nhân viên</h6>
 					<p>
 						Chúng tôi sẽ luôn tìm kiếm những nhân viên tiềm năng để phục vụ quý khách hàng<br>
-						<a href="hr@pkdtPhongPhu.com">hr@pkdtPhongPhu.com</a>
+						<i>hr@pkdtPhongPhu.com</i>
 					</p>
 				</div>
 			</div>

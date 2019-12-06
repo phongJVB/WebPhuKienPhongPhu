@@ -24,6 +24,7 @@ class DashboardController extends Controller
                      ->join('orders', 'orders.id', '=', 'order_products.orders_id')
                      ->join('products', 'products.id', '=', 'order_products.products_id')
                      ->where('orders.status', '<>', 3)
+                     ->where('products.delete_flag',0)
                      ->groupBy('products_id')
                      ->get();
          return view('admin.dashboard.index',compact('productSale'));

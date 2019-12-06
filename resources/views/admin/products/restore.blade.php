@@ -25,7 +25,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Name</th>
                         <th>Description</th>
                         <th>Detail Description</th>
@@ -36,9 +36,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($listProduct as $item)
+                    @foreach($listProduct as $key => $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td class="text-left">{{ $item->name }}</td>
                             <td class="text-left">{{ $item->description }}</td>
                             <td class="text-left">{!! $item->detail_description !!}</td>

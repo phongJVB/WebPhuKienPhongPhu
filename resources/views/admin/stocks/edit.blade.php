@@ -39,8 +39,9 @@
                                 <textarea id="demo" name="txtNote" class="ckeditor form-control" rows="3" disabled >{!! $stockDetail->note !!} </textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-success">Quantity Product Update</button>
+                            <button type="submit" class="btn btn-success">Update</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
+                            <a class="btn btn-danger" href="{{ Route('admin.stock.show',$stockDetail->stocks_id) }}" role="button">Cancel </a>
                         <form>
                     </div>
                 </div>

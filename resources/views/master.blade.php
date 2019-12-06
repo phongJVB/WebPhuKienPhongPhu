@@ -6,9 +6,9 @@
 	<base href="{{asset('')}}">  
 	<title>Phụ Kiện Phong Phú </title>
 	<link rel="icon" type="image/png" href="{{ asset('frontEnd/assets/dest/images/Shop.ico') }}"/>
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Dosis:300,400' >
-	<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:400,300'>
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/font-Dosis.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/font-Sans.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/bootstrap_3.1.0.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/vendors/colorbox/example3/colorbox.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('frontEnd/assets/dest/rs-plugin/css/settings.css') }}">
@@ -35,7 +35,7 @@
 	<script src="{{ asset('frontEnd/assets/dest/js/jquery.zoom.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/js/jquery2.1.3.min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/jqueryui/jquery-ui-1.10.4.custom.min.js') }}"></script>
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="{{ asset('frontEnd/assets/dest/js/bootstrap_3.1.0.min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/bxslider/jquery.bxslider.min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/colorbox/jquery.colorbox-min.js') }}"></script>
 	<script src="{{ asset('frontEnd/assets/dest/vendors/animo/Animo.js') }}"></script>

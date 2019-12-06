@@ -51,17 +51,17 @@
                                 <input type="password" class="form-control" name="txtPassword" placeholder="Please Enter Password" />
                             </div>
                             <div class="form-group">
-                                <label>RePassword</label>
+                                <label>Re-Password</label>
                                 <input type="password" class="form-control" name="txtRePassword" placeholder="Please Enter RePassword" />
                             </div>
 							<div class="form-group">
                                 <label>User Gender</label>
                                 <div class="radioChecked" >
 	                                <label class="radio-inline">
-	                                    <input name="rdoGender" value="1" checked="" type="radio">Nam
+	                                    <input name="rdoGender" value="1" checked="" type="radio">Male
 	                                </label>
 	                                <label class="radio-inline">
-	                                    <input name="rdoGender" value="0"  type="radio">Nữ
+	                                    <input name="rdoGender" value="0"  type="radio">Female
 	                                </label>
                                 </div>
                             </div>
@@ -79,8 +79,9 @@
 	                                </label>
                             	</div>
                             </div>
-                            <button type="submit" class="btn btn-success">User Add</button>
+                            <button type="submit" class="btn btn-success">Add</button>
                             <button type="reset" class="btn btn-warning">Reset</button>
+                            <a class="btn btn-danger" href="{{ Route('admin.dashboard.index') }}" role="button">Cancel </a>
                         <form>
                     </div>
                 </div>

@@ -78,7 +78,7 @@ class OrdersController extends Controller
             }
         }
 
-        return redirect()->back()->with('notification','Cập nhật thành công');
+        return redirect()->back()->with('notification','Xử lý đơn hàng thành công');
     }
 
     /**

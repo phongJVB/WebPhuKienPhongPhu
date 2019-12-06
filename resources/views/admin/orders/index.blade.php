@@ -20,7 +20,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Customer Name</th>
                         <th>Address</th>
                         <th>Email</th>
@@ -34,9 +34,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($orders as $item)
+                    @foreach($orders as $key=>$item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td class="text-left">{{ $item->customers_name }}</td>
                             <td class="text-left">{{ $item->customers_address }}</td>
                             <td class="text-left">{{ $item->customers_email }}</td>
@@ -44,18 +44,24 @@
                             <td>{{ $item->payment }}</td>
                             <td class="text-left">{!! $item->note !!}</td>
                             <td>{{ $item->date_order }}</td>
-
+                            
+                            @if($item->status == 4)
+                            <td class="text-left">
+                            <span class="btn btn-primary">Đang mua hàng</span>
+                            </td>
+                            @else
                             <td class="text-left">
                             <span class="btn {{ ($item['status']==0)?'btn-warning':( ($item['status']==1 )? 'btn-info':( ($item['status']==2 )? 'btn-success':'btn-danger' )) }} ">
                             {{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Đã hoàn lại' )) }}</span>
                             </td>
-
+                            @endif
+                            
                             <td class="center">
                                 <a href="{{ Route('admin.order.destroy',$item->id) }}"
                                 style="display: none"></a>
-                                <a class="btn btn-danger remove"><i class="fa fa-trash-o  fa-fw"></i> Delete</a>
+                                <a class="btn btn-danger remove"><i class="fa fa-trash-o  fa-fw"></i></a>
                             </td>
-                            <td class="center"><a href="{{ Route('admin.order.edit',$item->id) }}" class="btn btn-warning"><i class="fa fa-eye fa-fw"></i> Detail</a></td>
+                            <td class="center"><a href="{{ Route('admin.order.edit',$item->id) }}" class="btn btn-warning"><i class="fa fa-eye fa-fw"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

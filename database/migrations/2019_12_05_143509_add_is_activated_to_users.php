@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModelImagesProductsTable extends Migration
+class AddIsActivatedToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class CreateModelImagesProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('model_images_products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_activated')->default(0);
         });
     }
 
@@ -26,6 +25,8 @@ class CreateModelImagesProductsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('model_images_products');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('is_activated');
+        });
     }
 }

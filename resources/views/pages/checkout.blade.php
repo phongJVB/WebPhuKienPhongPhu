@@ -18,10 +18,20 @@
 	<div class="container">
 		<div id="content">
 	
-			@if(session('notification'))
-                 <div class="alert alert-success"> 
-                     {{ session('notification') }}
-                 </div>
+			@if(count($errors)>0)
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @foreach( $errors->all() as $key => $err )
+                    <strong>{{ ($key+1) }}.</strong>{{ $err }}<br>
+                @endforeach
+                </div>      
+            @endif
+
+            @if(session('notification'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					{{ session('notification') }}
+                </div>
             @endif
 			
 			<form action="{{ Route('home.checkout') }}" method="post" class="beta-form-checkout">

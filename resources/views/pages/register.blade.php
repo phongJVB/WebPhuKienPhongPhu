@@ -15,34 +15,36 @@
 	</div>
 	
 	<div class="container">
-		<div id="content">
-             @if(count($errors)>0)
-                 <div class="alert alert-danger"> 
-                     @foreach( $errors->all() as $err )
-                         {{ $err }}<br>
-                     @endforeach
-                 </div>    
-             @endif
-
-             @if(session('notification'))
-                 <div class="alert alert-success"> 
-                     {{ session('notification') }}
-                 </div>
-            @endif		
+		<div id="content">		
 			<form action="{{ Route('home.register') }}" method="post" class="beta-form-checkout">
 				@csrf
 				<div class="row">
 					<div class="col-sm-3"></div>
 					<div class="col-sm-6">
+						@if(count($errors)>0)
+		                    <div class="alert alert-danger alert-dismissible" role="alert">
+		                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                    @foreach( $errors->all() as $key => $err )
+		                        <strong>{{ ($key+1) }}.</strong>{{ $err }}<br>
+		                    @endforeach
+		                    </div>      
+		                @endif
+
+		                @if(session('notification'))
+		                    <div class="alert alert-success alert-dismissible" role="alert">
+		                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								{{ session('notification') }}
+		                    </div>
+		                @endif
 						<h4>Đăng kí</h4>
 						<div class="space20">&nbsp;</div>
 						<div class="form-block">
 							<label for="email">Địa chỉ Email <span style="color:red">(*)</span></label>
-							<input type="email" id="email" name="txtEmail" value="{{ old('txtEmail')}}" required>
+							<input type="email" id="email" name="txtEmail" value="{{ old('txtEmail')}}"placeholder="Nhập địa chỉ email..." required>
 						</div>
 						<div class="form-block">
 							<label for="your_last_name">Họ tên <span style="color:red">(*)</span></label>
-							<input type="text" id="your_last_name" name="txtFullName" value="{{ old('txtFullName')}}" required>
+							<input type="text" id="your_last_name" name="txtFullName" value="{{ old('txtFullName')}}" placeholder="Nhập họ tên..." required>
 						</div>
 						<div class="form-block">
 							<label for="adress">Địa chỉ</label>

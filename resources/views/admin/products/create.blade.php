@@ -103,8 +103,9 @@
                             <input name="rdoStatus" value="0" type="radio">Old
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-success">Product Add</button>
+                    <button type="submit" class="btn btn-success">Add</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
+                    <a class="btn btn-danger" href="{{ Route('admin.dashboard.index') }}" role="button">Cancel </a>
                 <form>
             </div>
         </div>

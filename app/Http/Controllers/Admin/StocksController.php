@@ -56,25 +56,17 @@ class StocksController extends Controller
         $date = date('Y-m-d H:i:s');
         $stockId = $request->stockId;
         $stock = Stock::find($stockId);
+        // Lấy số lượng hiện tại
         $currentSaleNumber = $stock->total_quantity - $stock->stock_quantity;
         $currentQuantityAdd = $stock->total_quantity += $request->productQuantity;
 
-        if($stock === null){
-            $stock = new Stock();
-            $stock->products_id = $productId;
-            $stock->total_quantity = $request->productQuantity;
-            $stock->stock_quantity = $request->productQuantity;
-            $stock->updated_at = $date;
-            $stock->save();
+        // Cập nhật số lượng vào kho
+        $stock->total_quantity = $currentQuantityAdd;
+        $stock->stock_quantity = $currentQuantityAdd - $currentSaleNumber;
+        $stock->updated_at = $date;
+        $stock->save();
 
-        }else{
-            $stock->total_quantity = $currentQuantityAdd;
-            $stock->stock_quantity = $currentQuantityAdd - $currentSaleNumber;
-            $stock->updated_at = $date;
-            $stock->save();
-        }
-        
-
+        // Lưu thông tin chi tiết lần thêm
         $stockDetail = new StockDetail();
         $stockDetail->stocks_id = $stock->id;
         $stockDetail->note = $request->txtNote;

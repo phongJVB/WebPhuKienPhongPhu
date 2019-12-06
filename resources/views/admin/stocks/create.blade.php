@@ -32,9 +32,9 @@
                 <form action="{{ Route('admin.stock.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label>Product</label>
+                        <label>Product Name</label>
                         <input type="hidden" name="stockId" value="{{ $stock->id }}">
-                        <input type="text" class="form-control" name="txtNameProduct"  value="{{ $products->name }}" disabled=""/>
+                        <input type="text" class="form-control" name="txtNameProduct"  value="{{ $products->name }}" readonly="" />
                     </div>                      
 
                     <div class="form-group">
@@ -47,8 +47,9 @@
                         <textarea id="demo" name="txtNote" class="ckeditor form-control" rows="3"> </textarea>
                     </div>
 
-                    <button type="submit" class="btn btn-success">Quantity Product Add</button>
+                    <button type="submit" class="btn btn-success">Add</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
+                    <a class="btn btn-danger" href="{{ Route('admin.dashboard.index') }}" role="button">Cancel </a>
                 <form>
             </div>
         </div>

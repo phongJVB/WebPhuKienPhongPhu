@@ -23,7 +23,7 @@
         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
             <thead>
                 <tr align="center">
-                    <th>ID</th>
+                    <th>STT</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Delete</th>
@@ -31,9 +31,9 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($category as $item)
+                @foreach($category as $key => $item)
                 <tr class="odd gradeX" align="center">
-                    <td>{{ $item->id }}</td>
+                    <td>{{ ++$key }}</td>
                     <td class="text-left">{{ $item->name }}</td>
                     <td class="text-left">{{ $item->description }} </td>
                     <td class="center {{(($item->countID) > 0) ? 'cursor-not-allowed':''}}">

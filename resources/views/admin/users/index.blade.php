@@ -20,27 +20,33 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Address</th>
                         <th>Gender</th>
                         <th>Role</th>
+                        <th>Active</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $item)
+                    @foreach($users as $key => $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
-                            <td>{{ $item->email }}</td>
+                            <td>{{ ++$key}}</td>
+                            <td class="text-left">{{ $item->name }}</td>
+                            <td class="text-left">{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>
-                            <td>{{ $item->address }}</td>
+                            <td class="text-left"> {{ $item->address }}</td>
                             <td>{{ ($item['gender']==1) ? 'Nam':'Nữ'}}</td>
-                            <td>{{ ($item['role']==0) ? 'Khách hàng':(($item['role']==1) ? 'Employee':'Admin') }}</td>
+                            <td class="text-left">{{ ($item['role']==0) ? 'Customer':(($item['role']==1) ? 'Employee':'Admin') }}</td>
+                            @if($item->is_activated == 1)
+                            <td><i class="fa fa-check-circle" style="color:blue"></i></td>
+                            @else
+                            <td><i class="fa fa-question-circle" style="color:red"></i></td>
+                            @endif
                             <td class="center">
                             <a href="{{ Route('admin.user.destroy', $item->id) }}" style="display: none"></a>
                             <a class="btn btn-danger remove"> <i class="fa fa-trash-o  fa-fw"></i> Delete</a>

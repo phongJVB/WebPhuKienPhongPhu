@@ -133,6 +133,7 @@ Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến xử lý trang đặt hàng của website
 		Route::get('/checkout','PageController@getCheckout')->name('checkout');
 		Route::post('/checkout','PageController@postCheckout')->name('checkout');
+		Route::get('/checkoutActivation/{token}','PageController@checkoutActivation')->name('checkoutActivation');
 
 		// Router gọi đến trang login của website
 		Route::get('/login','PageController@getLogin')->name('login');
@@ -141,6 +142,7 @@ Route::name('home.')->prefix('home')->group(function(){
 		// Router gọi đến trang đăng ký của website
 		Route::get('/register','PageController@getRegister')->name('register');
 		Route::post('/register','PageController@postRegister')->name('register');
+		Route::get('/userActivation/{token}','PageController@userActivation')->name('userActivation');
 
 		// Router gọi đến trang search của website
 		Route::get('/search','PageController@getSearch')->name('search');

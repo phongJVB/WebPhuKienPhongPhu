@@ -7,7 +7,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ValidateCheckOut;
 use Validator;
+use Mail;
+use Carbon\Carbon;
 use App\Model\User;
 use App\Model\Product;
 use App\Model\Category;
@@ -53,6 +56,7 @@ class PageController extends Controller
                      ->join('orders', 'orders.id', '=', 'order_products.orders_id')
                      ->join('products', 'products.id', '=', 'order_products.products_id')
                      ->where('orders.status', '<>', 3)
+                     ->where('products.delete_flag',0)
                      ->groupBy('products_id')
                      ->orderBy('total_sale_quantity','desc')
                      ->limit(4)
@@ -61,6 +65,7 @@ class PageController extends Controller
         $productNews = DB::table('products')
                     ->select('products.*')
                     ->where('products.status','1')
+                    ->Where('delete_flag',0)
                     ->limit(4)
                     ->get();
 
@@ -102,7 +107,7 @@ class PageController extends Controller
     }
 
     // Xử lý lưu thông tin đơn hàng
-    function postCheckout(Request $request){
+    function postCheckout(ValidateCheckOut $request){
         $order = new Order();
         $cart = Cart::content();
         $total = Cart::subtotal();
@@ -119,6 +124,7 @@ class PageController extends Controller
             $order->note = $request->txtNote;
             $order->payment = $request->payment;
             $order->amount = $convertTotal;
+            $order->token = str_random(32);
             $order->date_order = date('Y-m-d');
             $order->save();
 
@@ -131,6 +137,30 @@ class PageController extends Controller
                 $orderProduct->products_unit = $item->options->unit;
                 $orderProduct->save();
             }
+
+            //Gửi thông tin qua email 
+            $infoOrder = $order->toArray();
+            Mail::send('pages.contentMailCheckout',$infoOrder, function($message) use ($infoOrder){
+                $message->to($infoOrder['customers_email'], 'PkPhongPhu')->subject('Confirm Infomation Chekout');
+            });
+
+            // Xóa giỏ hàng
+            // Cart::destroy();
+
+            return redirect()->back()->with('notification','Đặt hàng thành công. Vui lòng xác nhận thông tin trong Email');
+            
+        } else{
+
+            return redirect()->back()->with('notification','Giỏ hàng trống! Khách hàng vui lòng đặt hàng');
+        }       
+    }
+
+    public function checkoutActivation($token){
+        $check = DB::table('orders')->where('token',$token)->where('status','4')->first();
+        if(!is_null($check)){
+            // Cập nhật lại trạng thái và xóa token
+            $order = Order::find($check->id);
+            $order->update(['status' => 0,'token'=>'']);
 
             //Tính toán sản phẩm còn lại trong kho lưu vào Stock
             $productSale = DB::table('order_products')
@@ -153,19 +183,10 @@ class PageController extends Controller
                 }
             }
 
-            Cart::destroy();
-
-            return redirect()->back()->with('notification','Đặt hàng thành công');
-            
-        } else{
-
-            return redirect()->back()->with('notification','Giỏ hàng trống! Khách hàng vui lòng đặt hàng');
-
+            return redirect()->route('home.checkout')->with('notification','Thông tin đơn hàng của bạn đã được xác nhận.');
         }
-
-        
+        abort(404);
     }
-
 
     function getLogin(){
         return view('pages.login');
@@ -191,7 +212,7 @@ class PageController extends Controller
         ];
 
         if(Auth::attempt($arr)){
-            if(Auth::user()->role == 0 && Auth::user()->delete_flag == 0 ){
+            if(Auth::user()->role==0 && Auth::user()->delete_flag==0 && Auth::user()->is_activated==1){
                 $url = $request->url;
                 return Redirect::to($url);
             }else{
@@ -219,10 +240,10 @@ class PageController extends Controller
         [
             'txtEmail.required'=>'Vui lòng nhập Email',
             'txtEmail.email'=>'Không đúng định dạng email',
-            'txtEmail.unique'=>'Email đã tồn tại',
+            'txtEmail.unique'=>'Địa chỉ email đã tồn tại',
             'txtFullName.required'=>'Vui lòng nhập tên đầy đủ',
-            'txtFullName.min'=>'Password không được nhỏ hơn 2',
-            'txtFullName.max'=>'Password không được lớn hơn 32',
+            'txtFullName.min'=>'Tên không được nhỏ hơn 2 ký tự',
+            'txtFullName.max'=>'Tên không được lớn hơn 32 ký tự',
             'txtAddress.required'=>'Vui lòng nhập địa chỉ',
             'txtPhone.required'=>'Vui lòng nhập số điện thoại',
             'txtPhone.regex'=>'Số điện thoại không đúng định dạng',
@@ -238,10 +259,26 @@ class PageController extends Controller
         $user-> address = $request->txtAddress;
         $user-> gender = $request->rdoGender;
         $user-> password = bcrypt($request->txtPassword);
+        $user-> remember_token = str_random(32);
         $user->save();
 
-        return redirect()->back()->with('notification','Thêm thành công người dùng');
+        $infoUser = $user->toArray();
+        Mail::send('pages.contentMailRegister',$infoUser, function($message) use ($infoUser){
+            $message->to($infoUser['email'], 'PkPhongPhu')->subject('Active Your Account....');
+        });
 
+        return redirect()->back()->with('notification','Đăng ký thành công. Vui lòng xác nhận email để kích hoạt tài khoản.');
+
+    }
+
+    public function userActivation($token){
+        $check = DB::table('users')->where('remember_token',$token)->where('is_activated','0')->first();
+        if(!is_null($check)){
+            $user = User::find($check->id);
+            $user->update(['is_activated' => 1,'remember_token'=>'']);
+            return redirect()->route('home.login')->with('noticeActive','Tài khoản đã được kích hoạt');
+        }
+        abort(404);
     }
 
     function getLogout(){

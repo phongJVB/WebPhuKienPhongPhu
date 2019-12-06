@@ -19,7 +19,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -31,9 +31,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($users as $item)
+                    @foreach($users as $key => $item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->email }}</td>
                             <td>{{ $item->phone }}</td>

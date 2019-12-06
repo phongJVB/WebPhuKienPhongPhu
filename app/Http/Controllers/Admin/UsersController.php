@@ -47,7 +47,7 @@ class UsersController extends Controller
             'txtName'=>'required',
             'txtEmail'=>'required|email|unique:users,email',
             'txtAddress'=>'required',
-            'txtPhone'=>'required',
+            'txtPhone'=>'required|regex:/^[0-9]{10}$/',
             'txtPassword'=>'required|min:6|max:32',
             'txtRePassword'=>'required|same:txtPassword'
         ],
@@ -57,6 +57,7 @@ class UsersController extends Controller
             'txtEmail.unique'=>'Email đã tồn tại',
             'txtAddress.required'=>'Vui lòng nhập địa chỉ',
             'txtPhone.required'=>'Vui lòng nhập số điện thoại',
+            'txtPhone.regex'=>'Số điện thoại nhập sai định dạng',
             'txtPassword.required'=>'Vui lòng nhập Password',
             'txtPassword.min'=>'Password không được nhỏ hơn 6',
             'txtPassword.max'=>'Password không được lớn hơn 32',
@@ -102,16 +103,15 @@ class UsersController extends Controller
       $this->validate($request,
         [   
             'txtName'=>'required',
-            'txtEmail'=>'required|email|unique:users,email',
+            'txtEmail'=>'required',
             'txtAddress'=>'required',
-            'txtPhone'=>'required',
+            'txtPhone'=>'required|regex:/^[0-9]{10}$/',
         ],
         [   'txtName.required'=>'Vui lòng nhập tên đăng nhập',
             'txtEmail.required'=>'Vui lòng nhập Email',
-            'txtEmail.email'=>'Không đúng định dạng email',
-            'txtEmail.unique'=>'Email đã tồn tại',
             'txtAddress.required'=>'Vui lòng nhập địa chỉ',
             'txtPhone.required'=>'Vui lòng nhập số điện thoại',
+            'txtPhone.regex'=>'Số điện thoại nhập sai định dạng',
         ]);
         $user-> email = $request->txtEmail;
         $user-> name = $request->txtName;
