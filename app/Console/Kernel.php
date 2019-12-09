@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\UserCommand'
+        'App\Console\Commands\UserCommand',
+        'App\Console\Commands\OrderCommand',
     ];
 
     /**
@@ -27,7 +28,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('command:delete_UserNotActive')->everyMinute();
+        $schedule->command('command:delete_UserNotActive');
+        $schedule->command('command:delete_OrderNotActive');
     }
 
     /**

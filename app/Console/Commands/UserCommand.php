@@ -40,5 +40,6 @@ class UserCommand extends Command
     public function handle()
     {
        User::where('created_at', '<', Carbon::now()->subMinute())->where('is_activated','0')->delete();
+       $this->info('Run Command Successfully!');
     }
 }

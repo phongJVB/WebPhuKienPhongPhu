@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Carbon\Carbon;
+use App\Model\Order;
 
 class OrderCommand extends Command
 {
@@ -11,14 +13,14 @@ class OrderCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'command:delete_OrderNotActive';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Delete Order Not Acive Email When Checkout';
 
     /**
      * Create a new command instance.
@@ -37,6 +39,6 @@ class OrderCommand extends Command
      */
     public function handle()
     {
-        //
+        Order::where('created_at', '<', Carbon::now()->subMinute())->where('status','4')->delete();
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ValidateCheckOut;
 use Validator;
 use Mail;
+use Cart;
 use Carbon\Carbon;
 use App\Model\User;
 use App\Model\Product;
@@ -20,8 +21,6 @@ use App\Model\Slide;
 use App\Model\Stock;
 use App\Model\Comment;
 use App\Model\ImagesProduct;
-use Cart;
-
 
 class PageController extends Controller
 {
