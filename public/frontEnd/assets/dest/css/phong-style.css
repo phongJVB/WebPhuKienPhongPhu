@@ -540,3 +540,15 @@ img.imgUserCmt{
   padding-left: 15px;
   padding-top: 5px;
 }
+.img-checkout-success img{
+  width:100px;
+  height:100px;
+}
+.title-checkout-success{
+  color: #53dd49;
+  font-weight: bold;
+}
+.title-checkout-error{
+  color: red;
+  font-weight: bold;
+}

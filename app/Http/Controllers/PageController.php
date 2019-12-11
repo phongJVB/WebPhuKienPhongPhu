@@ -88,6 +88,14 @@ class PageController extends Controller
     	return view('pages.contact');
     }
 
+    function getCheckoutSuccess(){
+        return view('pages.checkoutSuccess');
+    }
+
+    function getCheckoutError(){
+        return view('pages.checkoutError');
+    }
+
     function getCheckout(){
         if(Auth::check()){
             $user = Auth::user();
@@ -97,7 +105,7 @@ class PageController extends Controller
             else{
                //Nếu phiên trên cùng trình duyệt là Admin thì phải logout 
                Auth::logout();
-               return view('pages.checkout'); 
+               return view('pages.checkout');
             }  
         }else{
             return view('pages.checkout'); 
@@ -107,12 +115,11 @@ class PageController extends Controller
 
     // Xử lý lưu thông tin đơn hàng
     function postCheckout(ValidateCheckOut $request){
+
         $order = new Order();
         $cart = Cart::content();
         $total = Cart::subtotal();
         $convertTotal= str_replace(',','', $total);
-
-        if (count($cart) >0) {
 
             $order->customers_id = $request->customersId;
             $order->customers_name = $request->txtName;
@@ -123,7 +130,6 @@ class PageController extends Controller
             $order->note = $request->txtNote;
             $order->payment = $request->payment;
             $order->amount = $convertTotal;
-            $order->token = str_random(32);
             $order->date_order = date('Y-m-d');
             $order->save();
 
@@ -136,31 +142,9 @@ class PageController extends Controller
                 $orderProduct->products_unit = $item->options->unit;
                 $orderProduct->save();
             }
-
-            //Gửi thông tin qua email 
-            $infoOrder = $order->toArray();
-            Mail::send('pages.contentMailCheckout',$infoOrder, function($message) use ($infoOrder){
-                $message->to($infoOrder['customers_email'], 'PkPhongPhu')->subject('Confirm Infomation Chekout');
-            });
-
-            // Xóa giỏ hàng
-            // Cart::destroy();
-
-            return redirect()->back()->with('notification','Đặt hàng thành công. Vui lòng xác nhận thông tin trong Email');
             
-        } else{
-
-            return redirect()->back()->with('notification','Giỏ hàng trống! Khách hàng vui lòng đặt hàng');
-        }       
-    }
-
-    public function checkoutActivation($token){
-        $check = DB::table('orders')->where('token',$token)->where('status','4')->first();
-        if(!is_null($check)){
-            // Cập nhật lại trạng thái và xóa token
-            $order = Order::find($check->id);
-            $order->update(['status' => 0,'token'=>'']);
-
+            // Lấy biến id đơn hàng tại thời điểm đặt hàng
+            $idOrder = $order->id;
             //Tính toán sản phẩm còn lại trong kho lưu vào Stock
             $productSale = DB::table('order_products')
                      ->select('products_id','products.name',DB::raw('SUM(products_quantity) AS total_sale_quantity'))
@@ -172,20 +156,51 @@ class PageController extends Controller
 
             $stockList = Stock::all(); //Lấy ra các số lượng nhập vào trong kho
 
+            // Kiểm tra nếu 2 khách hàng cùng đặt một lúc số lượng lớn hơn số lượng trong kho
+            foreach ($stockList as $key => $item) {
+                foreach ($productSale as $itemSale) {
+                    if( $item->products_id == $itemSale->products_id ){
+                        $checkStockQty = ($item->total_quantity)-($itemSale->total_sale_quantity);
+                        if($checkStockQty < 0){
+                            // Xóa đơn hàng đã lưu tạm vào DB
+                            $order = Order::find($idOrder);
+                            // Xóa orderDetail
+                            $orderDetail = OrderProduct::Where('orders_id',$idOrder)->get();
+                            foreach ($orderDetail as $item){
+                                $item->delete();
+                            };
+                            // xóa order
+                            $order->delete();
+                            // Xóa giỏ hàng
+                            Cart::destroy();
+                            return redirect()->route('home.checkoutError');
+                        }                      
+                    }
+                }
+            }
+
+            // Lấy ra các id trong đơn hàng để trừ số lượng trong kho
             foreach ($stockList as $key => $item) {
                 foreach ($productSale as $itemSale) {
                     if( $item->products_id == $itemSale->products_id ){
                         $stock = Stock::where('products_id',$item->products_id)->first();
                         $stock->stock_quantity = ($item->total_quantity)-($itemSale->total_sale_quantity);
-                        $stock->save();
+                        $stock->save();  
+                        }                       
                     }
                 }
-            }
 
-            return redirect()->route('home.checkout')->with('notification','Thông tin đơn hàng của bạn đã được xác nhận.');
-        }
-        abort(404);
+            //Gửi thông tin qua email 
+            $infoOrder = $order->toArray();
+
+            Mail::send('pages.contentMailCheckout',$infoOrder, function($message) use ($infoOrder){
+                $message->to($infoOrder['customers_email'], 'PkPhongPhu')->subject('Confirm Infomation Chekout');
+            });
+
+            return redirect()->route('home.checkoutSuccess');
+
     }
+
 
     function getLogin(){
         return view('pages.login');
@@ -275,9 +290,9 @@ class PageController extends Controller
         if(!is_null($check)){
             $user = User::find($check->id);
             $user->update(['is_activated' => 1,'remember_token'=>'']);
-            return redirect()->route('home.login')->with('noticeActive','Tài khoản đã được kích hoạt');
+            return redirect()->route('home.login')->with('noticeActive','Tài khoản đã được kích hoạt.Vui lòng đăng nhập.');
         }
-        abort(404);
+        return view('pages.error404'); 
     }
 
     function getLogout(){

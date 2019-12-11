@@ -64,7 +64,7 @@ class CartController extends Controller
             if($request->modeAddCart==1){
                return redirect()->route('home.showShoppingCart');
             }else{
-               return redirect()->back();
+               return redirect()->route('home.checkout');
             }
         }
         
