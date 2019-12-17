@@ -42,7 +42,7 @@
                             <td class="text-left">{{ $item->name }}</td>
                             <td class="text-left">{{ $item->description }}</td>
                             <td class="text-left">{!! $item->detail_description !!}</td>
-                            <td>{{ $item->unit_price }}</td>
+                            <td>{{ number_format($item->unit_price,'0','','.') }}</td>
                             <td>{{ ($item->status ==1) ? 'Mới':'Cũ'}}</td>
                             <td class="center {{ ($item->countID > 0)?'cursor-not-allowed':'' }}" >
                                 <a href="{{ Route('admin.product.destroyAll', $item->id) }}"

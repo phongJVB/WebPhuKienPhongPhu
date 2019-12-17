@@ -74,10 +74,10 @@
                         <tr class="odd gradeX" align="center">
                             <td>{{ $key+1 }}</td>
                             <td>{{ $orderDetail->products_name }}</td>
-                            <td>{{ $orderDetail->products_unit_price }}</td>
+                            <td>{{ number_format($orderDetail->products_unit_price,'0','','.') }}</td>
                             <td>{{ $orderDetail->products_quantity }}</td>
                             <td>
-                            {{ $orderDetail->products_unit_price*$orderDetail->products_quantity  }}</td>
+                            {{ number_format($orderDetail->products_unit_price*$orderDetail->products_quantity,'0','','.') }} </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -87,7 +87,7 @@
             <div class="col-lg-12" id="txtTotalCart">
                 <div class="col-lg-8"></div>
                     <div class="col-lg-4">
-                        <label> Tổng Tiền: <span class="text-red">{{ $order->amount }} VNĐ</span></label>
+                        <label> Tổng Tiền: <span class="text-red">{{ number_format($order->amount,'0','','.') }} VNĐ</span></label>
                     </div>
             </div>
             <!-- End Tổng tiền -->

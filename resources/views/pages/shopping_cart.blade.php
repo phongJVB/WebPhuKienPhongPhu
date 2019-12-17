@@ -74,7 +74,7 @@
 									 <button class="minus-btn" name="button" mode="2">
 								        <img src="frontEnd\assets\dest\images\minus.svg" alt="" />
 								      </button>
-								      <input id="inputQty" type="text" name="qty" min="1" value="{{ $cartProduct->qty }}" stockQty="{{ $cartProduct->options->stockQty }}" mode="2">
+								      <input class="inputQty" type="text" name="qty" min="1" value="{{ $cartProduct->qty }}" stockQty="{{ $cartProduct->options->stockQty }}" mode="2">
 								      <button class="plus-btn" name="button">
 								        <img src="frontEnd\assets\dest\images\plus.svg" alt="" />
 								      </button>
@@ -164,7 +164,7 @@
 		$(document).ready(function(){
 				$('.plus-btn').click(function(){
 			  	var rowId = $(this).closest('div').prev('input').val();
-			  	var qty =  parseInt($(this).prev('#inputQty').val());
+			  	var qty =  parseInt($(this).prev('.inputQty').val());
 			  	
 			  	$.ajax({
 				    type:"POST",
@@ -185,7 +185,7 @@
 
 			$('.minus-btn').click(function(){
 			  	var rowId = $(this).closest('div').prev('input').val();
-			  	var qty =  parseInt($(this).next('#inputQty').val());
+			  	var qty =  parseInt($(this).next('.inputQty').val());
 			  	
 			  	$.ajax({
 				    type:"POST",
@@ -204,7 +204,7 @@
 			  	});
 			});
 
-			$('#inputQty').on('change',function(){
+			$('.inputQty').on('change',function(){
 				var rowId = $(this).closest('div').prev('input').val();
 			  	var qty =  $(this).val();
 			  	

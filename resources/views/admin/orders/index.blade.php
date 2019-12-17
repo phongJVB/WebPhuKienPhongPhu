@@ -40,7 +40,7 @@
                             <td class="text-left">{{ $item->customers_name }}</td>
                             <td class="text-left">{{ $item->customers_address }}</td>
                             <td class="text-left">{{ $item->customers_email }}</td>
-                            <td>{{ $item->amount }}</td>
+                            <td>{{ number_format($item->amount,'0','','.') }}</td>
                             <td>{{ $item->payment }}</td>
                             <td class="text-left">{!! $item->note !!}</td>
                             <td>{{ $item->date_order }}</td>

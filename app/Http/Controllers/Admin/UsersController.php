@@ -72,6 +72,7 @@ class UsersController extends Controller
         $user-> gender = $request->rdoGender;
         $user-> role = $request->rdoLevel;
         $user-> password = bcrypt($request->txtPassword);
+        $user-> is_activated = 1;
         $user->save();
 
         return redirect()->back()->with('notification','Thêm thành công người dùng');

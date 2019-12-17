@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$('.minus-btn').on('click', function(e) {
 		e.preventDefault();
+		debugger;
 		var $this = $(this);
 		var $mode = $(this).attr("mode");
 		var $input = $this.next('input');
@@ -19,12 +20,12 @@ $(document).ready(function(){
 	});
 	
 	$('.plus-btn').on('click', function(e) {
-
+		debugger;
 		e.preventDefault();
 		var $this = $(this);
 		var $input = $this.prev('input');
 		var value = parseInt($input.val());
-		var stockQty = parseInt($('#inputQty').attr("stockQty"));
+		var stockQty = parseInt( $this.prev('.inputQty').attr("stockQty"));
 		
 		if ( value < stockQty ) {
 			value = value + 1;
@@ -35,10 +36,10 @@ $(document).ready(function(){
 		$input.val(value);
 	});
 
-	$('#inputQty').on('change',function(){
-
+	$('.inputQty').on('change',function(){
+					debugger;
 			 		var value = parseInt($(this).val());
-			 		var stockQty = parseInt($('#inputQty').attr("stockQty"));
+			 		var stockQty = parseInt($(this).attr("stockQty"));
 			 		// Lấy biến mode để phân biệt giữa inputQty ở product.blade và shopping_cart.blade
 			 		var $mode = $(this).attr("mode");
 
@@ -55,7 +56,7 @@ $(document).ready(function(){
 			 	});
 
 				// Không cho nhập chữ "e" trong ô input number
-			 	$('#inputQty').on('keypress',function(evt){
+			 	$('.inputQty').on('keypress',function(evt){
 					if (evt.which != 8 && evt.which != 0 && evt.which < 48 || evt.which > 57){
 					    evt.preventDefault();
 					}
