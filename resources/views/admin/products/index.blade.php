@@ -5,9 +5,15 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
+                <div class="col-md-10">
                 <h1 class="page-header-account">Product
                     <small>List </small>
                 </h1>
+                </div>
+                <div class="col-md-2 selectTop-product" style="margin-top:20px; display: flex;">
+                    <a href="{{ Route('admin.product.create') }}" class="btn btn-success" style="margin-right:8px"><i class="fa fa-plus fa-fw"></i>Add</a>
+                    <a href="{{ Route('admin.product.showRestore') }}" class="btn btn-primary"><i class="fa fa-refresh"></i> Restore </a>
+                </div>
             </div>
             <!-- /.col-lg-12 -->
              @if(session('notification'))
@@ -24,7 +30,7 @@
                         <th>Description</th>
                         <th>Detail Description</th>
                         <th>Price</th>
-                        <th>Status</th>
+                        <th>Promotion Price</th>
                         <th>Delete</th>
                         <th>Edit</th>
                     </tr>
@@ -37,7 +43,7 @@
                             <td class="text-left">{{ $item->description }}</td>
                             <td class="text-left">{!! $item->detail_description !!}</td>
                             <td>{{ number_format($item->unit_price,'0','','.') }}</td>
-                            <td>{{ ($item->status ==1) ? 'Mới':'Cũ'}}</td>
+                            <td>{{ number_format($item->promotion_price,'0','','.') }}</td>
                             <td class="center" >
                                 <a href="{{ Route('admin.product.destroy', $item->id) }}"
                                 style="display: none"></a>

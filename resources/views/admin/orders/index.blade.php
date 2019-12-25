@@ -24,12 +24,12 @@
                         <th>Customer Name</th>
                         <th>Address</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Total</th>
                         <th>Payment</th>
                         <th>Note</th>
                         <th>Order Date</th>
                         <th>Status</th>
-                        <th>Delete</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -40,6 +40,7 @@
                             <td class="text-left">{{ $item->customers_name }}</td>
                             <td class="text-left">{{ $item->customers_address }}</td>
                             <td class="text-left">{{ $item->customers_email }}</td>
+                            <td class="text-left">{{ $item->customers_phone }}</td>
                             <td>{{ number_format($item->amount,'0','','.') }}</td>
                             <td>{{ $item->payment }}</td>
                             <td class="text-left">{!! $item->note !!}</td>
@@ -54,13 +55,12 @@
                             <span class="btn {{ ($item['status']==0)?'btn-warning':( ($item['status']==1 )? 'btn-info':( ($item['status']==2 )? 'btn-success':'btn-danger' )) }} ">
                             {{ ($item['status']==0)? 'Chưa xử lý':( ($item['status']==1 )? 'Đang vận chuyển':( ($item['status']==2 )? 'Giao thành công':'Đã hoàn lại' )) }}</span>
                             </td>
-                            @endif
-                            
-                            <td class="center">
+                            @endif                          
+                            <!-- <td class="center">
                                 <a href="{{ Route('admin.order.destroy',$item->id) }}"
                                 style="display: none"></a>
                                 <a class="btn btn-danger remove"><i class="fa fa-trash-o  fa-fw"></i></a>
-                            </td>
+                            </td> -->
                             <td class="center"><a href="{{ Route('admin.order.edit',$item->id) }}" class="btn btn-warning"><i class="fa fa-eye fa-fw"></i></a></td>
                         </tr>
                     @endforeach

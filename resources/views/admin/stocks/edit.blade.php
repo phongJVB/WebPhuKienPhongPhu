@@ -35,6 +35,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label>Original Price</label>
+                                <input type="number" min="1000"  class="form-control" name="originalPrice" placeholder="Please Enter Original Price" value="{{ $stockDetail->original_price }}" />
+                            </div>
+
+                            <div class="form-group">
                                 <label>Note</label>
                                 <textarea id="demo" name="txtNote" class="ckeditor form-control" rows="3" disabled >{!! $stockDetail->note !!} </textarea>
                             </div>

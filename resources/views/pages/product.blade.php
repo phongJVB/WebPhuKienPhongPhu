@@ -7,7 +7,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="home">Trang chủ</a> / <span>Thông tin chi tiết sản phẩm</span>
+					<a href="{{ Route('home.index') }}">Trang chủ</a> / <span>Thông tin chi tiết sản phẩm</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -69,7 +69,7 @@
 									 <button class="minus-btn" name="button" mode="1">
 								        <img src="frontEnd\assets\dest\images\minus.svg" alt="" />
 								      </button>
-								      <input type="number" name="qty" id="inputQty" value="1" stockQty="{{ $stock->stock_quantity }}" mode="1">
+								      <input type="number" name="qty" class="inputQty" value="1" stockQty="{{ $stock->stock_quantity }}" mode="1">
 								      <button class="plus-btn" name="button">
 								        <img src="frontEnd\assets\dest\images\plus.svg" alt="" />
 								      </button>

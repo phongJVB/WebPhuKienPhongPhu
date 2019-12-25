@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
             $categories = Category::all();
             $view->with('categories', $categories);
         });
-
+        
         Schema::defaultStringLength(191);
     }
 }

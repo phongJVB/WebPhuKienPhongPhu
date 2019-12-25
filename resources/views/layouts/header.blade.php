@@ -4,8 +4,8 @@
 			<div class="container">
 				<div class="pull-left auto-width-left">
 					<ul class="top-menu menu-beta l-inline">
-						<li><a href=""><i class="fa fa-home"></i> Ngõ 197 Trần Phú, Văn Quán, Hà Đông, HN</a></li>
-						<li><a href=""><i class="fa fa-phone"></i> 0964 648 152</a></li>
+						<li><a><i class="fa fa-home"></i> Ngõ 197 Trần Phú, Văn Quán, Hà Đông, HN</a></li>
+						<li><a><i class="fa fa-phone"></i> 0964 648 152</a></li>
 					</ul>
 				</div>
 				<div class="pull-right auto-width-right">
@@ -17,11 +17,11 @@
 							<li><a href=""> Chào bạn {{ Auth::user()->name }}</a></li>
 							<li><a href="{{ Route('home.logout') }}">Đăng xuất</a></li>
 						@else
-							<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
+							<li><a href="{{ Route('home.register') }}">Đăng ký</a></li>
 							<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>
 						@endif
 					@else
-						<li><a href="{{ Route('home.register') }}">Đăng kí</a></li>
+						<li><a href="{{ Route('home.register') }}">Đăng ký</a></li>
 						<li><a href="{{ Route('home.login') }}">Đăng nhập</a></li>	
 					@endif
 					
@@ -33,7 +33,7 @@
 		<div class="header-body">
 			<div class="container beta-relative">
 				<div class="pull-left">
-					<a href="index.html" id="logo"><img src="frontEnd/assets/dest/images/logoPhongPhu.png" width="200px" alt=""></a>
+					<a href="{{ Route('home.index') }}" id="logo"><img src="frontEnd/assets/dest/images/logoPhongPhu.png" width="200px" alt=""></a>
 				</div>
 				<div class="pull-right beta-components space-left ov">
 					<div class="space10">&nbsp;</div>
@@ -85,7 +85,7 @@
 								@endforeach
 								<!-- Show Dropdown Cart -->
 								<div class="cart-caption">
-									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value"> {{ $subtotal }} VNĐ</span></div>
+									<div class="cart-total text-right">Tổng tiền: <span class="cart-total-value"> {{ rtrim(rtrim($subtotal,"0"),".") }} VNĐ</span></div>
 									<div class="clearfix"></div>
 
 									<div class="center">

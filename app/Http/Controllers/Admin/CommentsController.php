@@ -65,7 +65,7 @@ class CommentsController extends Controller
             }
                         
         }else{
-            // Chưa có phiên session nào đăng nhập
+            // Chưa có phiên session nào đăng nhập hiển thị thông báo vui lòng đăng nhập
             $status = 0;
             $html = view('pages.comment')->with(compact('status'))->render();
             return response()->json(['success' => 0, 'html' => $html]);

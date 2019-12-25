@@ -32,19 +32,19 @@
                         	@csrf
                             <div class="form-group">
                                 <label>Username</label>
-                                <input type="text" class="form-control" name="txtName" placeholder="Please Enter Username" />
+                                <input type="text" class="form-control" name="txtName" value="{{old('txtName')}}" placeholder="Please Enter Username" />
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="txtEmail" placeholder="Please Enter Email" />
+                                <input type="email" class="form-control" name="txtEmail" value="{{old('txtEmail')}}" placeholder="Please Enter Email" />
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
-                                <input type="text" class="form-control" name="txtPhone" placeholder="Please Enter Phone" />
+                                <input type="text" class="form-control" name="txtPhone" value="{{old('txtPhone')}}" placeholder="Please Enter Phone" />
                             </div> 
                             <div class="form-group">
                                 <label>Address</label>
-                                <input type="text" class="form-control" name="txtAddress" placeholder="Please Enter Address" />
+                                <input type="text" class="form-control" name="txtAddress" value="{{old('txtAddress')}}" placeholder="Please Enter Address" />
                             </div>                           
                             <div class="form-group">
                                 <label>Password</label>

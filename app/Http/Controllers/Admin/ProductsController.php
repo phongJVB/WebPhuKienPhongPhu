@@ -115,8 +115,8 @@ class ProductsController extends Controller
             'txtDescription.min'=>'Mô tả sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
             'txtDescription.max'=>'Mô tả sản phẩm phải có độ dài từ 3 cho đến 100 ký tự',
             'txtDetailDescription.required'=>'Bạn chưa nhập mô tả chi tiết sản phẩm',
-            'txtDetailDescription.min'=>'Mô tả chi tiết sản phẩm phải có độ dài từ 10 cho đến 300 ký tự',
-            'txtDetailDescription.max'=>'Mô tả chi tiết sản phẩm phải có độ dài từ 10 cho đến 300 ký tự',
+            'txtDetailDescription.min'=>'Mô tả chi tiết sản phẩm có độ dài từ 10 cho đến 300 ký tự',
+            'txtDetailDescription.max'=>'Mô tả chi tiết sản phẩm có độ dài từ 10 cho đến 300 ký tự',
         ]);
 
         $products = Product::find($id);

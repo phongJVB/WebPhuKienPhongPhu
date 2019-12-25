@@ -7,7 +7,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb font-large">
-					<a href="index.html">Trang chủ</a> / <span>Thông tin giỏ hàng</span>
+					<a href="{{ Route('home.index') }}">Trang chủ</a> / <span>Thông tin giỏ hàng</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -44,7 +44,7 @@
 							<tr class="cart_item">
 								<td class="product-name" >
 									<div class="media">
-										<img class="pull-left" src="upload/products/{{ $cartProduct->options->image }}" alt="">
+										<a class="pull-left" href="{{ route('home.productDetail',$cartProduct->id)}}"><img src="upload/products/{{ $cartProduct->options->image }}" alt=""></a>
 										<div class="media-body">
 											<p class="font-large table-title">{{ $cartProduct->name }}</p>
 

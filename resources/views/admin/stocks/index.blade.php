@@ -5,9 +5,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Stock
-                    <small>List</small>
+                <div class="col-md-5">
+                <h1 class="page-header-account">Stock
+                    <small>List </small>
                 </h1>
+                </div>
+                <div class="col-md-7" style="margin-top:20px; display: flex;">
+                    <p style="margin-right: 15px"><i class="fa fa-circle" style="color:#0873b9"></i>&nbsp Tổng doanh thu: <strong>{{ number_format($sumAmount,'0','','.') }}</strong></p>
+                    <p style="margin-right: 15px"><i class="fa fa-circle" style="color:#FAE70F"></i>&nbsp Chi phí: <strong>{{ number_format($sumFee,'0','','.') }}</strong></p>
+                    <p><i class="fa fa-circle" style="color:#06FB0C"></i>&nbsp Tổng lợi nhuận: <strong>{{ number_format($sumAmount - $sumFee,'0','','.') }}</strong></p>
+                </div>
             </div>
             <!-- /.col-lg-12 -->
             @if(session('notification'))

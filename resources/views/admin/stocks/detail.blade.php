@@ -22,6 +22,7 @@
                         <th>STT</th>
                         <th>Stock Id</th>
                         <th>Import Quantity</th>
+                        <th>Original Price</th>
                         <th>Note</th>
                         <th>Import Date</th>
                         <th>Update Date</th>
@@ -34,6 +35,7 @@
                             <td>{{ ++$key }}</td>
                             <td>{{ $item->stocks_id }}</td>
                             <td>{{ $item->import_quantity }}</td>
+                            <td>{{ number_format($item->original_price,'0','','.') }}</td>
                             <td  class="text-left">{!! $item->note !!}</td>
                             <td>{{ $item->created_at }}</td>
                             <td>{{ $item->updated_at }}</td>

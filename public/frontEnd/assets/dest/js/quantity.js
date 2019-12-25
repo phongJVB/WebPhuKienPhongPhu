@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	$('.minus-btn').on('click', function(e) {
 		e.preventDefault();
-		debugger;
 		var $this = $(this);
 		var $mode = $(this).attr("mode");
 		var $input = $this.next('input');
@@ -9,8 +8,6 @@ $(document).ready(function(){
 		
 		if ( value > 1 ) {
 			value = value - 1;
-		} else if( $mode==2 ){
-			value = 0;
 		}else{
 			value = 1;
 		}
@@ -37,7 +34,6 @@ $(document).ready(function(){
 	});
 
 	$('.inputQty').on('change',function(){
-					debugger;
 			 		var value = parseInt($(this).val());
 			 		var stockQty = parseInt($(this).attr("stockQty"));
 			 		// Lấy biến mode để phân biệt giữa inputQty ở product.blade và shopping_cart.blade
@@ -46,7 +42,7 @@ $(document).ready(function(){
 			 		if( (value < 1 || isNaN(value)) && $mode ==1 ){
 			 			value = 1;
 			 		}else if( (value < 1 || isNaN(value)) && $mode ==2 ){
-						value = 0;
+						value = 1;
 			 		}else if(value > stockQty){	
 			 			value = stockQty;
 			 		}else{

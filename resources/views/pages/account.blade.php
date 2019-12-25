@@ -12,7 +12,7 @@
 		</div>
 		<div class="pull-right">
 			<div class="beta-breadcrumb font-large">
-				<a href="home">Trang chủ</a> / <span>@yield('title')</span>
+				<a href="{{ Route('home.index') }}">Trang chủ</a> / <span>@yield('title')</span>
 			</div>
 		</div>
 		<div class="clearfix"></div>

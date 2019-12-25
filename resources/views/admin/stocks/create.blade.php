@@ -43,13 +43,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Original Price</label>
+                        <input type="number" min="1000"  class="form-control" name="originalPrice" placeholder="Please Enter Original Price" value="1000" />
+                    </div>
+
+                    <div class="form-group">
                         <label>Note</label>
                         <textarea id="demo" name="txtNote" class="ckeditor form-control" rows="3"> </textarea>
                     </div>
 
                     <button type="submit" class="btn btn-success">Add</button>
                     <button type="reset" class="btn btn-warning">Reset</button>
-                    <a class="btn btn-danger" href="{{ Route('admin.dashboard.index') }}" role="button">Cancel </a>
+                    <a class="btn btn-danger" href="{{ Route('admin.stock.index') }}" role="button">Cancel </a>
                 <form>
             </div>
         </div>

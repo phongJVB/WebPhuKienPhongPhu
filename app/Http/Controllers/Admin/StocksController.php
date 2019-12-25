@@ -20,7 +20,19 @@ class StocksController extends Controller
     public function index()
     {   
         $stocks = Stock::all();
-        return view('admin.stocks.index',compact('stocks'));
+        // Tổng doanh thu
+        $totalAmount= DB::table('orders')
+                     ->select(DB::raw('SUM(amount) AS total_sale'))
+                     ->where('orders.status', '<>', 3)
+                     ->get();//Lấy ra số lượng đã bán của từng sản phẩm
+        $sumAmount = $totalAmount[0]->total_sale;
+        // Tổng chi phí
+        $totalFee = DB::table('stock_details')
+                     ->select(DB::raw('SUM(import_quantity*original_price) AS sum_original_price'))
+                     ->get();
+        $sumFee = $totalFee[0]->sum_original_price;
+
+        return view('admin.stocks.index',compact('stocks','sumAmount','sumFee'));
         
     }
 
@@ -47,10 +59,12 @@ class StocksController extends Controller
     {
         $this->validate($request,[
             'productQuantity'=>'required',
-            'txtNote'=>'required',                                             
+            'txtNote'=>'required',
+            'originalPrice'=>'required',                                             
         ],[
             'productQuantity.required'=>'Bạn chưa nhập số lượng sản phẩm',
             'txtNote.required'=>'Bạn cần phải nhập chú thích',
+            'originalPrice.required'=>'Bạn cần phải nhập giá gốc',
         ]);
 
         $date = date('Y-m-d H:i:s');
@@ -123,14 +137,17 @@ class StocksController extends Controller
         $this->validate($request,
             [
                 'productQuantity'=>'required|min:1',
+                'originalPrice'=>'required',
             ],
             [
                 'productQuantity.required'=>'Bạn chưa nhập số lượng sản phẩm',
                 'productQuantity.min'=>'Số lượng sản phẩm nhỏ nhất là 1',
+                'originalPrice.required'=>'Bạn chưa nhập giá gốc',
             ]);
 
         $stockDetail->import_quantity = $request->productQuantity;
         $stockDetail->note = $request->txtNote;
+        $stockDetail->original_price = $request->originalPrice;
         $stockDetail->save();
 
         //Lưu số lượng thay đổi trong bảng Stocks khi thay đổi số lượng bên Stock_Details

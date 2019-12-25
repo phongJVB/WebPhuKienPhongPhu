@@ -10,6 +10,15 @@ Lịch sử đơn hàng
         <div id="page-wrapper">
             <div class="container-fluid">
                     <h4 class="page-header-account"> Lịch sử đơn hàng </h4>
+                    @if(count($order)==0)
+                    <div class="notice-cart-null">
+                        <div class="img-null">
+                            <img src="frontEnd\assets\dest\images\null.png">
+                        </div>
+                        <h5>Bạn không có đơn hàng nào trong shop</h5>
+                        <div class="connect-home"> <a href="{{ Route('home.index') }}"> ĐẾN TRANG CHỦ PHỤ KIỆN PHONG PHÚ </a></div>
+                    </div>
+                    @else
                     <table class="table table-striped table-bordered table-hover table-historyOrder">
                         <thead>
                             <tr align="center">
@@ -40,6 +49,7 @@ Lịch sử đơn hàng
                             @endforeach
                         </tbody>
                     </table>
+                    @endif
                 <!-- /.row -->
             </div>
             <!-- /.container-fluid -->

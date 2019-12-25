@@ -8,7 +8,7 @@
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb">
-					<a href="index.html">Trang chủ</a> / <span>Đặt hàng</span>
+					<a href="{{ Route('home.index') }}">Trang chủ</a> / <span>Đặt hàng</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -17,7 +17,7 @@
 	
 	<div class="container">
 		<div id="content">
-	
+			
 			@if(count($errors)>0)
                 <div class="alert alert-danger alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -44,7 +44,7 @@
 						<div class="form-block">
 							<label for="name">Họ tên <span class="cl-red">(*)</span></label>
 							<input type="hidden" name="customersId" value="{{isset($user)?$user->id:''}}">
-							<input type="text" id="name" name="txtName" placeholder="Họ tên" value="{{isset($user)?$user->name:''}}" required>
+							<input type="text" id="name" name="txtName" placeholder="Họ tên" value="{{isset($user)?$user->name:old('txtName')}}" required>
 						</div>
 
 						<div class="form-block">
@@ -66,23 +66,23 @@
 
 						<div class="form-block">
 							<label for="email">Email <span class="cl-red">(*)</span></label>
-							<input type="email" id="email" name="txtEmail" value="{{isset($user)?$user->email:''}}" required placeholder="expample@gmail.com">
+							<input type="email" id="email" name="txtEmail" value="{{isset($user)?$user->email:old('txtEmail')}}" required placeholder="expample@gmail.com">
 						</div>
 
 						<div class="form-block">
 							<label for="adress">Địa chỉ <span class="cl-red">(*)</span></label>
-							<input type="text" id="adress" name="txtAddress" placeholder="Địa chỉ" value="{{isset($user)?$user->address:''}}" required>
+							<input type="text" id="adress" name="txtAddress" placeholder="Địa chỉ" value="{{isset($user)?$user->address:old('txtAddress')}}" required>
 						</div>
 						
 
 						<div class="form-block">
 							<label for="phone">Điện thoại <span class="cl-red">(*)</span></label>
-							<input type="text" name="txtPhone" id="phone" value="{{isset($user)?$user->phone:''}}" required>
+							<input type="text" name="txtPhone" id="phone" value="{{isset($user)?$user->phone:old('txtPhone')}}" required>
 						</div>
 						
 						<div class="form-block">
 							<label for="notes">Ghi chú</label>
-							<textarea id="notes" name="txtNote" ></textarea>
+							<textarea id="notes" name="txtNote" value="old('txtNote')"></textarea>
 						</div>
 					</div>
 
@@ -121,7 +121,7 @@
 								</div>
 								<div class="your-order-item">
 									<div class="pull-left"><p class="your-order-f18">Tổng tiền:</p></div>
-									<div class="pull-right"><h5 class="color-black">{{ $subtotal }} VNĐ</h5></div>
+									<div class="pull-right"><h5 class="color-black">{{ rtrim(rtrim($subtotal,"0"),".") }} VNĐ</h5></div>
 									<div class="clearfix"></div>
 								</div>
 							</div>

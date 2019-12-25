@@ -335,14 +335,14 @@ table.shop_table tfoot #btnCheckout{
   color: #07C5F5;
 }
 
-input#inputQty::-webkit-outer-spin-button,
-input#inputQty::-webkit-inner-spin-button {
+input.inputQty::-webkit-outer-spin-button,
+input.inputQty::-webkit-inner-spin-button {
   display: none; 
   -webkit-appearance: none;
   margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 
-input#inputQty[type=number] {
+input.inputQty[type=number] {
   -moz-appearance:textfield; /* Firefox */
 }
 /*----CSS Footer----*/

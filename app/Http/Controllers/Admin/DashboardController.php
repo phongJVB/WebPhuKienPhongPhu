@@ -27,6 +27,11 @@ class DashboardController extends Controller
                      ->where('products.delete_flag',0)
                      ->groupBy('products_id')
                      ->get();
-         return view('admin.dashboard.index',compact('productSale'));
+        $stockList = DB::table('stocks')
+                     ->select('products.name as name','stocks.stock_quantity as stockQty')
+                     ->join('products', 'products.id', '=', 'stocks.products_id')
+                     ->where('products.delete_flag',0)
+                     ->get();
+         return view('admin.dashboard.index',compact('productSale','stockList'));
     }
 }

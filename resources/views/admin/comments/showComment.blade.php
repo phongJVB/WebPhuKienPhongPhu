@@ -24,7 +24,7 @@
             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                 <thead>
                     <tr align="center">
-                        <th>ID</th>
+                        <th>STT</th>
                         <th>User Name</th>
                         <th>Content</th>
                         <th>Created_at</th>
@@ -32,9 +32,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($products->comment as $item)
+                    @foreach($products->comment as $key=>$item)
                         <tr class="odd gradeX" align="center">
-                            <td>{{ $item->id }}</td>
+                            <td>{{ ++$key }}</td>
                             <td>{{ $item->user->name }}</td>
                             <td class="text-left">{{ $item->content }}</td>
                             <td>{{ $item->created_at }}</td>

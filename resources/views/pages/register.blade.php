@@ -3,11 +3,11 @@
 	<div class="inner-header">
 		<div class="container">
 			<div class="pull-left">
-				<h6 class="inner-title">Đăng kí</h6>
+				<h6 class="inner-title">Đăng ký</h6>
 			</div>
 			<div class="pull-right">
 				<div class="beta-breadcrumb">
-					<a href="index.html">Trang chủ</a> / <span>Đăng kí</span>
+					<a href="{{ Route('home.index') }}">Trang chủ</a> / <span>Đăng ký</span>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -36,7 +36,7 @@
 								{{ session('notification') }}
 		                    </div>
 		                @endif
-						<h4>Đăng kí</h4>
+						<h4>Đăng ký</h4>
 						<div class="space20">&nbsp;</div>
 						<div class="form-block">
 							<label for="email">Địa chỉ Email <span style="color:red">(*)</span></label>

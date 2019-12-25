@@ -24,7 +24,7 @@ class ValidateCheckOut extends FormRequest
     public function rules()
     {
         return [
-            'txtEmail'=>'required|email',
+            'txtEmail'=>'required|email|regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/',
             'txtName'=>'required|min:2|max:32',
             'txtAddress'=>'required',
             'txtPhone'=>'required|regex:/^[0-9]{10}$/',
@@ -35,6 +35,7 @@ class ValidateCheckOut extends FormRequest
     {
      return [
             'txtEmail.required'=>'Vui lòng nhập Email',
+            'txtEmail.regex'=>'Không đúng định dạng email',
             'txtEmail.email'=>'Không đúng định dạng email',
             'txtName.required'=>'Vui lòng nhập tên đầy đủ',
             'txtName.min'=>'Tên người đặt hàng nhỏ nhất là 2 ký tự',

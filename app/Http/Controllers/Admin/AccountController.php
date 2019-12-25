@@ -73,7 +73,7 @@ class AccountController extends Controller
 		        ]);
 			$user = User::find($id);
             $user-> password = bcrypt($request->newPassword);
-        	// $user->save();
+        	$user->save();
         	return redirect()->back()->with('notification','Sửa mật khẩu thành công');               
         }else{
             return redirect()->back()->with('warring','Nhập sai mật khẩu hiện tại');
