@@ -85,6 +85,7 @@ class StocksController extends Controller
         $stockDetail->stocks_id = $stock->id;
         $stockDetail->note = $request->txtNote;
         $stockDetail->import_quantity = $request->productQuantity;
+        $stockDetail->original_price = $request->originalPrice;
         $stockDetail->save();
 
         return redirect()->back()->with('notification','Thêm số lượng sản phẩm thành công');

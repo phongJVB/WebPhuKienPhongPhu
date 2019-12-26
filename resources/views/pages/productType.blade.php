@@ -40,7 +40,7 @@
 							</div>
 
 							<div class="row">
-								@foreach($productType as $item)
+								@foreach($productType as $key=>$item)
 								<div class="col-sm-4">
 									<div class="single-item">
 										@if($item->promotion_price != 0)
@@ -72,6 +72,9 @@
 										</div>
 									</div>
 								</div>
+								@if( ($key+1)%3==0 )
+								<div class="space40">&nbsp;</div>
+								@endif
 								@endforeach
 
 							</div>
